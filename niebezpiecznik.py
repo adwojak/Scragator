@@ -1,4 +1,3 @@
-import pdb
 from datetime import datetime
 
 from article import ArticleModel
@@ -80,5 +79,3 @@ url = 'http://www.niebezpiecznik.pl'
 
 nieb = Niebezpiecznik(url)
 title_posts_links = nieb.get_main_site_posts()
-
-pdb.set_trace()
