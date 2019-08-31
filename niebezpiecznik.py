@@ -7,31 +7,26 @@ from scrapper import Scrapper
 class Niebezpiecznik(Scrapper):
 
     def get_articles(self):
-        posts_from_main_site = self.get_main_site_posts()
-        complete_post = self.get_posts_from_links(posts_from_main_site)
-        return [ArticleModel(
-            id=post['id'],
-            title=post['title'],
-            url=post['href'],
-            author=post.get('author'),
-            upload_date=post.get('date'),
-            content=post.get('content')
-        ) for post in complete_post]
-
-    def format_title_site_posts(self, href):
-        return {
-            'id': self.generate_id(),
-            'href': href,
-        }
+        return self.get_main_site_posts()
 
     def get_main_site_posts(self):
+        articles = []
         all_posts = self.main_soup.find_all('div', {'class': 'post'})
-        all_posts_titles = [
-            post.find('div', {'class': 'title'}) for post in all_posts]
-        all_posts_titles_links = [
-            self.format_title_site_posts(title.find('h2').find('a')['href']) for title in all_posts_titles
-        ]
-        return all_posts_titles_links
+
+        for post in all_posts:
+            post_h2 = post.find('h2')
+            post_link = post_h2.find('a', {'rel': 'bookmark'})['href']
+            full_post = self.get_post_from_link(post_link)
+            articles.append(ArticleModel(
+                id=self.generate_id(),
+                title=full_post['title'],
+                url=post_link,
+                author=full_post.get('author'),
+                upload_date=full_post.get('upload_date'),
+                content=full_post.get('content')
+            ))
+
+        return articles
 
     def get_date_as_datetime(self, date):
         date_unformatted = date.replace('\n', 'T')
@@ -65,17 +60,11 @@ class Niebezpiecznik(Scrapper):
             'content': content
         }
 
-    def get_posts_from_links(self, links):
-        complete_posts = []
-        for link in links:
-            soup = self.get_soup_from_link(link['href'])
-            post = self.get_post_from_soup(soup)
-            link.update(post)
-            complete_posts.append(link)
-        return complete_posts
+    def get_post_from_link(self, link):
+        soup = self.get_soup_from_link(link)
+        return self.get_post_from_soup(soup)
 
 
 url = 'http://www.niebezpiecznik.pl'
 
 nieb = Niebezpiecznik(url)
-title_posts_links = nieb.get_main_site_posts()
