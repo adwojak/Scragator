@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from article import ArticleModel
-from scrapper import Scrapper
+from libs.Article.article import ArticleModel
+from libs.Scrapper.scrapper import Scrapper
 
 
 class Niebezpiecznik(Scrapper):
