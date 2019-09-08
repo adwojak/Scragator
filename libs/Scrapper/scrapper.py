@@ -1,7 +1,8 @@
 from uuid import uuid4
 
-from bs4 import BeautifulSoup
 from requests import get as rget
+
+from bs4 import BeautifulSoup
 
 
 class Scrapper(object):
