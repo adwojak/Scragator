@@ -12,9 +12,8 @@ class Scrapper(object):
     def __init__(self, url, parser_type=default_parser):
         self.url = url
         self.main_soup = self.get_soup_from_link(url, parser_type)
-        self.articles = self.get_articles()
 
-    def get_articles(self):
+    def get_main_site_articles(self):
         raise NotImplementedError
 
     def generate_id(self):
