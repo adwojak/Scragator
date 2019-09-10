@@ -1,10 +1,11 @@
 from flask import Flask
 
-from Root.config import Config
-from Root.extensions import db, migrate
+from config import Config
+from extensions import db, migrate
+# from models import models
 
 
-def create_app():
+def create_app() -> Flask:
     app = Flask(__name__)
     app.config.from_object(Config)
     db.init_app(app)
