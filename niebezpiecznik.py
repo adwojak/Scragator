@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from libs.Article.article import CompareArticleModel
+from libs.Article.article import ArticleModel
 from libs.Scrapper.scrapper import Scrapper
 from typing import List
 from bs4 import BeautifulSoup
@@ -15,7 +15,7 @@ class Niebezpiecznik(Scrapper):
         for post in all_main_site_posts:
             post_h2 = post.find('h2')
             post_link = post_h2.find('a', {'rel': 'bookmark'})
-            main_site_articles.append(CompareArticleModel(
+            main_site_articles.append(ArticleModel(
                 article_id=self.generate_id(),
                 title=post_link['title'],
                 url=post_link['href'],

@@ -3,14 +3,15 @@ from datetime import datetime
 from typing import Dict
 
 
-class CompareArticleModel(object):
+class ArticleModel(object):
 
-    def __init__(self, article_id: str, title: str, url: str, author: str, upload_date: datetime) -> None:
+    def __init__(self, article_id: str, title: str, url: str, author: str, upload_date: datetime, content: str = None) -> None:
         self._article_id = article_id
         self._title = title
         self._url = url
         self._author = author
         self._upload_date = upload_date
+        self._content = content
         self._compare_hash = self._set_compare_hash()
 
     def get_article_id(self) -> str:
@@ -28,6 +29,9 @@ class CompareArticleModel(object):
     def get_upload_date(self) -> datetime:
         return self._upload_date
 
+    def get_content(self) -> str:
+        return self._content
+
     def get_compare_hash(self) -> bytes:
         return self._compare_hash
 
@@ -36,20 +40,12 @@ class CompareArticleModel(object):
             title=self._title, date=self._upload_date, author=self._author)
         return b64encode(data_to_encode.encode('utf-8'))
 
-
-class ArticleModel(CompareArticleModel):
-
-    def __init__(self, article_id: str, title: str, url: str, author: str, upload_date: datetime, content: str) -> None:
-        super().__init__(article_id, title, url, author, upload_date)
-        self._content = content
-
-    def get_content(self) -> str:
-        return self._content
-
     def get_article(self) -> Dict:
         return {
             'id': self.get_article_id(),
             'url': self.get_url(),
             'title': self.get_title(),
+            'author': self.get_author(),
+            'upload_date': self.get_upload_date(),
             'content': self.get_content(),
         }

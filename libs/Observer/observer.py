@@ -1,4 +1,3 @@
-from libs.Article.article import CompareArticleModel
 from typing import List
 
 
@@ -20,7 +19,4 @@ class BaseObserver(object):
         raise NotImplementedError
 
     def update_db_newest_articles(self, articles: List):
-        raise NotImplementedError
-
-    def create_article_model_from_compare_article(self, compare_article: CompareArticleModel):
         raise NotImplementedError
