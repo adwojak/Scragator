@@ -37,6 +37,3 @@ class Niebezpiecznik(Scrapper):
     def get_post_from_link(self, link):
         soup = self.get_soup_from_link(link)
         return soup
-
-    def test(self):
-        pass
