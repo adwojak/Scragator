@@ -20,3 +20,6 @@ class BaseObserver(object):
 
     def update_db_newest_articles(self, articles: List):
         raise NotImplementedError
+
+    def article_to_database_model(self, article):
+        raise NotImplementedError

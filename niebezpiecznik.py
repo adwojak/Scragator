@@ -9,6 +9,8 @@ from bs4.element import Tag
 
 class Niebezpiecznik(Scrapper):
 
+    __name__ = 'Niebezpiecznik'
+
     def get_main_site_articles(self) -> List:
         main_site_articles = []
         all_main_site_posts = self.main_soup.find_all('div', {'class': 'post'})
