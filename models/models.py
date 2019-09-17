@@ -4,6 +4,7 @@ from extensions import db
 class ArticleDbModel(db.Model):
     __tablename__ = 'articles'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), nullable=False)
     article_id = db.Column(db.String(128), nullable=False)
     title = db.Column(db.String(256), nullable=False)
     url = db.Column(db.String(128), nullable=False)
@@ -13,6 +14,8 @@ class ArticleDbModel(db.Model):
     compare_hash = db.Column(db.String(128), nullable=False)
 
 
-# class LastArticle(db.Model):
-#     __tablename__ = 'last_article'
-#     id = db.Column(db.Integer, primary_key=True)
+class LastArticleHashDbModel(db.Model):
+    __tablename__ = 'last_article_hash'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), nullable=False)
+    compare_hash = db.Column(db.String(128), nullable=False)

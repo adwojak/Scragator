@@ -12,8 +12,9 @@ def create_app() -> Flask:
     db.init_app(app)
     migrate.init_app(app, db)
 
-    # @app.route('/')
-    # def hello():
-    #     return 'aa'
+    @app.route('/')
+    def hello():
+        Manager().execute_observers()
+        return 'aa'
 
     return app

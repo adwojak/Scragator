@@ -5,6 +5,7 @@ from libs.Scrapper.scrapper import Scrapper
 from typing import List
 from bs4 import BeautifulSoup
 from bs4.element import Tag
+from string import whitespace
 
 
 class Niebezpiecznik(Scrapper):
@@ -19,6 +20,7 @@ class Niebezpiecznik(Scrapper):
             post_link = post_h2.find('a', {'rel': 'bookmark'})
             main_site_articles.append(ArticleModel(
                 article_id=self.generate_id(),
+                name=self.__name__,
                 title=post_link['title'],
                 url=post_link['href'],
                 author=self.get_author(
@@ -29,10 +31,10 @@ class Niebezpiecznik(Scrapper):
         return main_site_articles
 
     def get_date_from_main_site_post(self, upload_date: Tag) -> datetime:
-        return self.get_date_as_datetime(upload_date.get_text(), 'T%H:%MT%d.%m.%Y ')
+        return self.get_date_as_datetime(upload_date.get_text(), 'T%H:%MT%d.%m.%Y')
 
-    def get_date_as_datetime(self, date: str, date_format: str = 'T%H:%MT%d/%m/%Y ') -> datetime:
-        date_unformatted = date.replace('\n', 'T')
+    def get_date_as_datetime(self, date: str, date_format: str = 'T%H:%MT%d/%m/%Y') -> datetime:
+        date_unformatted = date.replace('\n', 'T').translate(str.maketrans('', '', whitespace))
         return datetime.strptime(date_unformatted, date_format)
 
     def get_author(self, author: Tag) -> str:

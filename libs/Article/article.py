@@ -5,8 +5,9 @@ from typing import Dict
 
 class ArticleModel(object):
 
-    def __init__(self, article_id: str, title: str, url: str, author: str, upload_date: datetime, content: str = None) -> None:
+    def __init__(self, article_id: str, name: str, title: str, url: str, author: str, upload_date: datetime, content: str = None) -> None:
         self._article_id = article_id
+        self._name = name
         self._title = title
         self._url = url
         self._author = author
@@ -16,6 +17,9 @@ class ArticleModel(object):
 
     def get_article_id(self) -> str:
         return self._article_id
+
+    def get_name(self) -> str:
+        return self._name
 
     def get_url(self) -> str:
         return self._url
