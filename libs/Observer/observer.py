@@ -1,22 +1,21 @@
 from typing import List
 from extensions import db
 from models.models import ArticleModel, LastArticleHashModel
+from libs.Scrapper.scrapper import Scrapper
 
 
 class BaseObserver(object):
 
-    def __init__(self, url: str, name: str) -> None:
+    def __init__(self, url: str, name: str, scrapper: Scrapper) -> None:
         self._url = url
         self.__name__ = name
+        self._scrapper = scrapper
 
     def get_url(self) -> str:
         return self._url
 
-    def check_for_posts_updates(self):
-        raise NotImplementedError
-
-    def get_new_posts(self, articles: List, newest_article_hash: bytes):
-        raise NotImplementedError
+    def get_scrapper(self):
+        return self._scrapper
 
     def get_newest_article(self, article_context):
         return LastArticleHashModel.query.filter_by(name=article_context).first()
@@ -39,3 +38,24 @@ class BaseObserver(object):
             article.save()
         self.update_db_newest_hash(articles[-1])
         db.session.commit()
+
+    def check_for_posts_updates(self):
+        scrapper = self.get_scrapper()(self.get_url(), self.__name__)
+        main_site_articles = scrapper.get_main_site_articles()
+        newest_article = self.get_newest_article(self.__name__)
+        if newest_article:
+            new_posts = self.get_new_posts(main_site_articles, newest_article.compare_hash)
+            if new_posts:
+                self.update_db_newest_articles(new_posts)
+        else:
+            self.update_db_newest_articles(main_site_articles)
+
+    def get_new_posts(self, articles: List, newest_article_hash: bytes) -> List:
+        new_posts = []
+        for article in articles:
+            if article.compare_hash == newest_article_hash:
+                break
+            new_posts.append(article)
+        if len(new_posts) == len(articles):
+            return []
+        return new_posts

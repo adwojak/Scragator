@@ -6,31 +6,6 @@ from typing import List
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from string import whitespace
-from libs.Observer.observer import BaseObserver
-
-
-class NiebezpiecznikObserver(BaseObserver):
-
-    def check_for_posts_updates(self) -> None:
-        niebezpiecznik = Niebezpiecznik(self.get_url(), self.__name__)
-        main_site_articles = niebezpiecznik.get_main_site_articles()
-        newest_article = self.get_newest_article(self.__name__)
-        if newest_article:
-            new_posts = self.get_new_posts(main_site_articles, newest_article.compare_hash)
-            if new_posts:
-                self.update_db_newest_articles(new_posts)
-        else:
-            self.update_db_newest_articles(main_site_articles)
-
-    def get_new_posts(self, articles: List, newest_article_hash: bytes) -> List:
-        new_posts = []
-        for article in articles:
-            if article.compare_hash == newest_article_hash:
-                break
-            new_posts.append(article)
-        if len(new_posts) == len(articles):
-            return []
-        return new_posts
 
 
 class Niebezpiecznik(Scrapper):

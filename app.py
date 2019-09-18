@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 
 from config import Config
 from extensions import db, migrate
@@ -16,5 +16,10 @@ def create_app() -> Flask:
     def hello():
         Manager().execute_observers()
         return 'aa'
+
+    @app.route('/all')
+    def all():
+        articles = [article.get_article() for article in models.ArticleModel.query.all()]
+        return jsonify(result=articles)
 
     return app

@@ -1,11 +1,11 @@
 from attrdict import AttrDict
 from typing import List
-from niebezpiecznik import NiebezpiecznikObserver
+from scrappers.niebezpiecznik import Niebezpiecznik
 
 observers_mapping: List = [
     AttrDict({
         'name': 'Niebezpiecznik',
         'url': 'http://www.niebezpiecznik.pl',
-        'observer': NiebezpiecznikObserver
+        'scrapper': Niebezpiecznik
     })
 ]
