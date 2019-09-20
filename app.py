@@ -20,6 +20,6 @@ def create_app() -> Flask:
     @app.route('/all')
     def all():
         articles = [article.get_article() for article in models.ArticleModel.query.all()]
-        return jsonify(result=articles)
+        return jsonify(len=len(articles), result=articles)
 
     return app
