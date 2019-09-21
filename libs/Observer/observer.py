@@ -22,9 +22,12 @@ class Observer(object):
         for article in articles:
             if not article.exist():
                 article.save()
-        db.session.commit()
+        self.commit_db()
 
     def check_for_posts_updates(self) -> None:
         scrapper = self.get_scrapper()(self.get_url(), self.__name__)
         main_site_articles = scrapper.get_main_site_articles()
         self.update_db_newest_articles(main_site_articles)
+
+    def commit_db(self):
+        db.session.commit()

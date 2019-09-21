@@ -1,6 +1,7 @@
 from os import environ, path
 
 from dotenv import load_dotenv
+from Manager import Manager
 
 
 class Config(object):
@@ -11,3 +12,12 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     load_dotenv(path.join(path.dirname(__file__), '.env'))
+
+    JOBS = [
+        {
+            'id': 'job1',
+            'func': Manager().execute_observers,
+            'trigger': 'interval',
+            'seconds': 60
+        }
+    ]
