@@ -1,4 +1,5 @@
 from typing import List
+
 from extensions import db
 from libs.Scrapper.scrapper import Scrapper
 

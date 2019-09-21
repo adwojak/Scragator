@@ -2,8 +2,8 @@ from flask import Flask, jsonify
 
 from config import Config
 from extensions import db, migrate
-from models import models
 from Manager import Manager
+from models import models
 
 
 def create_app() -> Flask:

@@ -1,6 +1,7 @@
-from extensions import db
-from typing import Dict
 from base64 import b64encode
+from typing import Dict
+
+from extensions import db
 
 
 class ArticleModel(db.Model):

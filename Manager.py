@@ -1,6 +1,7 @@
 from typing import List
-from observers_mapping import observers_mapping
+
 from libs.Observer.observer import Observer
+from observers_mapping import observers_mapping
 
 
 class Manager(object):
