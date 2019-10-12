@@ -11,7 +11,6 @@ class ArticleModel(db.Model):
     url = db.Column(db.String(128), nullable=False)
     author = db.Column(db.String(64), nullable=False)
     upload_date = db.Column(db.DateTime, nullable=False)
-    content = db.Column(db.Text, nullable=False)
     hash = db.Column(db.String(512), nullable=False, primary_key=True)
 
     def __init__(self, **kwargs):
@@ -29,7 +28,6 @@ class ArticleModel(db.Model):
             'title': self.title,
             'author': self.author,
             'upload_date': self.upload_date,
-            'content': self.content,
             'hash': str(self.hash)
         }
 

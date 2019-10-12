@@ -22,7 +22,6 @@ class Niebezpiecznik(Scrapper):
                 url=post_link['href'],
                 author=self.get_author(post.find('div', {'class': 'postmeta'})),
                 upload_date=self.get_date_from_main_site_post(post.find('div', {'class': 'date'})),
-                content='tmpcontent'
             ))
         return main_site_articles
 

@@ -17,10 +17,10 @@ def create_app() -> Flask:
     scheduler.init_app(app)
     scheduler.start()
 
-    @app.route('/')
+    @app.route('/execute_observers')
     def hello():
         Manager().execute_observers()
-        return 'aa'
+        return {}
 
     @app.route('/all')
     def all():

@@ -1,7 +1,7 @@
 from os import environ, path
 
 from dotenv import load_dotenv
-from Manager import Manager
+from requests import get as rget
 
 
 class Config(object):
@@ -15,9 +15,9 @@ class Config(object):
 
     JOBS = [
         {
-            'id': 'job1',
-            'func': Manager().execute_observers,
+            'id': 'execute_observers',
+            'func': lambda: rget('http://localhost:5000/execute_observers'),
             'trigger': 'interval',
-            'seconds': 60
+            'seconds': 10
         }
     ]
