@@ -1,10 +1,15 @@
+from flask_restful import Resource
 from typing import List
 
 from libs.Observer.observer import Observer
 from observers_mapping import observers_mapping
 
 
-class Manager(object):
+class ManagerResource(Resource):
+
+    def get(self):
+        self.execute_observers()
+        return {}
 
     @property
     def _observers_list(self) -> List:
