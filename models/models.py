@@ -18,8 +18,8 @@ class ArticleModel(db.Model):
         self.hash = self.set_hash()
 
     def set_hash(self):
-        data_to_encode = '{name}-{title}-{date}-{author}'.format(
-            name=self.name, title=self.title, date=self.upload_date, author=self.author)
+        data_to_encode = '{name}-{date}-{author}-{url}'.format(
+            name=self.name, date=self.upload_date, author=self.author, url=self.url)
         return b64encode(data_to_encode.encode('utf-8'))
 
     def get_article(self) -> Dict:

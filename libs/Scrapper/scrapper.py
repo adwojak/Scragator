@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 
 class Scrapper(object):
 
-    default_parser: str = 'lxml'
+    default_parser: str = 'html5lib'
 
     def __init__(self, url: str, name: str, parser_type: str = default_parser) -> None:
         self.url = url
