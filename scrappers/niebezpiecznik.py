@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from models.models import ArticleModel
 from libs.Scrapper.scrapper import Scrapper
 from typing import List
 from bs4.element import Tag
@@ -17,7 +16,7 @@ class Niebezpiecznik(Scrapper):
             post_container_title = post.find('div', {'class': 'title'}).find('h2').find('a')
             post_container_postmeta = post.find('div', {'class': 'postmeta'})
 
-            main_site_articles.append(ArticleModel(
+            main_site_articles.append(self.build_article(
                 name=self.__name__,
                 title=self.get_title(post_container_title),
                 url=self.get_url(post_container_title),

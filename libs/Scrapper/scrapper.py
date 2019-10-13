@@ -1,5 +1,4 @@
-from uuid import uuid4
-
+from models.models import ArticleModel
 from requests import get as rget
 from requests.models import Response
 
@@ -24,3 +23,6 @@ class Scrapper(object):
     def get_soup_from_link(self, url: str, parser_type: str = default_parser) -> BeautifulSoup:
         response = self.get_response_from_link(url)
         return BeautifulSoup(response.text, parser_type)
+
+    def build_article(self, **kwargs):
+        return ArticleModel(**kwargs)
