@@ -1,10 +1,15 @@
 from flask import jsonify
-from flask_restful import Resource
+from flask_restful import Resource, request
 from models.models import ArticleModel
+from werkzeug.exceptions import NotFound
 
 
 class PaginateArticle(Resource):
 
-    def get(self, page=1):
-        article_models = ArticleModel.query.paginate(page=page, per_page=8).items
-        return jsonify([article.get_article() for article in article_models])
+    def get(self):
+        page = int(request.args.get('page'))
+        try:
+            article_models = ArticleModel.query.paginate(page=page, per_page=8).items
+            return jsonify([article.get_article() for article in article_models])
+        except NotFound:
+            return jsonify([])

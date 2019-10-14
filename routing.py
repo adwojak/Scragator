@@ -4,6 +4,6 @@ from api.Services.resource import Services
 
 routing = {
     ManagerResource: ['/execute_observers'],
-    PaginateArticle: ['/page', '/page/<int:page>'],
+    PaginateArticle: ['/page'],
     Services: ['/services'],
 }
