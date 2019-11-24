@@ -1,5 +1,6 @@
-from flask_restful import Resource
 from typing import List
+
+from flask_restful import Resource
 
 from libs.Observer.observer import Observer
 from observers_mapping import observers_mapping

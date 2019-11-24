@@ -1,8 +1,9 @@
 from datetime import datetime
+from string import whitespace
+
+from bs4.element import Tag
 
 from libs.Scrapper.scrapper import Scrapper
-from bs4.element import Tag
-from string import whitespace
 
 
 class Niebezpiecznik(Scrapper):

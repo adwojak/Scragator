@@ -1,7 +1,8 @@
-from flask import jsonify, Response
+from flask import Response, jsonify
 from flask_restful import Resource, request
-from models.models import ArticleModel
 from werkzeug.exceptions import NotFound
+
+from models.models import ArticleModel
 
 
 class PaginateArticle(Resource):

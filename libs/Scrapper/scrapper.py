@@ -1,10 +1,10 @@
 from typing import Any
 
-from models.models import ArticleModel
+from bs4 import BeautifulSoup
 from requests import get as rget
 from requests.models import Response
 
-from bs4 import BeautifulSoup
+from models.models import ArticleModel
 
 
 class Scrapper(object):
