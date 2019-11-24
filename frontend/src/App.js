@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 class App extends Component {
 
@@ -9,20 +9,32 @@ class App extends Component {
     super(props);
 
     this.state = {
-      data: null,
+      data: Array.from({}),
       services: null,
+      hasMore: true,
       page: 1
     }
+    this.pageFetch();
     this.pageFetch.bind(this);
   }
 
-  pageFetch() {
+  pageFetch = () => {
     axios.get('http://localhost:5000/page', {
       params: {
         page: this.state.page
       }
     })
-      .then(res => this.setState({data: res.data}));
+    .then(res => {
+      console.log(res);
+      this.setState({
+        data: [
+          ...this.state.data,
+          ...res.data
+        ],
+        page: this.state.page + 1,
+        hasMore: res.data.length > 0
+      })
+    });
   }
 
   servicesFetch() {
@@ -30,15 +42,13 @@ class App extends Component {
       .then(res => this.setState({services: res.data}))
   }
 
-  changePage(e) {
-    this.setState({
-      page: e.target.value
-    })
-  }
-
   displayArticles() {
     return this.state.data.map(function(item, i) {
-      return <p key={i}>{i} | {item.author} | {item.title} | {item.upload_date}</p>
+      return (
+        <div style={{height: 200}}>
+          <p key={i}>{i} | {item.author} | {item.title} | {item.upload_date}</p>
+        </div>
+      )
     });
   }
 
@@ -48,27 +58,34 @@ class App extends Component {
     });
   }
 
+  onMount() {
+    this.pageFetch();
+  }
+
   render() {
     return (
       <div className="App">
-        <div>
-          <input type="range" min="1" max="5" value={this.state.page} name="page" onChange={(e) => this.changePage(e)}/>
-          <label>{this.state.page}</label>
-        </div>
-        <div>
-          <button onClick={() => this.pageFetch()}>Page</button>
-          <button onClick={() => this.servicesFetch()}>Services</button>
-        </div>
-        <div>
-          <div style={{width: `50%`, float: `left`}}>
-            {this.state.data && this.displayArticles()}
-          </div>
-          <div style={{width: `50%`, float: `left`}}>
-            {this.state.services && this.displayServices()}
-          </div>
-        </div>
+        {this.state.data && (
+          <InfiniteScroll
+            dataLength={this.state.data.length}
+            next={this.pageFetch}
+            loader={<h4>Loading...</h4>}
+            hasMore={this.state.hasMore}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
+          >
+            {this.state.data.map(function(item, i) {
+              return (<div style={{height: 200}}>
+                <p key={i}>{i} | {item.author} | {item.title} | {item.upload_date}</p>
+              </div>)
+            })}
+          </InfiniteScroll>
+        )}
       </div>
-    );
+    )
   }
 }
 
