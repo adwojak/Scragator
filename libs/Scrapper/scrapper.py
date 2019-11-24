@@ -1,27 +1,30 @@
-from uuid import uuid4
+from typing import Any
 
 from bs4 import BeautifulSoup
 from requests import get as rget
+from requests.models import Response
+
+from models.models import ArticleModel
 
 
 class Scrapper(object):
 
-    default_parser = 'lxml'
+    default_parser: str = 'html5lib'
 
-    def __init__(self, url, parser_type=default_parser):
+    def __init__(self, url: str, name: str, parser_type: str = default_parser) -> None:
         self.url = url
         self.main_soup = self.get_soup_from_link(url, parser_type)
-        self.articles = self.get_articles()
+        self.__name__ = name
 
-    def get_articles(self):
+    def get_main_site_articles(self) -> None:
         raise NotImplementedError
 
-    def generate_id(self):
-        return uuid4().hex
-
-    def get_response_from_link(self, url):
+    def get_response_from_link(self, url: str) -> Response:
         return rget(url)
 
-    def get_soup_from_link(self, url, parser_type=default_parser):
+    def get_soup_from_link(self, url: str, parser_type: str = default_parser) -> BeautifulSoup:
         response = self.get_response_from_link(url)
         return BeautifulSoup(response.text, parser_type)
+
+    def build_article(self, **kwargs: Any) -> ArticleModel:
+        return ArticleModel(**kwargs)
