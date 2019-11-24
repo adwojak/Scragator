@@ -14,7 +14,7 @@ class Observer(object):
     def get_url(self) -> str:
         return self._url
 
-    def get_scrapper(self):
+    def get_scrapper(self) -> Scrapper:
         return self._scrapper
 
     def update_db_newest_articles(self, articles: List) -> None:
@@ -25,9 +25,9 @@ class Observer(object):
         self.commit_db()
 
     def check_for_posts_updates(self) -> None:
-        scrapper = self.get_scrapper()(self.get_url(), self.__name__)
+        scrapper: Scrapper = self.get_scrapper()(self.get_url(), self.__name__)
         main_site_articles = scrapper.get_main_site_articles()
         self.update_db_newest_articles(main_site_articles)
 
-    def commit_db(self):
+    def commit_db(self) -> None:
         db.session.commit()

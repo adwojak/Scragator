@@ -1,20 +1,19 @@
 from datetime import datetime
 
 from libs.Scrapper.scrapper import Scrapper
-from typing import List
 from bs4.element import Tag
 from string import whitespace
 
 
 class Niebezpiecznik(Scrapper):
 
-    def get_main_site_articles(self) -> List:
-        main_site_articles = []
-        all_main_site_posts = self.main_soup.find_all('div', {'class': 'post'})
+    def get_main_site_articles(self) -> list:
+        main_site_articles: list = []
+        all_main_site_posts: Tag = self.main_soup.find_all('div', {'class': 'post'})
         for post in all_main_site_posts:
 
-            post_container_title = post.find('div', {'class': 'title'}).find('h2').find('a')
-            post_container_postmeta = post.find('div', {'class': 'postmeta'})
+            post_container_title: Tag = post.find('div', {'class': 'title'}).find('h2').find('a')
+            post_container_postmeta: Tag = post.find('div', {'class': 'postmeta'})
 
             main_site_articles.append(self.build_article(
                 name=self.__name__,
@@ -37,8 +36,8 @@ class Niebezpiecznik(Scrapper):
         author_raw = author.get_text().split('\n')[1]
         return author_raw.split('Autor:')[1].split('|')[0].strip()
 
-    def get_url(self, post_link):
+    def get_url(self, post_link: Tag) -> str:
         return post_link['href']
 
-    def get_title(self, post_title):
+    def get_title(self, post_title: Tag) -> str:
         return post_title.text

@@ -1,5 +1,5 @@
 from base64 import b64encode
-from typing import Dict
+from typing import Any
 
 from extensions import db
 
@@ -14,16 +14,16 @@ class ArticleModel(db.Model):
     upload_date = db.Column(db.DateTime, nullable=False)
     hash = db.Column(db.String(512), nullable=False)
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        self.hash = self.set_hash()
+        self.hash: bytes = self.set_hash()
 
-    def set_hash(self):
+    def set_hash(self) -> bytes:
         data_to_encode = '{name}-{date}-{author}-{url}'.format(
             name=self.name, date=self.upload_date, author=self.author, url=self.url)
         return b64encode(data_to_encode.encode('utf-8'))
 
-    def get_article(self) -> Dict:
+    def get_article(self) -> dict:
         return {
             'url': self.url,
             'title': self.title,
@@ -32,8 +32,8 @@ class ArticleModel(db.Model):
             'hash': str(self.hash)
         }
 
-    def save(self):
+    def save(self) -> None:
         db.session.add(self)
 
-    def exist(self):
+    def exist(self) -> bool:
         return self.query.filter_by(hash=self.hash).scalar() is not None

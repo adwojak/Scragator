@@ -7,7 +7,7 @@ from observers_mapping import observers_mapping
 
 class ManagerResource(Resource):
 
-    def get(self):
+    def get(self) -> dict:
         self.execute_observers()
         return {}
 

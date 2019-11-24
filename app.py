@@ -7,17 +7,17 @@ from extensions import db, migrate, scheduler
 from routing import routing
 
 
-def create_routing(api):
+def create_routing(api) -> None:
     for resource, routes in routing.items():
         api.add_resource(resource, *routes)
 
 
 def create_app() -> Flask:
-    app = Flask(__name__)
+    app: Flask = Flask(__name__)
     CORS(app)
     app.config.from_object(Config)
 
-    api = Api(app)
+    api: Api = Api(app)
     create_routing(api)
 
     db.init_app(app)
