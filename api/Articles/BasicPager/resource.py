@@ -9,7 +9,7 @@ class PaginateArticle(Resource):
     def get(self):
         page = int(request.args.get('page'))
         try:
-            article_models = ArticleModel.query.paginate(page=page, per_page=8).items
+            article_models = ArticleModel.query.order_by(ArticleModel.id.desc()).paginate(page=page, per_page=8).items
             return jsonify([article.get_article() for article in article_models])
         except NotFound:
             return jsonify([])

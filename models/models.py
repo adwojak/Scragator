@@ -6,12 +6,13 @@ from extensions import db
 
 class ArticleModel(db.Model):
     __tablename__ = 'articles'
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.String(128), nullable=False)
     title = db.Column(db.String(256), nullable=False)
     url = db.Column(db.String(128), nullable=False)
     author = db.Column(db.String(64), nullable=False)
     upload_date = db.Column(db.DateTime, nullable=False)
-    hash = db.Column(db.String(512), nullable=False, primary_key=True)
+    hash = db.Column(db.String(512), nullable=False)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

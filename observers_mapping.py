@@ -7,7 +7,7 @@ from scrappers.names import ScrapperNames
 observers_mapping: List = [
     AttrDict({
         'name': ScrapperNames.NIEBEZPIECZNIK.value,
-        'url': 'http://www.niebezpiecznik.pl',
+        'url': 'http://www.niebezpiecznik.pl/',
         'scrapper': Niebezpiecznik
     })
 ]
