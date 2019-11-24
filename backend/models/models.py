@@ -1,7 +1,7 @@
 from base64 import b64encode
 from typing import Any
 
-from extensions import db
+from backend.extensions import db
 
 
 class ArticleModel(db.Model):

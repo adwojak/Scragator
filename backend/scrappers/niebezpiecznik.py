@@ -3,7 +3,7 @@ from string import whitespace
 
 from bs4.element import Tag
 
-from libs.Scrapper.scrapper import Scrapper
+from backend.libs.Scrapper.scrapper import Scrapper
 
 
 class Niebezpiecznik(Scrapper):

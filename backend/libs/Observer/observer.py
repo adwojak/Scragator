@@ -1,7 +1,7 @@
 from typing import List
 
-from extensions import db
-from libs.Scrapper.scrapper import Scrapper
+from backend.extensions import db
+from backend.libs.Scrapper.scrapper import Scrapper
 
 
 class Observer(object):

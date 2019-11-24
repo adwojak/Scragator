@@ -2,9 +2,9 @@ from flask import Flask
 from flask_cors import CORS
 from flask_restful import Api
 
-from config import Config
-from extensions import db, migrate, scheduler
-from routing import routing
+from backend.config import Config
+from backend.extensions import db, migrate, scheduler
+from backend.routing import routing
 
 
 def create_routing(api) -> None:

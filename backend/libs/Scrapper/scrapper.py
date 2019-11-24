@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from requests import get as rget
 from requests.models import Response
 
-from models.models import ArticleModel
+from backend.models.models import ArticleModel
 
 
 class Scrapper(object):

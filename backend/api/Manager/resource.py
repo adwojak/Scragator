@@ -2,8 +2,8 @@ from typing import List
 
 from flask_restful import Resource
 
-from libs.Observer.observer import Observer
-from observers_mapping import observers_mapping
+from backend.libs.Observer.observer import Observer
+from backend.observers_mapping import observers_mapping
 
 
 class ManagerResource(Resource):

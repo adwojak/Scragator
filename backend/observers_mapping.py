@@ -1,7 +1,7 @@
 from attrdict import AttrDict
 
-from scrappers.names import ScrapperNames
-from scrappers.niebezpiecznik import Niebezpiecznik
+from backend.scrappers.names import ScrapperNames
+from backend.scrappers.niebezpiecznik import Niebezpiecznik
 
 observers_mapping: list = [
     AttrDict({
