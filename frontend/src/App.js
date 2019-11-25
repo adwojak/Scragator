@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       data: Array.from({}),
       services: null,
+      selectedArticleUrl: null,
       hasMore: true,
       page: 1
     }
@@ -25,7 +26,6 @@ class App extends Component {
       }
     })
     .then(res => {
-      console.log(res);
       this.setState({
         data: [
           ...this.state.data,
@@ -62,7 +62,13 @@ class App extends Component {
     this.pageFetch();
   }
 
-  render() {
+  setArticleUrl(url) {
+    this.setState({
+      selectedArticleUrl: url
+    });
+  }
+
+  listView() {
     return (
       <div className="App">
         {this.state.data && (
@@ -77,8 +83,8 @@ class App extends Component {
               </p>
             }
           >
-            {this.state.data.map(function(item, i) {
-              return (<div style={{height: 200}}>
+            {this.state.data.map((item, i) => {
+              return (<div style={{height: 200}} onClick={() => this.setArticleUrl(item.url)}>
                 <p key={i}>{i} | {item.author} | {item.title} | {item.upload_date}</p>
               </div>)
             })}
@@ -86,6 +92,25 @@ class App extends Component {
         )}
       </div>
     )
+  }
+
+  renderSinglePage = () => {
+    return (
+      <div>
+        <iframe
+          src={this.state.selectedArticleUrl}
+          width={`80%`}
+          height={`100%`}
+          style={{position: `fixed`, float: `left`}}
+          frameborder={0}
+        ></iframe>
+        <button style={{float: `right`}} onClick={() => this.setArticleUrl(null)}>Return</button>
+      </div>
+    )
+  }
+
+  render() {
+    return this.state.selectedArticleUrl ? this.renderSinglePage() : this.listView();
   }
 }
 
