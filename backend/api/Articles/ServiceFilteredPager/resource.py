@@ -13,9 +13,9 @@ class FilteredPager(Resource):
         services_str: str = request.form.get('services')
 
         try:
-            page = int(page_str)
-            services = literal_eval(services_str)
-            filtered_models = ArticleModel.query.order_by(ArticleModel.id.desc()).filter(
+            page: int = int(page_str)
+            services: list = literal_eval(services_str)
+            filtered_models: list = ArticleModel.query.order_by(ArticleModel.id.desc()).filter(
                 ArticleModel.name.in_(services)).paginate(page=page, per_page=8).items
             return jsonify([article.get_article() for article in filtered_models])
         except NotFound:
