@@ -14,7 +14,7 @@ class App extends Component {
       selectedArticleUrl: null,
       hasMore: true,
       page: 1
-    }
+    };
     this.pageFetch();
     this.pageFetch.bind(this);
   }
@@ -35,7 +35,7 @@ class App extends Component {
         hasMore: res.data.length > 0
       })
     });
-  }
+  };
 
   servicesFetch() {
     axios.get('http://localhost:5000/services')
