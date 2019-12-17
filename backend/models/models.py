@@ -41,6 +41,6 @@ class ArticleModel(db.Model):
 
 class UserModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nickname = db.Column(db.String(128), nullable=False)
+    username = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(128), unique=True)
     password = db.Column(db.String(100))
