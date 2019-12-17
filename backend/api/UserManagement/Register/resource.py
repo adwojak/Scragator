@@ -1,11 +1,12 @@
 from flask import Response, jsonify
-from flask_restful import Resource, request
+from flask_restful import request
 
 from backend.models.models import UserModel
 from backend.extensions import db
+from backend.libs.Resource.AuthResource import AuthResource
 
 
-class RegisterUser(Resource):
+class RegisterUser(AuthResource):
 
     def get(self) -> Response:
 
@@ -20,7 +21,8 @@ class RegisterUser(Resource):
             })
 
         try:
-            new_user = UserModel(username=username, email=email, password=password)
+            hashed_password = self.hash_password(password)
+            new_user = UserModel(username=username, email=email, password=hashed_password)
             db.session.add(new_user)
             db.session.commit()
             return jsonify({
