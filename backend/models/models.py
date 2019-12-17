@@ -37,3 +37,10 @@ class ArticleModel(db.Model):
 
     def exist(self) -> bool:
         return self.query.filter_by(hash=self.hash).scalar() is not None
+
+
+class UserModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nickname = db.Column(db.String(128), nullable=False)
+    email = db.Column(db.String(128), unique=True)
+    password = db.Column(db.String(100))
