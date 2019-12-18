@@ -41,11 +41,13 @@ class ArticleModel(db.Model):
 
 class UserModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(64), unique=True)
-    password = db.Column(db.String(32), nullable=False)
-    favourite_articles = db.Column(db.ARRAY(db.Integer), nullable=True)
-    favourite_services = db.Column(db.ARRAY(db.String), nullable=True)
+    password = db.Column(db.String(512), nullable=False)
+    favourite_articles = db.Column(db.ARRAY(db.Integer), default=[])
+    favourite_services = db.Column(db.ARRAY(db.String), default=[])
+
+    def commit_db(self):
+        db.session.commit()
 
 
 class RevokedTokenModel(db.Model):

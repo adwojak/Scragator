@@ -23,7 +23,7 @@ class RegisterUser(AuthResource):
 
             try:
                 hashed_password = self.hash_password(form.password.data)
-                new_user = UserModel(username=form.username.data, email=email, password=hashed_password)
+                new_user = UserModel(email=email, password=hashed_password)
                 db.session.add(new_user)
                 db.session.commit()
                 return jsonify({
