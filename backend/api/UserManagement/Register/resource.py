@@ -9,7 +9,7 @@ from backend.api.UserManagement.Register.form import RegisterForm
 
 class RegisterUser(AuthResource):
 
-    def get(self) -> Response:
+    def post(self) -> Response:
 
         form = RegisterForm(request.form)
 

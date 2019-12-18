@@ -3,7 +3,7 @@ from flask_cors import CORS
 from flask_restful import Api
 
 from backend.config import Config
-from backend.extensions import db, migrate, scheduler
+from backend.extensions import db, migrate, scheduler, jwt
 from backend.routing import routing
 
 
@@ -23,6 +23,8 @@ def create_app() -> Flask:
     db.init_app(app)
     db.app = app
     migrate.init_app(app, db)
+
+    jwt.init_app(app)
 
     scheduler.init_app(app)
     scheduler.start()

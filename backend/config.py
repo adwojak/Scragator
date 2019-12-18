@@ -8,6 +8,7 @@ class Config(object):
     SECRET_KEY: str = environ.get('SECRET_KEY') or 'super-secret-key'
     SQLALCHEMY_DATABASE_URI: str = environ.get('DATABASE_URL') or 'sqlite:///' + path.join(BASEDIR, 'ScrapperDB.db')
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
+    JWT_SECRET_KEY: str = environ.get('JWT_SECRET_KEY') or 'jwt_secret_key'
 
     JOBS: list = [
         {
