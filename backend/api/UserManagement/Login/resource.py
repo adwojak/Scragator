@@ -23,11 +23,9 @@ class LoginUser(AuthResource):
                 })
 
             if self.verify_password(user.password, form.password.data):
-                access_token = create_access_token(identity=email)
-                refresh_token = create_refresh_token(identity=email)
                 return jsonify({
-                    'access_token': access_token,
-                    'refresh_token': refresh_token
+                    'access_token': create_access_token(identity=email),
+                    'refresh_token': create_refresh_token(identity=email)
                 })
             else:
                 return jsonify({

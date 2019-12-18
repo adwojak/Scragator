@@ -4,6 +4,7 @@ from backend.api.Manager.resource import ManagerResource
 from backend.api.Services.resource import Services
 from backend.api.UserManagement.Register.resource import RegisterUser
 from backend.api.UserManagement.Login.resource import LoginUser, TestResource
+from backend.api.UserManagement.TokenRefresh.resource import TokenRefresh
 
 routing: dict = {
     ManagerResource: ['/execute_observers'],
@@ -12,5 +13,6 @@ routing: dict = {
     Services: ['/services'],
     RegisterUser: ['/user/register'],
     LoginUser: ['/user/login'],
+    TokenRefresh: ['/user/token_refresh'],
     TestResource: ['/test'],
 }
