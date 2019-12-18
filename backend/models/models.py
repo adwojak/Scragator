@@ -7,10 +7,10 @@ from backend.extensions import db
 class ArticleModel(db.Model):
     __tablename__ = 'articles'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    name = db.Column(db.String(128), nullable=False)
-    title = db.Column(db.String(256), nullable=False)
-    url = db.Column(db.String(128), nullable=False)
-    author = db.Column(db.String(64), nullable=False)
+    name = db.Column(db.String(512), nullable=False)
+    title = db.Column(db.String(512), nullable=False)
+    url = db.Column(db.String(512), nullable=False)
+    author = db.Column(db.String(128), nullable=False)
     upload_date = db.Column(db.DateTime, nullable=False)
     hash = db.Column(db.String(512), nullable=False)
 
@@ -21,7 +21,7 @@ class ArticleModel(db.Model):
     def set_hash(self) -> bytes:
         data_to_encode = '{name}-{date}-{author}-{url}'.format(
             name=self.name, date=self.upload_date, author=self.author, url=self.url)
-        return b64encode(data_to_encode.encode('utf-8'))
+        return b64encode(data_to_encode.encode('utf-8')).decode('utf-8')
 
     def get_article(self) -> dict:
         return {
@@ -43,7 +43,9 @@ class UserModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(64), unique=True)
-    password = db.Column(db.String(32))
+    password = db.Column(db.String(32), nullable=False)
+    favourite_articles = db.Column(db.ARRAY(db.Integer), nullable=True)
+    favourite_services = db.Column(db.ARRAY(db.String), nullable=True)
 
 
 class RevokedTokenModel(db.Model):
