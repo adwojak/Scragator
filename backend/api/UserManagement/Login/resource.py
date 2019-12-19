@@ -11,11 +11,11 @@ class LoginUser(AuthResource):
 
     def post(self) -> Response:
 
-        form = LoginForm(request.form)
+        form: LoginForm = LoginForm(request.form)
 
         if form.validate():
-            email = form.email.data
-            user = UserModel.query.filter_by(email=email).first()
+            email: str = form.email.data
+            user: UserModel = UserModel.query.filter_by(email=email).first()
 
             if not user:
                 return jsonify({

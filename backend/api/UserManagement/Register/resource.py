@@ -11,19 +11,19 @@ class RegisterUser(AuthResource):
 
     def post(self) -> Response:
 
-        form = RegisterForm(request.form)
+        form: RegisterForm = RegisterForm(request.form)
 
         if form.validate():
-            email = form.email.data
-            user = UserModel.query.filter_by(email=email).first()
+            email: str = form.email.data
+            user: UserModel = UserModel.query.filter_by(email=email).first()
             if user:
                 return jsonify({
                     'user_exists': True
                 })
 
             try:
-                hashed_password = self.hash_password(form.password.data)
-                new_user = UserModel(email=email, password=hashed_password)
+                hashed_password: str = self.hash_password(form.password.data)
+                new_user: UserModel = UserModel(email=email, password=hashed_password)
                 db.session.add(new_user)
                 db.session.commit()
                 return jsonify({

@@ -16,6 +16,6 @@ class SearchArticlesPager(Resource):
                 page=page, per_page=8).items
             return jsonify([article.get_article() for article in article_models])
         except NotFound:
-            return jsonify([{
+            return jsonify({
                 'error': True
             })
