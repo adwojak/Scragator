@@ -5,6 +5,7 @@ from backend.api.Articles.AddFavouriteArticle.resource import AddFavouriteArticl
 from backend.api.Articles.RemoveFavouriteArticle.resource import RemoveFavouriteArticle
 from backend.api.Articles.AddFavouriteService.resource import AddFavouriteService
 from backend.api.Articles.RemoveFavouriteService.resource import RemoveFavouriteService
+from backend.api.Articles.SearchArticlesPager.resource import SearchArticlesPager
 from backend.api.Manager.resource import ManagerResource
 from backend.api.Services.resource import Services
 from backend.api.UserManagement.Register.resource import RegisterUser
@@ -24,6 +25,7 @@ routing: dict = {
     RemoveFavouriteArticle: ['/remove_fav_article'],
     AddFavouriteService: ['/add_fav_service'],
     RemoveFavouriteService: ['/remove_fav_service'],
+    SearchArticlesPager: ['/search_articles'],
     Services: ['/services'],
     RegisterUser: ['/user/register'],
     LoginUser: ['/user/login'],
