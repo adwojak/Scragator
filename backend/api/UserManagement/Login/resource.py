@@ -33,12 +33,3 @@ class LoginUser(AuthResource):
                 })
         else:
             return jsonify(form.errors)
-
-
-class TestResource(AuthResource):
-
-    @jwt_required
-    def get(self):
-        return jsonify({
-            'authorized': True
-        })

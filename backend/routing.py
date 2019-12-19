@@ -8,11 +8,12 @@ from backend.api.Articles.RemoveFavouriteService.resource import RemoveFavourite
 from backend.api.Manager.resource import ManagerResource
 from backend.api.Services.resource import Services
 from backend.api.UserManagement.Register.resource import RegisterUser
-from backend.api.UserManagement.Login.resource import LoginUser, TestResource
+from backend.api.UserManagement.Login.resource import LoginUser
 from backend.api.UserManagement.TokenRefresh.resource import TokenRefresh
 from backend.api.UserManagement.Logout.resource import AccessTokenLogout
 from backend.api.UserManagement.Logout.resource import RefreshTokenLogout
 from backend.api.UserManagement.Profile.resource import Profile
+from backend.api.UserManagement.DeleteUser.resource import DeleteUser
 
 routing: dict = {
     ManagerResource: ['/execute_observers'],
@@ -29,6 +30,6 @@ routing: dict = {
     TokenRefresh: ['/user/token_refresh'],
     AccessTokenLogout: ['/user/logout_access'],
     RefreshTokenLogout: ['/user/logout_refresh'],
+    DeleteUser: ['/user/delete_user'],
     Profile: ['/profile'],
-    TestResource: ['/test'],
 }

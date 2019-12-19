@@ -49,6 +49,10 @@ class UserModel(db.Model):
     def commit_db(self):
         db.session.commit()
 
+    def delete_user(self):
+        self.query.delete()
+        self.commit_db()
+
 
 class RevokedTokenModel(db.Model):
     __tablename__ = 'revoked_tokens'
