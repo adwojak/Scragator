@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Home from './components/Home';
 import Another from './components/Another';
 import Form from './components/Form';
+import RemoveForm from './components/RemoveForm';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/another" component={Another} />
             <Route path="/addArticle" component={Form} />
+            <Route path="/removeArticle" component={RemoveForm} />
           </Switch>
         </BrowserRouter>
       </div>

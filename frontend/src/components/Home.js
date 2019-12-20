@@ -6,6 +6,7 @@ const mapStateToProps = state => {
 };
 
 const ArticlesList = ({ articles }) => (
+
     <ul>
         {articles.map(el => (
             <li key={el.id}>{el.title}</li>

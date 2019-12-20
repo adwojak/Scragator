@@ -1,0 +1,3 @@
+export const ADD_ARTICLE = "ADD_ARTICLE";
+export const REMOVE_ARTICLE = "REMOVE_ARTICLE";
+export const BAD_WORD_FOUND = "BAD_WORD_FOUND";

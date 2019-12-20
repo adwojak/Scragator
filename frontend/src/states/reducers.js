@@ -1,18 +1,18 @@
-import { ADD_ARTICLE } from '../constants/action-types';
+import { ADD_ARTICLE, REMOVE_ARTICLE } from './action-types';
 
 const initialState = {
     articles: []
 };
-
-// function rootReducer(state = initialState, action) {
-//     return state;
-// };
 
 const rootReducer = (state = initialState, action) => {
     if (action.type == ADD_ARTICLE) {
         return Object.assign({}, state, {
             articles: state.articles.concat(action.payload)
         });
+    } else if (action.type == REMOVE_ARTICLE) {
+        return Object.assign({}, state, {
+            articles: state.articles.filter(article => article.title !== action.payload.title)
+        })
     }
     return state;
 }

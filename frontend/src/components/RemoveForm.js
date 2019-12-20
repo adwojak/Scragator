@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addArticle } from '../states/actions';
+import { removeArticle } from '../states/actions';
 
 function mapDispatchToProps(dispatch) {
     return {
-        addArticle: article => dispatch(addArticle(article))
+        removeArticle: article => dispatch(removeArticle(article))
     };
 }
 
-class ConnectedForm extends Component {
+class RemoveFormComponent extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             title: ''
-        };
+        }
     }
 
     handleChange = event => {
@@ -24,8 +24,8 @@ class ConnectedForm extends Component {
     handleSubmit = event => {
         event.preventDefault();
         const { title } = this.state;
-        this.props.addArticle({ title });
-        this.setState({ title: '' });
+        this.props.removeArticle({ title });
+        this.setState({ title: '' })
     }
 
     render() {
@@ -43,13 +43,13 @@ class ConnectedForm extends Component {
                 </div>
                 <button type="submit">Save</button>
             </form>
-        );
+        )
     }
 }
 
-const Form = connect(
+const RemoveForm = connect(
     null,
     mapDispatchToProps
-)(ConnectedForm);
+)(RemoveFormComponent);
 
-export default Form;
+export default RemoveForm;

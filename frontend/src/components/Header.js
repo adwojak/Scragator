@@ -23,6 +23,9 @@ class Header extends Component {
                 <li>
                     <Link to="/addArticle">Add article</Link>
                 </li>
+                <li>
+                    <Link to="/removeArticle">Remove article</Link>
+                </li>
                 {this.state.isLogged ? (
                     <Fragment>
                         <li>
