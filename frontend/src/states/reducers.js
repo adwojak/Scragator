@@ -1,7 +1,8 @@
-import { ADD_ARTICLE, REMOVE_ARTICLE } from './action-types';
+import { ADD_ARTICLE, REMOVE_ARTICLE, LOGIN_USER, LOGOUT_USER } from './action-types';
 
 const initialState = {
-    articles: []
+    articles: [],
+    isLogged: false
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -13,6 +14,21 @@ const rootReducer = (state = initialState, action) => {
         return Object.assign({}, state, {
             articles: state.articles.filter(article => article.title !== action.payload.title)
         })
+    }
+
+    switch (action.type) {
+        case LOGIN_USER:
+            return Object.assign({}, state, {
+                login: action.payload.login,
+                password: action.payload.password,
+                isLogged: true
+            });
+        case LOGOUT_USER:
+            return Object.assign({}, state, {
+                login: '',
+                password: '',
+                isLogged: false
+            })
     }
     return state;
 }

@@ -1,13 +1,24 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logoutUser } from '../states/actions';
+
+const mapStateToProps = state => {
+    return {
+        isLogged: state.isLogged
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logoutUser: () => dispatch(logoutUser())
+    }
+}
 
 class Header extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLogged: true
-        };
+    handleLogout = event => {
+        event.preventDefault();
+        this.props.logoutUser();
     }
 
     render() {
@@ -26,13 +37,13 @@ class Header extends Component {
                 <li>
                     <Link to="/removeArticle">Remove article</Link>
                 </li>
-                {this.state.isLogged ? (
+                {this.props.isLogged ? (
                     <Fragment>
                         <li>
                             <Link to="/profile">Profile</Link>
                         </li>
                         <li>
-                            <Link to="/logout">Logout</Link>
+                            <button onClick={this.handleLogout}>Logout</button>
                         </li>
                     </Fragment>
                 ) : (
@@ -51,4 +62,7 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Header);
