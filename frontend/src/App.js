@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import Header from './components/Header';
 import Home from './components/Home';
 import Another from './components/Another';
@@ -9,24 +9,25 @@ import RemoveForm from './components/RemoveForm';
 import Login from './components/Login';
 import Register from './components/Register';
 import LoginRoute from './components/LoginRoute';
+import AnonymousRoute from './components/AnonymousRoute';
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <Fragment>
+        <Header />
         <BrowserRouter>
-          <Header />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/another" component={Another} />
             <Route path="/addArticle" component={Form} />
             <Route path="/removeArticle" component={RemoveForm} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
+            <AnonymousRoute path="/login" component={Login} />
+            <AnonymousRoute path="/register" component={Register} />
             <LoginRoute path="/profile" component={RemoveForm} />
           </Switch>
         </BrowserRouter>
-      </div>
+      </Fragment>
     );
   }
 }
