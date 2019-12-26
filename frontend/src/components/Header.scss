@@ -1,13 +1,11 @@
+@import './constants.scss';
+
 .Header {
     height: 100px;
     display: flex;
     // background-color: green;
 
-    @media (max-width: 640px) {
-        background-color: red;
-    }
-
-    @media (max-width: 999px) {
+    @media (max-width: $mobileMedia) {
         background-color: blue;
     }
 
@@ -20,9 +18,82 @@
     .Title {
         font-size: 40px;
         color: white;
-        // padding-left: 15px;
-        // margin: 0px auto;
-        // display: inline;
+    }
+
+    nav[role=navigation] {
+
+        @media (min-width: $mobileMedia) {
+            display: flex;
+            justify-content: space-between;
+
+            input[type=checkbox] {
+                display: none;
+            }
+
+            ul[role=mainNav] {
+                position: absolute;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                list-style-type: none;
+                color: white;
+                margin-right: 3vh;
+                margin-top: 4vh;
+                right: 2vh;
+
+                li {
+                    margin-left: 4vh;
+                    color: rgba(255, 255, 255, 0.8);
+                    cursor: pointer;
+                }
+
+                li:hover {
+                    color: rgba(255, 255, 255, 1);
+                }
+            }
+
+            .burgerMenu {
+                display: none;
+            }
+        }
+
+        @media (max-width: $mobileMedia) {
+
+            // input[type=checkbox] {
+            //     position: absolute;
+            //     top: 1vh;
+            //     right: 2vh;
+            //     width: 6vh;
+            //     height: 6vh;
+            //     opacity: 0;
+            //     z-index: 2;
+            // }
+
+            // input[type=checkbox]:target
+            // {
+            // opacity: 1;
+            // transform: rotate(45deg) translate(-2px, -1px);
+            // background: #232323;
+            // }
+
+            .burgerMenu {
+                position: absolute;
+                top: 1vh;
+                right: 2vh;
+                cursor: pointer;
+                color: rgba(255, 255, 255, 0.8);
+                font-size: 6vh;
+            }
+    
+            ul[role=mainNav] {
+                list-style-type: none;
+    
+                li {
+                    text-align: center;
+                    margin: 15px auto;
+                }
+            }
+        }
     }
 }
 

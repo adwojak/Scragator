@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faAddressCard } from '@fortawesome/free-solid-svg-icons'
 import { logoutUser } from '../states/actions';
 import './Header.scss';
 import homeIcon from '../static/images/houseIcon.jpg';
@@ -36,20 +38,18 @@ const HeaderSearchBar = () => {
 }
 
 const HeaderNavbar = () => {
+    let icon = faBars;
+
+    const changeIcon = () => {
+        icon = faAddressCard;
+    }
     return (
         <nav role="navigation">
-            <div id="menuToggle">
-                <input type="checkbox" />
-
-                <span></span>
-                <span></span>
-                <span></span>
-
-                <ul>
-                    <li>elo</li>
-                    <li>elo2</li>
-                </ul>
-            </div>
+            <FontAwesomeIcon icon={icon} className="burgerMenu" onClick={changeIcon} />
+            <ul role="mainNav">
+                <li>elo</li>
+                <li>elo2</li>
+            </ul>
         </nav>
     );
 }
