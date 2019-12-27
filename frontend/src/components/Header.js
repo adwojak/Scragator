@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import { faBars, faAddressCard } from '@fortawesome/free-solid-svg-icons'
 import { logoutUser } from '../states/actions';
 import './Header.scss';
@@ -37,24 +38,42 @@ const HeaderSearchBar = () => {
     );
 }
 
-const HeaderNavbar = () => {
+const HeaderNavbar = props => {
     let icon = faBars;
 
-    const changeIcon = () => {
-        icon = faAddressCard;
-    }
     return (
-        <nav role="navigation">
-            <FontAwesomeIcon icon={icon} className="burgerMenu" onClick={changeIcon} />
+        <nav role="navigation" className={classNames({
+            'burgerVisible': props.burgerMenuVisible,
+            'burgerHidden': !props.burgerMenuVisible
+        })}>
+            <FontAwesomeIcon icon={icon} className="burgerMenuIcon" onClick={() => props.changeBurgerMenuVisibility()} />
+            <div class="burgerMenu"></div>
             <ul role="mainNav">
-                <li>elo</li>
-                <li>elo2</li>
+                <li><strong>HOME</strong></li>
+                <li><strong>SERVICES</strong></li>
+                <li><strong>ABOUT</strong></li>
+                <li><strong>PROFILE</strong></li>
+                <li><strong>LOGOUT</strong></li>
             </ul>
         </nav>
     );
 }
 
 class Header extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            burgerMenuVisible: null
+        }
+    }
+
+    changeBurgerMenuVisibility = () => {
+        this.setState({
+            burgerMenuVisible: this.state.burgerMenuVisible ? false : true
+        })
+    }
+
     handleLogout = event => {
         event.preventDefault();
         this.props.logoutUser();
@@ -66,7 +85,7 @@ class Header extends Component {
                 <HeaderIcon />
                 <HeaderTitle />
                 <HeaderSearchBar />
-                <HeaderNavbar />
+                <HeaderNavbar burgerMenuVisible={this.state.burgerMenuVisible} changeBurgerMenuVisibility={this.changeBurgerMenuVisibility} />
             </div>
             // <nav>
             //     <ul>
