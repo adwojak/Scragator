@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { faBars, faAddressCard } from '@fortawesome/free-solid-svg-icons'
 import { logoutUser } from '../states/actions';
 import './Header.scss';
-import homeIcon from '../static/images/houseIcon.jpg';
+import homeIcon from '../static/images/houseIcon.png';
 
 const mapStateToProps = state => {
     return {
