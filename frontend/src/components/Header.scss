@@ -19,45 +19,111 @@
 }
 
 .Header {
+    width: 100%;
     display: flex;
+    justify-content: flex-start;
 
     .Icon {
-        width: 50px;
-        height: 50px;
-        margin: 5px 10px 5px 5px;
+        flex: initial;
+        @media(min-width: $mobileMedia) {
+            width: 50px;
+            height: 50px;
+            margin: 5px 10px 5px 5px;
+        }
+        @media(max-width: $mobileMedia) {
+            width: 45px;
+            height: 45px;
+            margin: 5px 5px 5px 5px;
+        }
     }
 
     .Title {
         font-size: 30px;
         color: white;
+        margin-right: 10px;
+        flex: initial;
 
         @media(max-width: $mobileMedia) {
             font-size: 25px;
         }
     }
 
-    nav[role=navigation] {
-        @media (min-width: $mobileMedia) {
-            display: flex;
-            justify-content: space-between;
+    .SearchBar {
+        outline: none;
+        width: 20%;
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+        margin: auto;
 
-            input[type=checkbox] {
-                display: none;
-            }
+        input[type=search] {
+            width: 40px;
+            height: 40px;
+            outline: none;
+            border: none;
+
+            background: url($searchIconPath);
+            background-repeat: no-repeat;
+            background-size: 40px;
+            background-position: right;
+
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+        input[type=search]:hover {
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        input[type=search]:focus {
+            width: 100%;
+            max-width: 500px;
+            padding-left: 45px;
+            color: white;
+            background-color: transparent;
+            background-position: 2%;
+            background-size: 30px;
+            font-size: 20px;
+
+            border: 2px solid white;
+            border-radius: 15px;
+            cursor: auto;
+        }
+
+        input:-moz-placeholder {
+            color: transparent;
+        }
+
+        input::-webkit-input-placeholder {
+            color: transparent;
+        }
+
+        @media(max-width: $mobileMedia) {
+            margin: 5px auto;
+        }
+    }
+
+    nav[role=navigation] {
+        @media (min-width: $mobileMedia + 1) {
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 20px;
 
             ul[role=mainNav] {
-                position: absolute;
                 display: flex;
-                flex-direction: row;
-                justify-content: flex-end;
                 list-style-type: none;
+                padding-inline-start: 0px;
                 color: white;
-                margin-right: 3vw;
-                margin-top: 4vh;
-                right: 2vw;
+                margin-top: 25px;
+
+                .ProfileLinks {
+                    display: flex;
+                    margin-left: 50px;
+                }
 
                 li {
-                    margin-left: 4vw;
+                    margin-left: 20px;
                     color: rgba(255, 255, 255, 0.8);
                     cursor: pointer;
                 }
@@ -67,48 +133,41 @@
                 }
             }
 
-            .burgerMenu {
-                display: none;
-            }
-
             .burgerMenuIcon {
                 display: none;
             }
         }
 
         @media (max-width: $mobileMedia) {
-            position: absolute;
-            right: 0;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            width: 60vw;
+            justify-content: flex-end;
 
             .burgerMenuIcon {
-                position: absolute;
-                top: 1vh;
-                right: 2vw;
+                display: flex;
+                justify-content: flex-end;
+                margin-right: 5px;
+                margin-left: 10px;
                 color: rgba(255, 255, 255, 0.8);
                 font-size: 50px;
-                z-index: 1;
                 cursor: pointer;
             }
 
-            .burgerMenu {
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 100%;
-                height: inherit;
-                background-color: rgba(0, 0, 0, 0.7);
-                z-index: 0;
-            }
-
             ul[role=mainNav] {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin: auto;
                 list-style-type: none;
                 font-size: 35px;
-                width: 100%;
+                height: 100%;
+                padding-right: 25px;
+
+                .ProfileLinks {
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: 30px;
+                }
 
                 li {
                     z-index: 0;
@@ -117,33 +176,24 @@
                     margin: 15px auto;
                     cursor: pointer;
                 }
-
-                li:nth-last-child(2) {
-                    margin-top: 100px;
-                }
             }
 
             &.burgerVisible {
-                .burgerMenu {
-                    @include slideIn;
-                }
-
                 ul[role=mainNav] {
                     @include slideIn;
+                    background-color: rgba(0, 0, 0, 0.7);
                 }
 
                 >.burgerMenuIcon {
                     transform: rotate(180deg);
                     transition-duration: 0.5s;
+                    z-index: 1;
                 }
             }
 
             &.burgerHidden {
-                .burgerMenu {
-                    @include slideOut;
-                }
-
                 ul[role=mainNav] {
+                    display: none;
                     @include slideOut;
                 }
 

@@ -34,7 +34,9 @@ const HeaderTitle = () => {
 
 const HeaderSearchBar = () => {
     return (
-        <span>Search bar</span>
+        <form className="SearchBar" autoComplete="Off">
+            <input type="search" name="search" />
+        </form>
     );
 }
 
@@ -47,13 +49,14 @@ const HeaderNavbar = props => {
             'burgerHidden': !props.burgerMenuVisible
         })}>
             <FontAwesomeIcon icon={icon} className="burgerMenuIcon" onClick={() => props.changeBurgerMenuVisibility()} />
-            <div class="burgerMenu"></div>
             <ul role="mainNav">
                 <li><strong>HOME</strong></li>
                 <li><strong>SERVICES</strong></li>
                 <li><strong>ABOUT</strong></li>
-                <li><strong>PROFILE</strong></li>
-                <li><strong>LOGOUT</strong></li>
+                <div class="ProfileLinks">
+                    <li><strong>PROFILE</strong></li>
+                    <li><strong>LOGOUT</strong></li>
+                </div>
             </ul>
         </nav>
     );
@@ -87,6 +90,7 @@ class Header extends Component {
                 <HeaderSearchBar />
                 <HeaderNavbar burgerMenuVisible={this.state.burgerMenuVisible} changeBurgerMenuVisibility={this.changeBurgerMenuVisibility} />
             </div>
+
             // <nav>
             //     <ul>
             //     <li>
