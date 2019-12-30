@@ -1,8 +1,7 @@
 {
   "parser": "babel-eslint",
   "plugins": [
-    "react",
-    "flowtype"
+    "react"
   ],
   "rules": {
     "space-in-parens": [ 0, "always" ],
