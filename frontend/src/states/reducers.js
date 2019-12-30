@@ -1,13 +1,13 @@
 // @flow
 import { LOGIN_USER, LOGOUT_USER, SHOW_BURGER_MENU, HIDE_BURGER_MENU } from './action-types';
-import type { InitialState } from './types';
+import type { InitialStateType } from './types';
 
 const initialState = {
     isLogged: false,
     burgerMenuVisible: false
 };
 
-type Action = $ReadOnly<{|
+type ActionType = $ReadOnly<{|
     type: string,
     payload: {
         login: string,
@@ -15,7 +15,7 @@ type Action = $ReadOnly<{|
     }
 |}>;
 
-const rootReducer = (state: InitialState = initialState, action: Action) => {
+const rootReducer = (state: InitialStateType = initialState, action: ActionType): Object => {
     switch (action.type) {
         case LOGIN_USER:
             return Object.assign({}, state, {

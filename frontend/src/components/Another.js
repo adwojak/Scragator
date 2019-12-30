@@ -1,7 +1,7 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 
-const Another = () => (
+const Another = (): React.Node => (
     <div>
         adnother
     </div>

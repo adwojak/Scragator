@@ -1,9 +1,9 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 
-class Register extends Component<Object> {
+class Register extends React.Component<Object> {
 
-    render() {
+    render(): React.Node {
         return (
             <p>register</p>
         );

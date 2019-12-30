@@ -1,21 +1,21 @@
 // @flow
-import React, { Fragment } from 'react';
+import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { Route } from 'react-router-dom';
 
-type Props = $ReadOnly<{|
+type PropsType = $ReadOnly<{|
     path: string,
     component: React$ComponentType<any>
 |}>;
 
-export default function LoginRoute(props: Props) {
-    const isLogged = useSelector(state => state.isLogged);
+export default function LoginRoute(props: PropsType): React.Node {
+    const isLogged = useSelector((state: Object): Object => state.isLogged);
     const { path, component } = props;
     return (
-        <Fragment>
+        <React.Fragment>
             {!isLogged && (
-                <Route path={path} component={component}/>
+                <Route path={ path } component={ component }/>
             )}
-        </Fragment>
+        </React.Fragment>
     );
 }

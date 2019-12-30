@@ -1,7 +1,7 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 
-const ArticlesList = () => (
+const ArticlesList = (): React.Node => (
     <ul>
         <li>Nothing for now</li>
     </ul>

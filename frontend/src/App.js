@@ -12,16 +12,16 @@ import AnonymousRoute from './components/AnonymousRoute';
 class App extends Component {
   render() {
     return (
-      <Fragment>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/another" component={Another} />
-          <AnonymousRoute path="/login" component={Login} />
-          <AnonymousRoute path="/register" component={Register} />
-          <LoginRoute path="/profile" component={Another} />
-        </Switch>
-      </Fragment>
+        <Fragment>
+            <Header />
+            <Switch>
+                <Route exact path="/" component={ Home } />
+                <Route path="/another" component={ Another } />
+                <AnonymousRoute path="/login" component={ Login } />
+                <AnonymousRoute path="/register" component={ Register } />
+                <LoginRoute path="/profile" component={ Another } />
+            </Switch>
+        </Fragment>
     );
   }
 }

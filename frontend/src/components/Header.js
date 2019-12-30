@@ -1,43 +1,43 @@
 // @flow
-import React, { Component, Fragment } from 'react';
+import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { logoutUser, showBurgerMenu, hideBurgerMenu } from '../states/actions';
-import type { InitialState } from '../states/types';
+import type { InitialStateType } from '../states/types';
 import './Header.scss';
 import homeIcon from '../static/images/houseIcon.png';
 
-const mapStateToProps = (state: InitialState) => {
+const mapStateToProps = (state: InitialStateType): Object => {
     return {
         isLogged: state.isLogged,
         burgerMenuVisible: state.burgerMenuVisible
     };
 }
 
-const mapDispatchToProps = (dispatch: Object) => {
+const mapDispatchToProps = (dispatch: Object): Object => {
     return {
-        logoutUser: () => dispatch(logoutUser()),
-        showBurgerMenu: () => dispatch(showBurgerMenu()),
-        hideBurgerMenu: () => dispatch(hideBurgerMenu())
+        logoutUser: (): Object => dispatch(logoutUser()),
+        showBurgerMenu: (): Object => dispatch(showBurgerMenu()),
+        hideBurgerMenu: (): Object => dispatch(hideBurgerMenu())
     }
 }
 
-const HeaderIcon = () => {
+const HeaderIcon = (): React.Node => {
     return (
-        <NavLink className="NavLink" to="/"><img src={homeIcon} className="Icon" alt="Home Icon"/></NavLink>
+        <NavLink className="NavLink" to="/"><img src={ homeIcon } className="Icon" alt="Home Icon"/></NavLink>
     );
 }
 
-const HeaderTitle = () => {
+const HeaderTitle = (): React.Node => {
     return (
         <h1 className="Title">Quokka</h1>
     );
 }
 
-const HeaderSearchBar = () => {
+const HeaderSearchBar = (): React.Node => {
     return (
         <form className="SearchBar" autoComplete="Off">
             <input type="search" name="search" />
@@ -45,43 +45,43 @@ const HeaderSearchBar = () => {
     );
 }
 
-type NavbarProps = $ReadOnly<{|
-    ...InitialState,
+type NavbarPropsType = $ReadOnly<{|
+    ...InitialStateType,
     changeBurgerMenuVisibility: Object,
     handleLogout: Object,
     hideBurgerMenu: Object
 |}>;
 
-const HeaderNavbar = (props: NavbarProps) => {
+const HeaderNavbar = (props: NavbarPropsType): React.Node => {
     return (
-        <nav role="navigation" className={classNames({
+        <nav role="navigation" className={ classNames({
             'burgerVisible': props.burgerMenuVisible,
             'burgerHidden': !props.burgerMenuVisible
-        })}>
-            <FontAwesomeIcon icon={faBars} className="burgerMenuIcon" onClick={() => props.changeBurgerMenuVisibility()} />
-            <ul role="menubar" onClick={props.hideBurgerMenu}>
+        }) }>
+            <FontAwesomeIcon icon={ faBars } className="burgerMenuIcon" onClick={ (): Object => props.changeBurgerMenuVisibility() } />
+            <ul role="menubar" onClick={ props.hideBurgerMenu }>
                 <li><NavLink className="NavLink" to="/">HOME</NavLink></li>
                 <li><NavLink className="NavLink" to="/another">SERVICES</NavLink></li>
                 <li><NavLink className="NavLink" to="/addArticle">ABOUT</NavLink></li>
                 <div className="ProfileLinks">
-                {props.isLogged ? (
-                    <Fragment>
-                        <li>
-                            <NavLink className="NavLink" to="/profile">PROFILE</NavLink>
-                        </li>
-                        <li>
-                            <button type="button" className="LinkButton" onClick={props.handleLogout}>LOGOUT</button>
-                        </li>
-                    </Fragment>
+                    {props.isLogged ? (
+                        <React.Fragment>
+                            <li>
+                                <NavLink className="NavLink" to="/profile">PROFILE</NavLink>
+                            </li>
+                            <li>
+                                <button type="button" className="LinkButton" onClick={ props.handleLogout }>LOGOUT</button>
+                            </li>
+                        </React.Fragment>
                 ) : (
-                    <Fragment>
+                    <React.Fragment>
                         <li>
                             <NavLink className="NavLink" to="/login">LOGIN</NavLink>
                         </li>
                         <li>
                             <NavLink className="NavLink" to="/register">REGISTER</NavLink>
                         </li>
-                    </Fragment>
+                    </React.Fragment>
                 )}
                 </div>
             </ul>
@@ -89,14 +89,14 @@ const HeaderNavbar = (props: NavbarProps) => {
     );
 }
 
-type Props = $ReadOnly<{|
-    ...InitialState,
+type PropsType = $ReadOnly<{|
+    ...InitialStateType,
     hideBurgerMenu: Object,
     showBurgerMenu: Object,
     logoutUser: Object
 |}>;
 
-class Header extends Component<Props> {
+class Header extends React.Component<PropsType> {
     changeBurgerMenuVisibility = () => {
         this.props.burgerMenuVisible? this.props.hideBurgerMenu() : this.props.showBurgerMenu();
     }
@@ -106,24 +106,24 @@ class Header extends Component<Props> {
         this.props.logoutUser();
     }
 
-    render() {
+    render(): React.Node {
         return (
             <div className="Header">
                 <HeaderIcon />
                 <HeaderTitle />
                 <HeaderSearchBar />
                 <HeaderNavbar
-                    burgerMenuVisible={this.props.burgerMenuVisible}
-                    changeBurgerMenuVisibility={this.changeBurgerMenuVisibility}
-                    isLogged={this.props.isLogged}
-                    handleLogout={this.handleLogout}
-                    hideBurgerMenu={this.props.hideBurgerMenu} />
+                    burgerMenuVisible={ this.props.burgerMenuVisible }
+                    changeBurgerMenuVisibility={ this.changeBurgerMenuVisibility }
+                    isLogged={ this.props.isLogged }
+                    handleLogout={ this.handleLogout }
+                    hideBurgerMenu={ this.props.hideBurgerMenu } />
             </div>
         )
     }
 }
 
-export default connect<Props, InitialState, _, _, _, _>(
+export default connect<PropsType, InitialStateType, _, _, _, _>(
     mapStateToProps,
     mapDispatchToProps
 )(Header);
