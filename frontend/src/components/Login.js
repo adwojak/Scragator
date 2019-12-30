@@ -1,15 +1,25 @@
+// @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../states/actions';
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Object) {
     return {
         loginUser: (login, password) => dispatch(loginUser({login, password}))
     };
 }
 
-class Login extends Component {
-    constructor(props) {
+type Props = $ReadOnly<{|
+    loginUser: Object
+|}>;
+
+type State = $ReadOnly<{|
+    login: string,
+    password: string
+|}>;
+
+class Login extends Component<Props, State> {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
@@ -25,11 +35,11 @@ class Login extends Component {
         });
     }
 
-    handleChange = event => {
+    handleChange = (event: {target: {id: string, value: string}}) => {
         this.setState({ [event.target.id]: event.target.value })
     }
 
-    handleSubmit = event => {
+    handleSubmit = (event: Event) => {
         event.preventDefault();
         const { login, password } = this.state;
         this.props.loginUser(login, password);
@@ -61,7 +71,7 @@ class Login extends Component {
     }
 }
 
-export default connect(
+export default connect<_, Props, _, _, _, _>(
     null,
     mapDispatchToProps
 )(Login);

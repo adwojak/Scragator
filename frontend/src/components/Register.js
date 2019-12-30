@@ -1,6 +1,7 @@
+// @flow
 import React, { Component } from 'react';
 
-class Register extends Component {
+class Register extends Component<Object> {
 
     render() {
         return (

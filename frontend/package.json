@@ -41,5 +41,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-flow": "^7.7.4",
+    "flow-bin": "^0.114.0",
+    "flow-typed": "^2.6.2"
   }
 }

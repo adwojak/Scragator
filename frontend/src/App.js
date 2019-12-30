@@ -15,7 +15,7 @@ class App extends Component {
       <Fragment>
         <Header />
         <Switch>
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/" component={Home} />
           <Route path="/another" component={Another} />
           <AnonymousRoute path="/login" component={Login} />
           <AnonymousRoute path="/register" component={Register} />

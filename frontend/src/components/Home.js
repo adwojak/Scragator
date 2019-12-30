@@ -1,16 +1,10 @@
+// @flow
 import React from 'react';
-import { connect } from 'react-redux';
 
-const mapStateToProps = state => {
-    return { articles: state.articles };
-};
-
-const ArticlesList = ({ articles }) => (
+const ArticlesList = () => (
     <ul>
-        {articles.map(el => (
-            <li key={el.id}>{el.title}</li>
-        ))}
+        <li>Nothing for now</li>
     </ul>
 );
 
-export default connect(mapStateToProps)(ArticlesList);
+export default ArticlesList;

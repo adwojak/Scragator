@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -5,17 +6,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { logoutUser, showBurgerMenu, hideBurgerMenu } from '../states/actions';
+import type { InitialState } from '../states/types';
 import './Header.scss';
 import homeIcon from '../static/images/houseIcon.png';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: InitialState) => {
     return {
         isLogged: state.isLogged,
         burgerMenuVisible: state.burgerMenuVisible
     };
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Object) => {
     return {
         logoutUser: () => dispatch(logoutUser()),
         showBurgerMenu: () => dispatch(showBurgerMenu()),
@@ -43,7 +45,14 @@ const HeaderSearchBar = () => {
     );
 }
 
-const HeaderNavbar = props => {
+type NavbarProps = $ReadOnly<{|
+    ...InitialState,
+    changeBurgerMenuVisibility: Object,
+    handleLogout: Object,
+    hideBurgerMenu: Object
+|}>;
+
+const HeaderNavbar = (props: NavbarProps) => {
     return (
         <nav role="navigation" className={classNames({
             'burgerVisible': props.burgerMenuVisible,
@@ -80,12 +89,19 @@ const HeaderNavbar = props => {
     );
 }
 
-class Header extends Component {
+type Props = $ReadOnly<{|
+    ...InitialState,
+    hideBurgerMenu: Object,
+    showBurgerMenu: Object,
+    logoutUser: Object
+|}>;
+
+class Header extends Component<Props> {
     changeBurgerMenuVisibility = () => {
         this.props.burgerMenuVisible? this.props.hideBurgerMenu() : this.props.showBurgerMenu();
     }
 
-    handleLogout = event => {
+    handleLogout = (event: Event) => {
         event.preventDefault();
         this.props.logoutUser();
     }
@@ -107,7 +123,7 @@ class Header extends Component {
     }
 }
 
-export default connect(
+export default connect<Props, InitialState, _, _, _, _>(
     mapStateToProps,
     mapDispatchToProps
 )(Header);
