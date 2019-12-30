@@ -1,21 +1,12 @@
-import { ADD_ARTICLE, REMOVE_ARTICLE, LOGIN_USER, LOGOUT_USER } from './action-types';
+import { LOGIN_USER, LOGOUT_USER, SHOW_BURGER_MENU, HIDE_BURGER_MENU } from './action-types';
 
 const initialState = {
     articles: [],
-    isLogged: false
+    isLogged: false,
+    burgerMenuVisible: false
 };
 
 const rootReducer = (state = initialState, action) => {
-    if (action.type == ADD_ARTICLE) {
-        return Object.assign({}, state, {
-            articles: state.articles.concat(action.payload)
-        });
-    } else if (action.type == REMOVE_ARTICLE) {
-        return Object.assign({}, state, {
-            articles: state.articles.filter(article => article.title !== action.payload.title)
-        })
-    }
-
     switch (action.type) {
         case LOGIN_USER:
             return Object.assign({}, state, {
@@ -29,8 +20,17 @@ const rootReducer = (state = initialState, action) => {
                 password: '',
                 isLogged: false
             })
+        case SHOW_BURGER_MENU:
+            return Object.assign({}, state, {
+                burgerMenuVisible: true
+            })
+        case HIDE_BURGER_MENU:
+                return Object.assign({}, state, {
+                    burgerMenuVisible: false
+                })
+        default:
+            return state;
     }
-    return state;
 }
 
 export default rootReducer;

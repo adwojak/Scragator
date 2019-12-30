@@ -2,7 +2,7 @@
 
 @mixin slideIn {
     opacity: 0;
-    animation: slide-in 0.5s forwards;
+    animation: slide-in $sliderTransitionDuration forwards;
 
     @keyframes slide-in {
         100% { opacity: 1; }
@@ -11,7 +11,7 @@
 
 @mixin slideOut {
     opacity: 0;
-    animation: slide-out 0.5s forwards;
+    animation: slide-out $sliderTransitionDuration forwards;
 
     @keyframes slide-out {
         0% { opacity: 1; }
@@ -33,13 +33,13 @@
         @media(max-width: $mobileMedia) {
             width: 45px;
             height: 45px;
-            margin: 5px 5px 5px 5px;
+            margin: 5px;
         }
     }
 
     .Title {
         font-size: 30px;
-        color: white;
+        color: $headerBasicColor;
         margin-right: 10px;
         flex: initial;
 
@@ -67,8 +67,8 @@
             background-size: 40px;
             background-position: right;
 
-            -webkit-transition: width 0.4s ease-in-out;
-            transition: width 0.4s ease-in-out;
+            -webkit-transition: width $searchInputResizeTransitionDuration ease-in-out;
+            transition: width $searchInputResizeTransitionDuration ease-in-out;
         }
 
         input[type=search]:hover {
@@ -80,13 +80,13 @@
             width: 100%;
             max-width: 500px;
             padding-left: 45px;
-            color: white;
+            color: $headerBasicColor;
             background-color: transparent;
             background-position: 2%;
             background-size: 30px;
             font-size: 20px;
 
-            border: 2px solid white;
+            border: 2px solid $headerBasicColor;
             border-radius: 15px;
             cursor: auto;
         }
@@ -105,31 +105,71 @@
     }
 
     nav[role=navigation] {
-        @media (min-width: $mobileMedia + 1) {
+        display: flex;
+        justify-content: flex-end;
+
+        ul[role=menubar] {
             display: flex;
-            justify-content: flex-end;
+            list-style-type: none;
+            padding-inline-start: 0px;
+
+            .ProfileLinks {
+                display: flex;
+            }
+
+            li {
+                cursor: pointer;
+
+                a,
+                .NavLink {
+                    text-decoration: none;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .LinkButton {
+            background-color: transparent;
+            color: $headerMenuHighlightColor;
+            font-weight: bold;
+            font-size: inherit;
+            font-family: inherit;
+            padding: 0;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+          }
+
+        @media (min-width: $mobileMedia + 1) {
             margin-right: 20px;
 
-            ul[role=mainNav] {
-                display: flex;
-                list-style-type: none;
-                padding-inline-start: 0px;
-                color: white;
+            ul[role=menubar] {
+                color: $headerBasicColor;
                 margin-top: 25px;
 
                 .ProfileLinks {
-                    display: flex;
                     margin-left: 50px;
                 }
 
                 li {
                     margin-left: 20px;
-                    color: rgba(255, 255, 255, 0.8);
-                    cursor: pointer;
+                      
+                      .link-button:hover,
+                      .link-button:focus {
+                        text-decoration: none;
+                      }
+                    
+                    .NavLink {
+                        color: $headerMenuHighlightColor;
+                    }
                 }
 
                 li:hover {
-                    color: rgba(255, 255, 255, 1);
+                    .LinkButton,
+                    .NavLink {
+                        color: $headerBasicColor;
+                    }
                 }
             }
 
@@ -139,67 +179,64 @@
         }
 
         @media (max-width: $mobileMedia) {
-            display: flex;
-            justify-content: flex-end;
-
             .burgerMenuIcon {
                 display: flex;
                 justify-content: flex-end;
                 margin-right: 5px;
                 margin-left: 10px;
-                color: rgba(255, 255, 255, 0.8);
+                color: $headerMenuHighlightColor;
                 font-size: 50px;
                 cursor: pointer;
             }
 
-            ul[role=mainNav] {
+            ul[role=menubar] {
                 position: absolute;
-                display: flex;
                 flex-direction: column;
                 justify-content: center;
                 margin: auto;
-                list-style-type: none;
                 font-size: 35px;
                 height: 100%;
-                padding-right: 25px;
+                width: 100%;
 
                 .ProfileLinks {
-                    display: flex;
                     flex-direction: column;
                     margin-top: 30px;
                 }
 
                 li {
                     z-index: 0;
-                    color: white;
                     text-align: center;
                     margin: 15px auto;
-                    cursor: pointer;
+
+                    .LinkButton,
+                    .NavLink {
+                        color: $headerBasicColor;
+                    }
                 }
             }
 
             &.burgerVisible {
-                ul[role=mainNav] {
+                ul[role=menubar] {
                     @include slideIn;
-                    background-color: rgba(0, 0, 0, 0.7);
+                    background-color: $burgerMenuBackgroundColor;
                 }
 
                 >.burgerMenuIcon {
                     transform: rotate(180deg);
-                    transition-duration: 0.5s;
+                    transition-duration: $burgerMenuTransitionDuration;
                     z-index: 1;
                 }
             }
 
             &.burgerHidden {
-                ul[role=mainNav] {
+                ul[role=menubar] {
                     display: none;
                     @include slideOut;
                 }
 
                 >.burgerMenuIcon {
                     transform: rotate(-180deg);
-                    transition-duration: 0.5s;
+                    transition-duration: $burgerMenuTransitionDuration;
                 }
             }
         }

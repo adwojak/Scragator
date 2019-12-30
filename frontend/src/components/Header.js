@@ -1,28 +1,31 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { faBars, faAddressCard } from '@fortawesome/free-solid-svg-icons'
-import { logoutUser } from '../states/actions';
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { logoutUser, showBurgerMenu, hideBurgerMenu } from '../states/actions';
 import './Header.scss';
 import homeIcon from '../static/images/houseIcon.png';
 
 const mapStateToProps = state => {
     return {
-        isLogged: state.isLogged
+        isLogged: state.isLogged,
+        burgerMenuVisible: state.burgerMenuVisible
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        logoutUser: () => dispatch(logoutUser())
+        logoutUser: () => dispatch(logoutUser()),
+        showBurgerMenu: () => dispatch(showBurgerMenu()),
+        hideBurgerMenu: () => dispatch(hideBurgerMenu())
     }
 }
 
-const HeaderIcon = img => {
+const HeaderIcon = () => {
     return (
-        <img src={homeIcon} className="Icon"/>
+        <NavLink className="NavLink" to="/"><img src={homeIcon} className="Icon" alt="Home Icon"/></NavLink>
     );
 }
 
@@ -41,21 +44,36 @@ const HeaderSearchBar = () => {
 }
 
 const HeaderNavbar = props => {
-    let icon = faBars;
-
     return (
         <nav role="navigation" className={classNames({
             'burgerVisible': props.burgerMenuVisible,
             'burgerHidden': !props.burgerMenuVisible
         })}>
-            <FontAwesomeIcon icon={icon} className="burgerMenuIcon" onClick={() => props.changeBurgerMenuVisibility()} />
-            <ul role="mainNav">
-                <li><strong>HOME</strong></li>
-                <li><strong>SERVICES</strong></li>
-                <li><strong>ABOUT</strong></li>
-                <div class="ProfileLinks">
-                    <li><strong>PROFILE</strong></li>
-                    <li><strong>LOGOUT</strong></li>
+            <FontAwesomeIcon icon={faBars} className="burgerMenuIcon" onClick={() => props.changeBurgerMenuVisibility()} />
+            <ul role="menubar" onClick={props.hideBurgerMenu}>
+                <li><NavLink className="NavLink" to="/">HOME</NavLink></li>
+                <li><NavLink className="NavLink" to="/another">SERVICES</NavLink></li>
+                <li><NavLink className="NavLink" to="/addArticle">ABOUT</NavLink></li>
+                <div className="ProfileLinks">
+                {props.isLogged ? (
+                    <Fragment>
+                        <li>
+                            <NavLink className="NavLink" to="/profile">PROFILE</NavLink>
+                        </li>
+                        <li>
+                            <button type="button" className="LinkButton" onClick={props.handleLogout}>LOGOUT</button>
+                        </li>
+                    </Fragment>
+                ) : (
+                    <Fragment>
+                        <li>
+                            <NavLink className="NavLink" to="/login">LOGIN</NavLink>
+                        </li>
+                        <li>
+                            <NavLink className="NavLink" to="/register">REGISTER</NavLink>
+                        </li>
+                    </Fragment>
+                )}
                 </div>
             </ul>
         </nav>
@@ -63,18 +81,8 @@ const HeaderNavbar = props => {
 }
 
 class Header extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            burgerMenuVisible: null
-        }
-    }
-
     changeBurgerMenuVisibility = () => {
-        this.setState({
-            burgerMenuVisible: this.state.burgerMenuVisible ? false : true
-        })
+        this.props.burgerMenuVisible? this.props.hideBurgerMenu() : this.props.showBurgerMenu();
     }
 
     handleLogout = event => {
@@ -84,48 +92,17 @@ class Header extends Component {
 
     render() {
         return (
-            <div class="Header">
+            <div className="Header">
                 <HeaderIcon />
                 <HeaderTitle />
                 <HeaderSearchBar />
-                <HeaderNavbar burgerMenuVisible={this.state.burgerMenuVisible} changeBurgerMenuVisibility={this.changeBurgerMenuVisibility} />
+                <HeaderNavbar
+                    burgerMenuVisible={this.props.burgerMenuVisible}
+                    changeBurgerMenuVisibility={this.changeBurgerMenuVisibility}
+                    isLogged={this.props.isLogged}
+                    handleLogout={this.handleLogout}
+                    hideBurgerMenu={this.props.hideBurgerMenu} />
             </div>
-
-            // <nav>
-            //     <ul>
-            //     <li>
-            //         <Link to="/">Home</Link>
-            //     </li>
-            //     <li>
-            //         <Link to="/another">Aboequt</Link>
-            //     </li>
-            //     <li>
-            //         <Link to="/addArticle">Add article</Link>
-            //     </li>
-            //     <li>
-            //         <Link to="/removeArticle">Remove article</Link>
-            //     </li>
-            //     {this.props.isLogged ? (
-            //         <Fragment>
-            //             <li>
-            //                 <Link to="/profile">Profile</Link>
-            //             </li>
-            //             <li>
-            //                 <button onClick={this.handleLogout}>Logout</button>
-            //             </li>
-            //         </Fragment>
-            //     ) : (
-            //         <Fragment>
-            //             <li>
-            //                 <Link to="/login">Login</Link>
-            //             </li>
-            //             <li>
-            //                 <Link to="/register">Register</Link>
-            //             </li>
-            //         </Fragment>
-            //     )}
-            //     </ul>
-            // </nav>
         )
     }
 }
