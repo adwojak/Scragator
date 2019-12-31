@@ -25,19 +25,19 @@ const mapDispatchToProps = (dispatch: Object): Object => {
     }
 }
 
-const HeaderIcon = (): React.Node => {
+export const HeaderIcon = (): React.Node => {
     return (
         <NavLink className="NavLink" to="/"><img src={ homeIcon } className="Icon" alt="Home Icon"/></NavLink>
     );
 }
 
-const HeaderTitle = (): React.Node => {
+export const HeaderTitle = (): React.Node => {
     return (
         <h1 className="Title">Quokka</h1>
     );
 }
 
-const HeaderSearchBar = (): React.Node => {
+export const HeaderSearchBar = (): React.Node => {
     return (
         <form className="SearchBar" autoComplete="Off">
             <input type="search" name="search" />
@@ -52,7 +52,7 @@ type NavbarPropsType = $ReadOnly<{|
     hideBurgerMenu: Object
 |}>;
 
-const HeaderNavbar = (props: NavbarPropsType): React.Node => {
+export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
     return (
         <nav role="navigation" className={ classNames({
             'burgerVisible': props.burgerMenuVisible,

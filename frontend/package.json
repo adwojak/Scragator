@@ -20,10 +20,18 @@
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
-    "fix": "eslint --fix src/"
+    "fix": "eslint --fix src/",
+    "test:deb": "node --inspect node_modules/.bin/jest --runInBand",
+    "test:cov": "jest --coverage"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "moduleNameMapper": {
+         "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+         "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    }
   },
   "browserslist": {
     "production": [
