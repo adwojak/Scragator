@@ -1,7 +1,8 @@
 {
   "parser": "babel-eslint",
   "plugins": [
-    "react"
+    "react",
+    "flowtype"
   ],
   "rules": {
     "space-in-parens": [ 0, "always" ],
@@ -21,7 +22,6 @@
     "react/prop-types": [ 1 ],
     "react/no-array-index-key": [ 1 ],
     "class-methods-use-this": [ 1 ],
-    "no-undef": [ 1 ],
     "no-case-declarations": [ 1 ],
     "no-return-assign": [ 1 ],
     "no-param-reassign": [ 1 ],

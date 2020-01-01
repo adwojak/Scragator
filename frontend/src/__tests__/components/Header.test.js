@@ -1,28 +1,30 @@
+// @flow
 import React from 'react';
-import Enzyme from 'enzyme';
+import Enzyme, { ReactWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { wrapComponent, MOUNT } from '../../helpers/wrapper';
+import type { NewParamsType } from '../../helpers/wrapper';
 import Header, { HeaderIcon, HeaderTitle, HeaderSearchBar, HeaderNavbar } from '../../components/Header';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const setupHeaderComponent = (newParams = {}) => {
+const setupHeaderComponent = (newParams: NewParamsType = {}): ReactWrapper => {
     return wrapComponent(Header, newParams);
 };
 
-const setupHeaderIconComponent = (newParams = {}) => {
+const setupHeaderIconComponent = (newParams: NewParamsType = {}): ReactWrapper => {
     return wrapComponent(HeaderIcon, newParams);
 };
 
-const setupHeaderTitleComponent = (newParams = {}) => {
+const setupHeaderTitleComponent = (newParams: NewParamsType = {}): ReactWrapper => {
     return wrapComponent(HeaderTitle, newParams);
 };
 
-const setupHeaderSearchBarComponent = (newParams = {}) => {
+const setupHeaderSearchBarComponent = (newParams: NewParamsType = {}): ReactWrapper => {
     return wrapComponent(HeaderSearchBar, newParams);
 };
 
-const setupHeaderNavbarComponent = (newParams = {}) => {
+const setupHeaderNavbarComponent = (newParams: NewParamsType = {}): ReactWrapper => {
     return wrapComponent(HeaderNavbar, newParams);
 };
 

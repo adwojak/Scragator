@@ -1,15 +1,17 @@
+// @flow
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, ReactWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import Login from '../../components/Login';
 
 Enzyme.configure({ adapter: new Adapter() })
 
-const setupComponent = () => {
+// To fix later
+const setupComponent = (): ReactWrapper => {
     const mockStore = configureMockStore();
     const store = mockStore({});
-    return shallow(<Login store={store} />).shallow()
+    return shallow(<Login store={ store } />).shallow()
 };
 
 describe('Login Component', () => {
