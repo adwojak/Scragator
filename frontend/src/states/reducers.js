@@ -10,7 +10,7 @@ const initialState = {
 type ActionType = $ReadOnly<{|
     type: string,
     payload: {
-        login: string,
+        email: string,
         password: string
     }
 |}>;
@@ -19,13 +19,13 @@ const rootReducer = (state: InitialStateType = initialState, action: ActionType)
     switch (action.type) {
         case LOGIN_USER:
             return Object.assign({}, state, {
-                login: action.payload.login,
+                email: action.payload.email,
                 password: action.payload.password,
                 isLogged: true
             });
         case LOGOUT_USER:
             return Object.assign({}, state, {
-                login: '',
+                email: '',
                 password: '',
                 isLogged: false
             })

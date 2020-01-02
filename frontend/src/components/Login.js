@@ -2,10 +2,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../states/actions';
+import Button from '../libs/components/Button';
+import Input from '../libs/components/Input';
+import Form from '../libs/components/Form';
+import EmailValidator from '../libs/validators/EmailValidator';
+import PasswordValidator from '../libs/validators/PasswordValidator';
 
 function mapDispatchToProps(dispatch: Object): Object {
     return {
-        loginUser: (login: string, password: string): Object => dispatch(loginUser({ login, password }))
+        loginUser: (email: string, password: string): Object => dispatch(loginUser({ email, password }))
     };
 }
 
@@ -14,58 +19,28 @@ type PropsType = $ReadOnly<{|
 |}>;
 
 type StateType = $ReadOnly<{|
-    login: string,
+    email: string,
     password: string
 |}>;
 
-class Login extends React.Component<PropsType, StateType> {
-    constructor(props: PropsType) {
-        super(props);
+class Login extends Form<PropsType, StateType> {
+    formInputs = [ 'email', 'password' ]
+    state = this.createLocalState(this.formInputs);
 
-        this.state = {
-            login: '',
-            password: ''
-        };
-    }
-
-    clearState = () => {
-        this.setState({
-            login: '',
-            password: ''
-        });
-    }
-
-    handleChange = (event: {target: {id: string, value: string}}) => {
-        this.setState({ [ event.target.id ]: event.target.value })
-    }
-
-    handleSubmit = (event: Event) => {
-        event.preventDefault();
-        const { login, password } = this.state;
-        this.props.loginUser(login, password);
-        this.clearState();
+    executeValidFormSubmit = () => {
+        const { email, password } = this.state;
+        this.props.loginUser(email.value, password.value);
     }
 
     render(): React.Node {
-        const { login, password } = this.state;
         return (
-            <form onSubmit={ this.handleSubmit }>
+            <form onSubmit={ this.handleSubmit } noValidate>
                 <div>
                     <label htmlFor="login">Login</label>
-                    <input
-                        type="text"
-                        id="login"
-                        value={ login }
-                        onChange={ this.handleChange }
-                    />
-                    <input
-                        type="password"
-                        id="password"
-                        value={ password }
-                        onChange={ this.handleChange }
-                    />
+                    <Input id="email" placeholder="Email..." required setInputData={ this.setInputData } validator={ EmailValidator } />
+                    <Input id="password" placeholder="Password..." type="password" required setInputData={ this.setInputData } validator={ PasswordValidator } />
                 </div>
-                <button type="submit">Save</button>
+                <Button buttonText="Save" />
             </form>
         );
     }

@@ -1,92 +1,56 @@
 // @flow
 import React from 'react';
-import Enzyme, { shallow, ReactWrapper } from 'enzyme';
+import Enzyme, { ReactWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import configureMockStore from 'redux-mock-store';
+import { wrapComponent, MOUNT } from '../../helpers/wrapper';
+import type { NewParamsType } from '../../helpers/wrapper';
 import Login from '../../components/Login';
 
-Enzyme.configure({ adapter: new Adapter() })
+Enzyme.configure({ adapter: new Adapter() });
 
-// To fix later
-const setupComponent = (): ReactWrapper => {
-    const mockStore = configureMockStore();
-    const store = mockStore({});
-    return shallow(<Login store={ store } />).shallow()
+const setupLoginComponent = (newParams: NewParamsType = {}): ReactWrapper => {
+    return wrapComponent(Login, newParams);
 };
 
-describe('Login Component', () => {
-    it('Has form', () => {
-        const node = setupComponent().find('form');
-        expect(node.length).toEqual(1);
+describe('Login', () => {
+    const formInputs = [ 'email', 'password' ];
+    const stateData = {
+        [ formInputs[ 0 ] ]: {
+            value: null,
+            hasError: true
+        },
+        [ formInputs[ 1 ] ]: {
+            value: null,
+            hasError: true
+        }
+    }
+    const emailDataToUpdate = {
+        id: formInputs[ 0 ],
+        value: 'example.asd@com',
+        hasError: false
+    };
+    const passwordDataToUpdate = {
+        id: formInputs[ 1 ],
+        value: 'examplePassword',
+        hasError: false
+    };
+
+    it('Component renders properly', () => {
+        expect(setupLoginComponent().length).toEqual(1);
     });
 
-    describe('Login label', () => {
-        const node = setupComponent().find('label');
-
-        it('Has label', () => {
-            expect(node.length).toEqual(1);
-        });
-
-        it('Has property htmlFor', () => {
-            const htmlFor = node.props().htmlFor;
-            expect(htmlFor).toEqual('login');
-        });
-
-        it('Has proper text', () => {
-            const text = node.text();
-            expect(text).toEqual('Login');
-        })
+    it('Create local state', () => {
+        const loginInstance = setupLoginComponent().dive().instance();
+        loginInstance.createLocalState(formInputs);
+        expect(loginInstance.state).toMatchObject(stateData, { defaultFormInputs: formInputs });
     });
 
-    describe('Login button', () => {
-        const node = setupComponent().find('button');
+    it('Submit form', () => {
+        const loginInstance = setupLoginComponent().dive().instance();
+        loginInstance.createLocalState(formInputs);
 
-        it('Has button', () => {
-            expect(node.length).toEqual(1);
-        });
-
-        it('Has property type=submit', () => {
-            const type = node.props().type;
-            expect(type).toEqual('submit');
-        });
-
-        it('Has proper text', () => {
-            const text = node.text();
-            expect(text).toEqual('Save');
-        });
-    });
-
-    describe('Login inputs', () => {
-        const node = setupComponent().find('input');
-
-        it('Has two inputs', () => {
-            expect(node.length).toEqual(2);
-        });
-
-        describe('User login input', () => {
-            const loginNode = node.find('#login');
-
-            it('Has user login input', () => {
-                expect(loginNode.length).toEqual(1);
-            });
-
-            it('Has property type=text', () => {
-                const type = loginNode.props().type;
-                expect(type).toEqual('text');
-            });
-        });
-
-        describe('User password input', () => {
-            const passwordNode = node.find('#password');
-
-            it('Has user password input', () => {
-                expect(passwordNode.length).toEqual(1);
-            });
-
-            it('Has property type=password', () => {
-                const type = passwordNode.props().type;
-                expect(type).toEqual('password');
-            });
-        });
+        loginInstance.setInputData(emailDataToUpdate, false);
+        loginInstance.setInputData(passwordDataToUpdate, false);
+        loginInstance.executeValidFormSubmit();
     });
 });
