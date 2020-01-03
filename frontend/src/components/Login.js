@@ -29,6 +29,8 @@ class Login extends Form<PropsType, StateType> {
 
     executeValidFormSubmit = () => {
         const { email, password } = this.state;
+        // Handle login here (axios to endpoint) and if login error - return msg and display
+        // Then call loginUser?
         this.props.loginUser(email.value, password.value);
     }
 
@@ -40,7 +42,7 @@ class Login extends Form<PropsType, StateType> {
                     <Input id="email" placeholder="Email..." required setInputData={ this.setInputData } validator={ EmailValidator } />
                     <Input id="password" placeholder="Password..." type="password" required setInputData={ this.setInputData } validator={ PasswordValidator } />
                 </div>
-                <Button buttonText="Save" />
+                <Button buttonText="Login" />
             </form>
         );
     }

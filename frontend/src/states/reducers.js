@@ -1,5 +1,5 @@
 // @flow
-import { LOGIN_USER, LOGOUT_USER, SHOW_BURGER_MENU, HIDE_BURGER_MENU } from './action-types';
+import { LOGIN_USER, LOGOUT_USER, SHOW_BURGER_MENU, HIDE_BURGER_MENU, REGISTER_USER } from './action-types';
 import type { InitialStateType } from './types';
 
 const initialState = {
@@ -29,6 +29,12 @@ const rootReducer = (state: InitialStateType = initialState, action: ActionType)
                 password: '',
                 isLogged: false
             })
+        case REGISTER_USER:
+            return Object.assign({}, state, {
+                email: action.payload.email,
+                password: action.payload.password,
+                repeatPassword: action.payload.repeatPassword
+            });
         case SHOW_BURGER_MENU:
             return Object.assign({}, state, {
                 burgerMenuVisible: true

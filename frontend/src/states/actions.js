@@ -1,5 +1,5 @@
 // @flow
-import { LOGIN_USER, LOGOUT_USER, SHOW_BURGER_MENU, HIDE_BURGER_MENU } from './action-types';
+import { LOGIN_USER, LOGOUT_USER, REGISTER_USER, SHOW_BURGER_MENU, HIDE_BURGER_MENU } from './action-types';
 import type { ActionReturnType } from './types';
 
 export const loginUser = (payload: Object): ActionReturnType => {
@@ -8,6 +8,10 @@ export const loginUser = (payload: Object): ActionReturnType => {
 
 export const logoutUser = (payload: Object): ActionReturnType => {
     return { type: LOGOUT_USER, payload };
+};
+
+export const registerUser = (payload: Object): ActionReturnType => {
+    return { type: REGISTER_USER, payload };
 };
 
 export const showBurgerMenu = (payload: Object): ActionReturnType => {
