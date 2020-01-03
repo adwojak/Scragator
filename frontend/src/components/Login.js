@@ -35,6 +35,7 @@ class Login extends Form<PropsType, StateType> {
     const { email, password } = this.state;
     // Handle login here (axios to endpoint) and if login error - return msg and display
     // Then call loginUser
+    // Save favourite articles and services in store
     this.props.loginUser(email.value, password.value);
   };
 

@@ -20,6 +20,7 @@
 
     @media (min-width: $mobileMedia) {
       width: calc(#{$elementsDesktopWidth} + 20px);
+      font-size: 16px;
     }
 
     .NavLink {

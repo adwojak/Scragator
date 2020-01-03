@@ -1,0 +1,88 @@
+@import "./constants.scss";
+
+.Articles {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  color: white;
+
+  li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    width: calc(100vw - 30px);
+    min-height: 20vh;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    box-shadow: inset 0 0 0 100vw rgba(48, 63, 143, 0.7);
+    background-image: url("https://miro.medium.com/max/590/1*cBFSQ9Ytv_D0jwGtpuL5WA.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    hr {
+      display: flex;
+      flex-direction: row;
+      color: white;
+      height: 2px;
+      width: 40vw;
+      border: none;
+      background-color: blue;
+      margin: 2px 0;
+    }
+
+    .ArticleBookmark {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      width: 30px;
+      height: 60px;
+      background: linear-gradient(180deg, $flagColor 50%, transparent 50%);
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    .ArticleBookmark:before {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-bottom: 15px solid $flagColor;
+      border-left: 15px solid transparent;
+
+      transform: scale(1, -1);
+      margin-bottom: 15px;
+    }
+
+    .ArticleBookmark:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-bottom: 15px solid $flagColor;
+      border-right: 15px solid transparent;
+
+      transform: scale(1, -1);
+      margin-bottom: 15px;
+    }
+
+    .ArticleDate {
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .ArticleAuthor {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+}

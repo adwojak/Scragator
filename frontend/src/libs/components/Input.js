@@ -58,6 +58,11 @@ export default function Input(props: InputType): React.Node {
         onChange={handleChange}
         onBlur={validateInput}
         className={className || "InputBig"}
+        onKeyDown={event => {
+          if (event.keyCode === 13) {
+            validateInput();
+          }
+        }}
       />
       {error && <p className="Error">{error}</p>}
     </React.Fragment>
