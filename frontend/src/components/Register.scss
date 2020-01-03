@@ -4,4 +4,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .FormError {
+    color: red;
+    white-space: pre-wrap;
+  }
 }

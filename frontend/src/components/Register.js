@@ -5,8 +5,10 @@ import { registerUser } from "../states/actions";
 import Button from "../libs/components/Button";
 import Input from "../libs/components/Input";
 import Form from "../libs/components/Form";
+import Label from "../libs/components/Label";
 import EmailValidator from "../libs/validators/EmailValidator";
 import PasswordValidator from "../libs/validators/PasswordValidator";
+import "./Register.scss";
 
 function mapDispatchToProps(dispatch: Object): Object {
   return {
@@ -41,10 +43,12 @@ class Register extends Form<PropsType, StateType> {
 
   render(): React.Node {
     return (
-      <form onSubmit={this.handleSubmit} noValidate>
-        {this.state.formError && <p>{this.state.formError}</p>}
+      <form onSubmit={this.handleSubmit} className="Form" noValidate>
         <div>
-          <label htmlFor="register">Register</label>
+          <Label htmlFor="register">REGISTER</Label>
+          {this.state.formError && (
+            <p className="FormError">{this.state.formError}</p>
+          )}
           <Input
             id="email"
             placeholder="Email..."

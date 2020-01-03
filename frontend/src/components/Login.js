@@ -40,9 +40,12 @@ class Login extends Form<PropsType, StateType> {
 
   render(): React.Node {
     return (
-      <form onSubmit={this.handleSubmit} className="FormLogin" noValidate>
+      <form onSubmit={this.handleSubmit} className="Form" noValidate>
         <div>
           <Label htmlFor="login">LOGIN</Label>
+          {this.state.formError && (
+            <p className="FormError">{this.state.formError}</p>
+          )}
           <Input
             id="email"
             placeholder="Email..."

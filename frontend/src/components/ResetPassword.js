@@ -22,7 +22,7 @@ class ResetPassword extends Form<null, StateType> {
 
   render(): React.Node {
     return (
-      <form onSubmit={this.handleSubmit} className="FormLogin" noValidate>
+      <form onSubmit={this.handleSubmit} className="Form" noValidate>
         <div>
           <Label htmlFor="resetPassword">RESET PASSWORD</Label>
           <Input
