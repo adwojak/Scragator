@@ -5,63 +5,17 @@
   flex-direction: column;
   align-items: center;
 
-  .LoginLabel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    margin-top: 20px;
-    margin-bottom: 80px;
-    color: white;
-    font-size: 30px;
-    font-weight: bold;
-  }
-
-  input {
-    display: flex;
-    flex-direction: column;
-
-    background-color: $inputColor;
-    border: none;
-    width: $elementsWidth;
-    height: $elementsHeight;
-    margin-bottom: 15px;
-
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    padding-left: 10px;
-    padding-right: 10px;
-
-    &::placeholder {
-      color: white;
-      opacity: 1;
-    }
-  }
-
-  .Error {
-    width: calc(#{$elementsWidth} + 20px);
-    color: red;
-  }
-
-  .LoginButton {
-    width: calc(#{$elementsWidth} + 20px);
-    height: $elementsHeight;
-    outline: none;
-    border: none;
-    background-color: $buttonColor;
-    font-size: 20px;
-    font-weight: bold;
-    color: $inputColor;
-  }
-
   .Links {
     display: flex;
     justify-content: space-between;
 
-    width: calc(#{$elementsWidth} + 20px);
+    width: calc(#{$elementsMobileWidth} + 20px);
     font-size: 12px;
     margin-top: 5px;
+
+    @media (min-width: $mobileMedia) {
+      width: calc(#{$elementsDesktopWidth} + 20px);
+    }
 
     .NavLink {
       color: white;

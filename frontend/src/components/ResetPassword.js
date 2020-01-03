@@ -3,6 +3,7 @@ import * as React from "react";
 import Button from "../libs/components/Button";
 import Input from "../libs/components/Input";
 import Form from "../libs/components/Form";
+import Label from "../libs/components/Label";
 import EmailValidator from "../libs/validators/EmailValidator";
 
 type StateType = $ReadOnly<{|
@@ -21,9 +22,9 @@ class ResetPassword extends Form<null, StateType> {
 
   render(): React.Node {
     return (
-      <form onSubmit={this.handleSubmit} noValidate>
+      <form onSubmit={this.handleSubmit} className="FormLogin" noValidate>
         <div>
-          <label htmlFor="resetPassword">Reset password</label>
+          <Label htmlFor="resetPassword">RESET PASSWORD</Label>
           <Input
             id="email"
             placeholder="Email..."

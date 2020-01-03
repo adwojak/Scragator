@@ -78,11 +78,6 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
           </NavLink>
         </li>
         <li>
-          <NavLink className="NavLink" to="/resetPassword">
-            RESET PASSWORD (TMP)
-          </NavLink>
-        </li>
-        <li>
           <NavLink className="NavLink" to="/addArticle">
             ABOUT
           </NavLink>

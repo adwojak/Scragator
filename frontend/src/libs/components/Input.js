@@ -1,5 +1,6 @@
 // @flow
 import * as React from "react";
+import "./Input.scss";
 
 type InputType = $ReadOnly<{|
   id: string,
@@ -7,6 +8,7 @@ type InputType = $ReadOnly<{|
   placeholder?: string,
   required?: boolean,
   autoComplete?: string,
+  className?: string,
   setInputData: Function,
   validator?: Function
 |}>;
@@ -18,6 +20,7 @@ export default function Input(props: InputType): React.Node {
     placeholder,
     required,
     autoComplete,
+    className,
     setInputData,
     validator
   } = props;
@@ -54,6 +57,7 @@ export default function Input(props: InputType): React.Node {
         value={value.value}
         onChange={handleChange}
         onBlur={validateInput}
+        className={className || "InputBig"}
       />
       {error && <p className="Error">{error}</p>}
     </React.Fragment>

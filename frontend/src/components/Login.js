@@ -6,6 +6,7 @@ import { loginUser } from "../states/actions";
 import Button from "../libs/components/Button";
 import Input from "../libs/components/Input";
 import Form from "../libs/components/Form";
+import Label from "../libs/components/Label";
 import EmailValidator from "../libs/validators/EmailValidator";
 import PasswordValidator from "../libs/validators/PasswordValidator";
 import "./Login.scss";
@@ -41,9 +42,7 @@ class Login extends Form<PropsType, StateType> {
     return (
       <form onSubmit={this.handleSubmit} className="FormLogin" noValidate>
         <div>
-          <label htmlFor="login" className="LoginLabel">
-            LOGIN
-          </label>
+          <Label htmlFor="login">LOGIN</Label>
           <Input
             id="email"
             placeholder="Email..."
@@ -60,7 +59,7 @@ class Login extends Form<PropsType, StateType> {
             validator={PasswordValidator}
           />
         </div>
-        <Button buttonText="Login" className="LoginButton" />
+        <Button buttonText="Login" />
         <div className="Links">
           <NavLink className="NavLink" to="/resetPassword">
             Forgot password?
