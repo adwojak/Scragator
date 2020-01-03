@@ -45,7 +45,7 @@ export const wrapComponent = (
 
   if (wrapperType === "shallow") {
     return shallowComponent(component);
-  } else if (wrapperType === "mount") {
+  } else {
     return mountComponent(component);
   }
 };

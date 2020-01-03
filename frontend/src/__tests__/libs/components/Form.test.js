@@ -33,9 +33,9 @@ describe("Form", () => {
     hasError: false
   };
 
-  const createInstanceWithState = (): Form => {
+  const createInstanceWithState = (forms: Array = formInputs): Form => {
     const formInstance = setupFormComponent().instance();
-    formInstance.state = formInstance.createLocalState(formInputs);
+    formInstance.state = formInstance.createLocalState(forms);
     return formInstance;
   };
 
@@ -67,5 +67,55 @@ describe("Form", () => {
     const formInstance = createInstanceWithState();
     formInstance.setInputData(dataToUpdate, false);
     expect((): null => formInstance.handleSubmit(event)).toThrow();
+  });
+
+  it("Handle submit - repeat passwords", () => {
+    const formInstance = createInstanceWithState([
+      "password",
+      "repeatPassword"
+    ]);
+    formInstance.setInputData(
+      {
+        id: "password",
+        value: "examplePassword",
+        hasError: false
+      },
+      false
+    );
+    formInstance.setInputData(
+      {
+        id: "repeatPassword",
+        value: "notMatchingPassword",
+        hasError: false
+      },
+      false
+    );
+    formInstance.checkForFormErrors();
+    expect(formInstance.state.formError).toBe("Passwords are not same!");
+  });
+
+  it("Handle submit - same passwords", () => {
+    const formInstance = createInstanceWithState([
+      "password",
+      "repeatPassword"
+    ]);
+    formInstance.setInputData(
+      {
+        id: "password",
+        value: "examplePassword",
+        hasError: false
+      },
+      false
+    );
+    formInstance.setInputData(
+      {
+        id: "repeatPassword",
+        value: "examplePassword",
+        hasError: false
+      },
+      false
+    );
+    formInstance.checkForFormErrors();
+    expect(formInstance.state.formError).toBe("");
   });
 });
