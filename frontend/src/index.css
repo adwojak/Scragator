@@ -2,7 +2,7 @@ html {
   margin: 0px;
   padding: 0px;
   box-shadow: inset 0 0 0 100vw rgba(48, 63, 143, 0.7);
-  background-image: url('./static/images/backgroundImage.jpg');
+  background-image: url("./static/images/backgroundImage.jpg");
   background-size: cover;
   background-repeat: repeat-y;
   width: 100%;

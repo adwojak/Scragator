@@ -9,7 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe("Wrapper for tests", () => {
   class SampleComponent extends React.Component {
-    render() {
+    render(): React.Node {
       return (
         <form>
           <label>Example</label>

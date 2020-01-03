@@ -55,7 +55,7 @@ export default function Input(props: InputType): React.Node {
         onChange={handleChange}
         onBlur={validateInput}
       />
-      {error && <p>{error}</p>}
+      {error && <p className="Error">{error}</p>}
     </React.Fragment>
   );
 }

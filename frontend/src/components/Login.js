@@ -1,12 +1,14 @@
 // @flow
 import * as React from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { loginUser } from "../states/actions";
 import Button from "../libs/components/Button";
 import Input from "../libs/components/Input";
 import Form from "../libs/components/Form";
 import EmailValidator from "../libs/validators/EmailValidator";
 import PasswordValidator from "../libs/validators/PasswordValidator";
+import "./Login.scss";
 
 function mapDispatchToProps(dispatch: Object): Object {
   return {
@@ -31,15 +33,17 @@ class Login extends Form<PropsType, StateType> {
   executeValidFormSubmit = () => {
     const { email, password } = this.state;
     // Handle login here (axios to endpoint) and if login error - return msg and display
-    // Then call loginUser?
+    // Then call loginUser
     this.props.loginUser(email.value, password.value);
   };
 
   render(): React.Node {
     return (
-      <form onSubmit={this.handleSubmit} noValidate>
+      <form onSubmit={this.handleSubmit} className="FormLogin" noValidate>
         <div>
-          <label htmlFor="login">Login</label>
+          <label htmlFor="login" className="LoginLabel">
+            LOGIN
+          </label>
           <Input
             id="email"
             placeholder="Email..."
@@ -56,7 +60,15 @@ class Login extends Form<PropsType, StateType> {
             validator={PasswordValidator}
           />
         </div>
-        <Button buttonText="Login" />
+        <Button buttonText="Login" className="LoginButton" />
+        <div className="Links">
+          <NavLink className="NavLink" to="/resetPassword">
+            Forgot password?
+          </NavLink>
+          <NavLink className="NavLink" to="/register">
+            New user? SIGN UP
+          </NavLink>
+        </div>
       </form>
     );
   }

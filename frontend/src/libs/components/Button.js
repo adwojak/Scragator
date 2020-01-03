@@ -3,10 +3,15 @@ import * as React from "react";
 
 type ButtonType = $ReadOnly<{|
   buttonText: string,
-  disabled?: boolean
+  disabled?: boolean,
+  className?: string
 |}>;
 
 export default function Button(props: ButtonType): React.Node {
-  const { buttonText, disabled } = props;
-  return <button disabled={disabled || false}>{buttonText}</button>;
+  const { buttonText, disabled, className } = props;
+  return (
+    <button disabled={disabled || false} className={className}>
+      {buttonText}
+    </button>
+  );
 }
