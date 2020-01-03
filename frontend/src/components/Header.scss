@@ -1,244 +1,248 @@
-@import './constants.scss';
+@import "./constants.scss";
 
 @mixin slideIn {
-    opacity: 0;
-    animation: slide-in $sliderTransitionDuration forwards;
+  opacity: 0;
+  animation: slide-in $sliderTransitionDuration forwards;
 
-    @keyframes slide-in {
-        100% { opacity: 1; }
+  @keyframes slide-in {
+    100% {
+      opacity: 1;
     }
+  }
 }
 
 @mixin slideOut {
-    opacity: 0;
-    animation: slide-out $sliderTransitionDuration forwards;
+  opacity: 0;
+  animation: slide-out $sliderTransitionDuration forwards;
 
-    @keyframes slide-out {
-        0% { opacity: 1; }
+  @keyframes slide-out {
+    0% {
+      opacity: 1;
     }
+  }
 }
 
 .Header {
-    width: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+
+  .Icon {
+    flex: initial;
+    @media (min-width: $mobileMedia) {
+      width: 50px;
+      height: 50px;
+      margin: 5px 10px 5px 5px;
+    }
+    @media (max-width: $mobileMedia) {
+      width: 45px;
+      height: 45px;
+      margin: 5px;
+    }
+  }
+
+  .Title {
+    font-size: 30px;
+    color: $headerBasicColor;
+    margin-right: 10px;
+    flex: initial;
+
+    @media (max-width: $mobileMedia) {
+      font-size: 25px;
+    }
+  }
+
+  .SearchBar {
+    outline: none;
+    width: 20%;
     display: flex;
-    justify-content: flex-start;
+    flex: 1;
+    justify-content: flex-end;
+    margin: auto;
 
-    .Icon {
-        flex: initial;
-        @media(min-width: $mobileMedia) {
-            width: 50px;
-            height: 50px;
-            margin: 5px 10px 5px 5px;
-        }
-        @media(max-width: $mobileMedia) {
-            width: 45px;
-            height: 45px;
-            margin: 5px;
-        }
+    input[type="search"] {
+      width: 40px;
+      height: 40px;
+      outline: none;
+      border: none;
+
+      background: url($searchIconPath);
+      background-repeat: no-repeat;
+      background-size: 40px;
+      background-position: right;
+
+      -webkit-transition: width $searchInputResizeTransitionDuration ease-in-out;
+      transition: width $searchInputResizeTransitionDuration ease-in-out;
     }
 
-    .Title {
-        font-size: 30px;
+    input[type="search"]:hover {
+      background-color: transparent;
+      cursor: pointer;
+    }
+
+    input[type="search"]:focus {
+      width: 100%;
+      max-width: 500px;
+      padding-left: 45px;
+      color: $headerBasicColor;
+      background-color: transparent;
+      background-position: 2%;
+      background-size: 30px;
+      font-size: 20px;
+
+      border: 2px solid $headerBasicColor;
+      border-radius: 15px;
+      cursor: auto;
+    }
+
+    input:-moz-placeholder {
+      color: transparent;
+    }
+
+    input::-webkit-input-placeholder {
+      color: transparent;
+    }
+
+    @media (max-width: $mobileMedia) {
+      margin: 5px auto;
+    }
+  }
+
+  nav[role="navigation"] {
+    display: flex;
+    justify-content: flex-end;
+
+    ul[role="menubar"] {
+      display: flex;
+      list-style-type: none;
+      padding-inline-start: 0px;
+
+      .ProfileLinks {
+        display: flex;
+      }
+
+      li {
+        cursor: pointer;
+
+        a,
+        .NavLink {
+          text-decoration: none;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .LinkButton {
+      background-color: transparent;
+      color: $headerMenuHighlightColor;
+      font-weight: bold;
+      font-size: inherit;
+      font-family: inherit;
+      padding: 0;
+      outline: none;
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    @media (min-width: $mobileMedia + 1) {
+      margin-right: 20px;
+
+      ul[role="menubar"] {
         color: $headerBasicColor;
-        margin-right: 10px;
-        flex: initial;
+        margin-top: 25px;
 
-        @media(max-width: $mobileMedia) {
-            font-size: 25px;
-        }
-    }
-
-    .SearchBar {
-        outline: none;
-        width: 20%;
-        display: flex;
-        flex: 1;
-        justify-content: flex-end;
-        margin: auto;
-
-        input[type=search] {
-            width: 40px;
-            height: 40px;
-            outline: none;
-            border: none;
-
-            background: url($searchIconPath);
-            background-repeat: no-repeat;
-            background-size: 40px;
-            background-position: right;
-
-            -webkit-transition: width $searchInputResizeTransitionDuration ease-in-out;
-            transition: width $searchInputResizeTransitionDuration ease-in-out;
+        .ProfileLinks {
+          margin-left: 50px;
         }
 
-        input[type=search]:hover {
-            background-color: transparent;
-            cursor: pointer;
-        }
+        li {
+          margin-left: 20px;
 
-        input[type=search]:focus {
-            width: 100%;
-            max-width: 500px;
-            padding-left: 45px;
-            color: $headerBasicColor;
-            background-color: transparent;
-            background-position: 2%;
-            background-size: 30px;
-            font-size: 20px;
-
-            border: 2px solid $headerBasicColor;
-            border-radius: 15px;
-            cursor: auto;
-        }
-
-        input:-moz-placeholder {
-            color: transparent;
-        }
-
-        input::-webkit-input-placeholder {
-            color: transparent;
-        }
-
-        @media(max-width: $mobileMedia) {
-            margin: 5px auto;
-        }
-    }
-
-    nav[role=navigation] {
-        display: flex;
-        justify-content: flex-end;
-
-        ul[role=menubar] {
-            display: flex;
-            list-style-type: none;
-            padding-inline-start: 0px;
-
-            .ProfileLinks {
-                display: flex;
-            }
-
-            li {
-                cursor: pointer;
-
-                a,
-                .NavLink {
-                    text-decoration: none;
-                    font-weight: bold;
-                }
-            }
-        }
-
-        .LinkButton {
-            background-color: transparent;
-            color: $headerMenuHighlightColor;
-            font-weight: bold;
-            font-size: inherit;
-            font-family: inherit;
-            padding: 0;
-            outline: none;
-            border: none;
+          .link-button:hover,
+          .link-button:focus {
             text-decoration: none;
-            cursor: pointer;
           }
 
-        @media (min-width: $mobileMedia + 1) {
-            margin-right: 20px;
-
-            ul[role=menubar] {
-                color: $headerBasicColor;
-                margin-top: 25px;
-
-                .ProfileLinks {
-                    margin-left: 50px;
-                }
-
-                li {
-                    margin-left: 20px;
-                      
-                      .link-button:hover,
-                      .link-button:focus {
-                        text-decoration: none;
-                      }
-                    
-                    .NavLink {
-                        color: $headerMenuHighlightColor;
-                    }
-                }
-
-                li:hover {
-                    .LinkButton,
-                    .NavLink {
-                        color: $headerBasicColor;
-                    }
-                }
-            }
-
-            .burgerMenuIcon {
-                display: none;
-            }
+          .NavLink {
+            color: $headerMenuHighlightColor;
+          }
         }
 
-        @media (max-width: $mobileMedia) {
-            .burgerMenuIcon {
-                display: flex;
-                justify-content: flex-end;
-                margin-right: 5px;
-                margin-left: 10px;
-                color: $headerMenuHighlightColor;
-                font-size: 50px;
-                cursor: pointer;
-            }
-
-            ul[role=menubar] {
-                position: absolute;
-                flex-direction: column;
-                justify-content: center;
-                margin: auto;
-                font-size: 35px;
-                height: 100%;
-                width: 100%;
-
-                .ProfileLinks {
-                    flex-direction: column;
-                    margin-top: 30px;
-                }
-
-                li {
-                    z-index: 0;
-                    text-align: center;
-                    margin: 15px auto;
-
-                    .LinkButton,
-                    .NavLink {
-                        color: $headerBasicColor;
-                    }
-                }
-            }
-
-            &.burgerVisible {
-                ul[role=menubar] {
-                    @include slideIn;
-                    background-color: $burgerMenuBackgroundColor;
-                }
-
-                >.burgerMenuIcon {
-                    transform: rotate(180deg);
-                    transition-duration: $burgerMenuTransitionDuration;
-                    z-index: 1;
-                }
-            }
-
-            &.burgerHidden {
-                ul[role=menubar] {
-                    display: none;
-                    @include slideOut;
-                }
-
-                >.burgerMenuIcon {
-                    transform: rotate(-180deg);
-                    transition-duration: $burgerMenuTransitionDuration;
-                }
-            }
+        li:hover {
+          .LinkButton,
+          .NavLink {
+            color: $headerBasicColor;
+          }
         }
+      }
+
+      .burgerMenuIcon {
+        display: none;
+      }
     }
+
+    @media (max-width: $mobileMedia) {
+      .burgerMenuIcon {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 5px;
+        margin-left: 10px;
+        color: $headerMenuHighlightColor;
+        font-size: 50px;
+        cursor: pointer;
+      }
+
+      ul[role="menubar"] {
+        position: absolute;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+        font-size: 35px;
+        height: 100%;
+        width: 100%;
+
+        .ProfileLinks {
+          flex-direction: column;
+          margin-top: 30px;
+        }
+
+        li {
+          z-index: 0;
+          text-align: center;
+          margin: 15px auto;
+
+          .LinkButton,
+          .NavLink {
+            color: $headerBasicColor;
+          }
+        }
+      }
+
+      &.burgerVisible {
+        ul[role="menubar"] {
+          @include slideIn;
+          background-color: $burgerMenuBackgroundColor;
+        }
+
+        > .burgerMenuIcon {
+          transform: rotate(180deg);
+          transition-duration: $burgerMenuTransitionDuration;
+          z-index: 1;
+        }
+      }
+
+      &.burgerHidden {
+        ul[role="menubar"] {
+          display: none;
+          @include slideOut;
+        }
+
+        > .burgerMenuIcon {
+          transform: rotate(-180deg);
+          transition-duration: $burgerMenuTransitionDuration;
+        }
+      }
+    }
+  }
 }

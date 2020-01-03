@@ -1,7 +1,5 @@
 // @flow
-import { createStore } from 'redux';
-import rootReducer from './reducers';
+import { createStore } from "redux";
+import rootReducer from "./reducers";
 
-export default createStore<Object, Object, null>(
-    rootReducer
-);
+export default createStore<Object, Object, null>(rootReducer);
