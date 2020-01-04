@@ -69,7 +69,6 @@
     "flow-bin": "^0.114.0",
     "flow-typed": "^2.6.2",
     "gh-pages": "^2.1.1",
-    "husky": "^4.0.0-beta.5",
     "jest": "^24.9.0",
     "react-infinite-scroll-component": "^5.0.4",
     "react-test-renderer": "^16.12.0",
