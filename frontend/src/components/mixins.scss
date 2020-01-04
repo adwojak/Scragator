@@ -1,0 +1,46 @@
+@import "./constants.scss";
+
+@mixin set_transform_origin() {
+  -o-transform-origin: 50% 55.2%;
+  -ms-transform-origin: 50% 55.2%;
+  -webkit-transform-origin: 50% 55.2%;
+  -moz-transform-origin: 50% 55.2%;
+  transform-origin: 50% 55.2%;
+}
+
+@mixin transform($transX, $transY, $deg) {
+  -ms-transform: translate($transX, $transY) rotate($deg);
+  -webkit-transform: translate($transX, $transY) rotate($deg);
+  transform: translate($transX, $transY) rotate($deg);
+}
+
+@mixin fill_color($color) {
+  border-bottom: 0.691em solid $color;
+  border-left: 0.951em solid transparent;
+  border-right: 0.951em solid transparent;
+}
+
+@mixin star($radius, $color, $top, $right) {
+  // https://github.com/adcentury/css-star
+  position: absolute;
+  top: $top;
+  right: $right;
+  font-size: $radius;
+  @include set_transform_origin();
+  @include transform(-50%, -55.2%, 36deg);
+  @include fill_color($color);
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    display: block;
+    @include set_transform_origin();
+    @include fill_color($color);
+  }
+  &:before {
+    @include transform(-50%, 0, -72deg);
+  }
+  &:after {
+    @include transform(-50%, 0, 72deg);
+  }
+}
