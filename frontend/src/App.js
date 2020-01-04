@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import Another from "./components/Another";
+import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import LoginRoute from "./components/LoginRoute";
@@ -17,11 +17,11 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/another" component={Another} />
+          <Route path="/another" component={Profile} />
           <AnonymousRoute path="/login" component={Login} />
           <AnonymousRoute path="/register" component={Register} />
           <AnonymousRoute path="/resetPassword" component={ResetPassword} />
-          <LoginRoute path="/profile" component={Another} />
+          <LoginRoute path="/profile" component={Profile} />
         </Switch>
       </Fragment>
     );
