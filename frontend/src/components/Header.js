@@ -77,11 +77,6 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
             SERVICES
           </NavLink>
         </li>
-        <li>
-          <NavLink className="NavLink" to="/addArticle">
-            ABOUT
-          </NavLink>
-        </li>
         <div className="ProfileLinks">
           {props.isLogged ? (
             <React.Fragment>

@@ -58,7 +58,7 @@ export default function Input(props: InputType): React.Node {
         onChange={handleChange}
         onBlur={validateInput}
         className={className || "InputBig"}
-        onKeyDown={event => {
+        onKeyDown={(event: Event) => {
           if (event.keyCode === 13) {
             validateInput();
           }

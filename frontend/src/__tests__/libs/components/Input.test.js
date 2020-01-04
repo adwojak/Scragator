@@ -27,6 +27,18 @@ describe("Input component", () => {
     expect(inputComponent.find("input").prop("value")).toEqual(inputText);
   });
 
+  it("Simulate input enter keydown", () => {
+    const inputComponent = mount(<Input setInputData={jest.fn()} />);
+    inputComponent.simulate("change", { target: { value: inputText } });
+    inputComponent.simulate("keydown", { keyCode: 13 });
+    expect(inputComponent.find("input").prop("value")).toEqual(inputText);
+  });
+
+  it("Simulate input other keydown", () => {
+    const inputComponent = mount(<Input />);
+    inputComponent.simulate("keydown", { keyCode: 14 });
+  });
+
   it("Simulate input blur (email validation) - success", () => {
     const inputComponent = mount(
       <Input setInputData={jest.fn()} validator={EmailValidator} />

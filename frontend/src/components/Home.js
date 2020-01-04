@@ -1,13 +1,13 @@
 // @flow
 import * as React from "react";
-import classNames from "classnames";
+import Article from "./Article";
 import "./Home.scss";
 
 const favouriteArticles = [1, 3, 5, 7];
 const exampleArticle = number => {
   return {
     id: String(number),
-    title: `Article title Article title Article title Article title Article title Article title Article title Article title ${number}`,
+    title: `Article title Article title Article title Article title Article title Article title Article title Article tit ${number}`,
     service: `Service ${number}`,
     author: `Author ${number}`,
     date: "12",
@@ -24,20 +24,7 @@ const ArticlesList = () => {
   return (
     <ul className="Articles">
       {exampleArticlesList().map(article => (
-        <li key={article.id}>
-          <span
-            className={classNames({
-              ArticleBookmark: true,
-              Favourite: article.isFavourite
-            })}
-          ></span>
-          <span className="ArticleDate">{article.date}</span>
-          <span className="ArticleAuthor">
-            {article.service} | {article.author}
-          </span>
-          <hr />
-          <span className="ArticleTitle">{article.title}</span>
-        </li>
+        <Article key={article.id} article={article} />
       ))}
     </ul>
   );

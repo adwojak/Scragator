@@ -116,6 +116,7 @@
       display: flex;
       list-style-type: none;
       padding-inline-start: 0px;
+      z-index: 10;
 
       .ProfileLinks {
         display: flex;
@@ -228,7 +229,7 @@
         > .burgerMenuIcon {
           transform: rotate(180deg);
           transition-duration: $burgerMenuTransitionDuration;
-          z-index: 1;
+          z-index: 11;
         }
       }
 
