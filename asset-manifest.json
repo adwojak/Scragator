@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Scragator/static/css/main.48135bc3.chunk.css",
+    "main.css": "/Scragator/static/css/main.817aacb1.chunk.css",
     "main.js": "/Scragator/static/js/main.9749a7dc.chunk.js",
     "main.js.map": "/Scragator/static/js/main.9749a7dc.chunk.js.map",
     "runtime-main.js": "/Scragator/static/js/runtime-main.0f3492c3.js",
@@ -8,16 +8,16 @@
     "static/js/2.a05410d0.chunk.js": "/Scragator/static/js/2.a05410d0.chunk.js",
     "static/js/2.a05410d0.chunk.js.map": "/Scragator/static/js/2.a05410d0.chunk.js.map",
     "index.html": "/Scragator/index.html",
-    "precache-manifest.0b6b498fd99edb13fa701028a63951da.js": "/Scragator/precache-manifest.0b6b498fd99edb13fa701028a63951da.js",
+    "precache-manifest.be70b1329e6bbce1979d2e39b7c1e025.js": "/Scragator/precache-manifest.be70b1329e6bbce1979d2e39b7c1e025.js",
     "service-worker.js": "/Scragator/service-worker.js",
-    "static/css/main.48135bc3.chunk.css.map": "/Scragator/static/css/main.48135bc3.chunk.css.map",
+    "static/css/main.817aacb1.chunk.css.map": "/Scragator/static/css/main.817aacb1.chunk.css.map",
     "static/media/index.css": "/Scragator/static/media/backgroundImage.8fcd1d9a.jpg",
     "static/media/houseIcon.jpg": "/Scragator/static/media/houseIcon.5ce58a95.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.0f3492c3.js",
     "static/js/2.a05410d0.chunk.js",
-    "static/css/main.48135bc3.chunk.css",
+    "static/css/main.817aacb1.chunk.css",
     "static/js/main.9749a7dc.chunk.js"
   ]
 }
