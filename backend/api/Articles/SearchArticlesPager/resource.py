@@ -5,13 +5,17 @@ from werkzeug.exceptions import NotFound
 from backend.models.models import ArticleModel
 
 
-class PaginateArticle(Resource):
+class SearchArticlesPager(Resource):
 
-    def get(self) -> Response:
+    def post(self) -> Response:
         page_int: int = request.form.get('page')
+        search_string: str = request.form.get('search_string')
         try:
             page: int = int(page_int)
-            article_models: list = ArticleModel.query.order_by(ArticleModel.id.desc()).paginate(page=page, per_page=8).items
+            article_models: list = ArticleModel.query.filter(ArticleModel.title.match(search_string)).paginate(
+                page=page, per_page=8).items
             return jsonify([article.get_article() for article in article_models])
         except NotFound:
-            return jsonify([])
+            return jsonify({
+                'error': True
+            })

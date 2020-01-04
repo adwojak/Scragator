@@ -1,10 +1,12 @@
+import jwt
 from flask import Flask
 from flask_cors import CORS
 from flask_restful import Api
 
 from backend.config import Config
-from backend.extensions import db, migrate, scheduler
+from backend.extensions import db, migrate, scheduler, jwt
 from backend.routing import routing
+from backend.models.models import RevokedTokenModel
 
 
 def create_routing(api) -> None:
@@ -24,7 +26,15 @@ def create_app() -> Flask:
     db.app = app
     migrate.init_app(app, db)
 
+    jwt.init_app(app)
+
     scheduler.init_app(app)
     scheduler.start()
 
     return app
+
+
+@jwt.token_in_blacklist_loader
+def check_if_token_in_blacklist(decrypted_token):
+    jti = decrypted_token['jti']
+    return RevokedTokenModel.is_jti_blacklisted(jti)
