@@ -42,8 +42,8 @@ export default class Form extends React.Component {
         this.setState({
           formError: "Passwords are not same!"
         });
+        return true;
       }
-      return passwordsSame;
     }
     return false;
   };

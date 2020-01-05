@@ -63,7 +63,7 @@ class Login extends Form<PropsType, StateType> {
             validator={PasswordValidator}
           />
         </div>
-        <Button buttonText="Login" />
+        <Button>LOGIN</Button>
         <div className="Links">
           <NavLink className="NavLink" to="/resetPassword">
             Forgot password?

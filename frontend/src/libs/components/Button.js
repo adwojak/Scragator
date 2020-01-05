@@ -10,14 +10,15 @@ type ButtonType = $ReadOnly<{|
 |}>;
 
 export default function Button(props: ButtonType): React.Node {
-  const { buttonText, disabled, type, className } = props;
+  const { children, disabled, type, className, ...properties } = props;
   return (
     <button
       disabled={disabled || false}
       type={type || "submit"}
       className={className || "ButtonBig"}
+      {...properties}
     >
-      {buttonText}
+      {children}
     </button>
   );
 }

@@ -8,6 +8,7 @@ import Form from "../libs/components/Form";
 import Label from "../libs/components/Label";
 import EmailValidator from "../libs/validators/EmailValidator";
 import PasswordValidator from "../libs/validators/PasswordValidator";
+import registerAPI from "../api/register";
 import "./Register.scss";
 
 function mapDispatchToProps(dispatch: Object): Object {
@@ -36,8 +37,33 @@ class Register extends Form<PropsType, StateType> {
 
   executeValidFormSubmit = () => {
     const { email, password, repeatPassword } = this.state;
-    // Handle login here (axios to endpoint) and if login error - return msg and display
-    // Then call loginUser?
+    registerAPI
+      .POST({
+        email: email.value,
+        password: password.value,
+        password_confirm: repeatPassword.value
+      })
+      .then(response => {
+        const data = response.data;
+        if (data.user_exists) {
+          this.setState({
+            formError: "User already exists!"
+          });
+        } else if (data.created) {
+          this.props.history.push("/message", {
+            isCreated: true
+          });
+        } else {
+          this.props.history.push("/message", {
+            serverError: true
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({
+          serverError: true
+        });
+      });
     this.props.registerUser(email.value, password.value, repeatPassword.value);
   };
 
@@ -73,7 +99,7 @@ class Register extends Form<PropsType, StateType> {
             validator={PasswordValidator}
           />
         </div>
-        <Button buttonText="Register" />
+        <Button>REGISTER</Button>
       </form>
     );
   }

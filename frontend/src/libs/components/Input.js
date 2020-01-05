@@ -22,7 +22,8 @@ export default function Input(props: InputType): React.Node {
     autoComplete,
     className,
     setInputData,
-    validator
+    validator,
+    ...properties
   } = props;
 
   const [value, setValue] = React.useState({ id: id, value: "" });
@@ -58,6 +59,7 @@ export default function Input(props: InputType): React.Node {
         onChange={handleChange}
         onBlur={validateInput}
         className={className || "InputBig"}
+        {...properties}
         onKeyDown={(event: Event) => {
           if (event.keyCode === 13) {
             validateInput();

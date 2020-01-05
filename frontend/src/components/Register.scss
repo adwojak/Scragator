@@ -6,6 +6,8 @@
   align-items: center;
 
   .FormError {
+    display: flex;
+    justify-content: center;
     color: red;
     white-space: pre-wrap;
   }

@@ -33,7 +33,7 @@ class ResetPassword extends Form<null, StateType> {
             validator={EmailValidator}
           />
         </div>
-        <Button buttonText="RESET PASSWORD" />
+        <Button>RESET PASSWORD</Button>
       </form>
     );
   }

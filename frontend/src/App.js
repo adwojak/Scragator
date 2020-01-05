@@ -9,6 +9,7 @@ import Register from "./components/Register";
 import LoginRoute from "./components/LoginRoute";
 import AnonymousRoute from "./components/AnonymousRoute";
 import ResetPassword from "./components/ResetPassword";
+import Message from "./components/Message";
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/another" component={Profile} />
+          <Route path="/message" component={Message} />
           <AnonymousRoute path="/login" component={Login} />
           <AnonymousRoute path="/register" component={Register} />
           <AnonymousRoute path="/resetPassword" component={ResetPassword} />
