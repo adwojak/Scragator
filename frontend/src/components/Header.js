@@ -74,7 +74,7 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
           </NavLink>
         </li>
         <li>
-          <NavLink className="NavLink" to="/another">
+          <NavLink className="NavLink" to="/services">
             SERVICES
           </NavLink>
         </li>

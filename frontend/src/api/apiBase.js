@@ -17,3 +17,19 @@ export const axiosPost = (url, data) => {
     headers: headers
   });
 };
+
+export const axiosGet = url => {
+  const accessToken = store.getState().accessToken;
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded"
+  };
+  if (accessToken) {
+    Object.assign(headers, {
+      Authorization: `Bearer ${accessToken}`
+    });
+  }
+
+  return axios.get(url, {
+    headers: headers
+  });
+};
