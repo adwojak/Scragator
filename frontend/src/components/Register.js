@@ -6,7 +6,8 @@ import Form from "../libs/components/Form";
 import Label from "../libs/components/Label";
 import EmailValidator from "../libs/validators/EmailValidator";
 import PasswordValidator from "../libs/validators/PasswordValidator";
-import registerAPI from "../api/register";
+import { axiosPost } from "../api/apiBase";
+import { REGISTER } from "../api/urls";
 import "./Register.scss";
 
 type StateType = $ReadOnly<{|
@@ -21,7 +22,7 @@ class Register extends Form<null, StateType> {
 
   executeValidFormSubmit = () => {
     const { email, password, repeatPassword } = this.state;
-    registerAPI
+    axiosPost(REGISTER)
       .POST({
         email: email.value,
         password: password.value,

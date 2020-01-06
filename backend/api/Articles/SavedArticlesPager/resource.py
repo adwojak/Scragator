@@ -8,7 +8,7 @@ from backend.models.models import ArticleModel, UserModel
 class SavedArticlesPager(Resource):
 
     @jwt_required
-    def get(self) -> Response:
+    def post(self) -> Response:
         page_str: str = request.form.get('page')
 
         try:

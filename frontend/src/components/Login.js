@@ -9,7 +9,8 @@ import Form from "../libs/components/Form";
 import Label from "../libs/components/Label";
 import EmailValidator from "../libs/validators/EmailValidator";
 import PasswordValidator from "../libs/validators/PasswordValidator";
-import loginAPI from "../api/login";
+import { axiosPost } from "../api/apiBase";
+import { HOME, LOGIN } from "../api/urls";
 import "./Login.scss";
 
 function mapDispatchToProps(dispatch: Object): Object {
@@ -48,11 +49,10 @@ class Login extends Form<PropsType, StateType> {
 
   executeValidFormSubmit = () => {
     const { email, password } = this.state;
-    loginAPI
-      .POST({
-        email: email.value,
-        password: password.value
-      })
+    axiosPost(LOGIN, {
+      email: email.value,
+      password: password.value
+    })
       .then(response => {
         const data = response.data;
         if (data.form_error === "BAD_EMAIL") {
@@ -71,7 +71,9 @@ class Login extends Form<PropsType, StateType> {
             data.favourite_articles,
             data.favourite_services
           );
-          this.props.history.push("/");
+          this.props.history.push("/", {
+            url: HOME
+          });
         } else {
           this.props.history.push("/message", {
             serverError: true

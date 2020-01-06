@@ -1,15 +1,17 @@
 // @flow
 import * as React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { logoutUser, showBurgerMenu, hideBurgerMenu } from "../states/actions";
 import type { InitialStateType } from "../states/types";
-import logoutAPI from "../api/logout";
+import { axiosPost } from "../api/apiBase";
+import { LOGOUT_ACCESS } from "../api/urls";
 import "./Header.scss";
 import homeIcon from "../static/images/houseIcon.png";
+import { HOME, SEARCH } from "../api/urls";
 
 const mapStateToProps = (state: InitialStateType): Object => {
   return {
@@ -28,7 +30,15 @@ const mapDispatchToProps = (dispatch: Object): Object => {
 
 export const HeaderIcon = (): React.Node => {
   return (
-    <NavLink className="NavLink" to="/">
+    <NavLink
+      className="NavLink"
+      to={{
+        pathname: "/",
+        state: {
+          url: HOME
+        }
+      }}
+    >
       <img src={homeIcon} className="Icon" alt="Home Icon" />
     </NavLink>
   );
@@ -39,9 +49,25 @@ export const HeaderTitle = (): React.Node => {
 };
 
 export const HeaderSearchBar = (): React.Node => {
+  const [inputValue, setInputValue] = React.useState("");
+  const history = useHistory();
+  const submitSearch = event => {
+    event.preventDefault();
+    history.replace("/search", {
+      url: SEARCH,
+      search_string: inputValue
+    });
+    setInputValue("");
+  };
+
   return (
-    <form className="SearchBar" autoComplete="Off">
-      <input type="search" name="search" />
+    <form className="SearchBar" autoComplete="Off" onSubmit={submitSearch}>
+      <input
+        type="search"
+        name="search"
+        value={inputValue}
+        onChange={e => setInputValue(e.target.value)}
+      />
     </form>
   );
 };
@@ -54,6 +80,7 @@ type NavbarPropsType = $ReadOnly<{|
 |}>;
 
 export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
+  const history = useHistory();
   return (
     <nav
       role="navigation"
@@ -69,7 +96,15 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
       />
       <ul role="menubar" onClick={props.hideBurgerMenu}>
         <li>
-          <NavLink className="NavLink" to="/">
+          <NavLink
+            className="NavLink"
+            to={{
+              pathname: "/",
+              state: {
+                url: HOME
+              }
+            }}
+          >
             HOME
           </NavLink>
         </li>
@@ -90,7 +125,7 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
                 <button
                   type="button"
                   className="LinkButton"
-                  onClick={props.handleLogout}
+                  onClick={event => props.handleLogout(event, history)}
                 >
                   LOGOUT
                 </button>
@@ -130,16 +165,18 @@ class Header extends React.Component<PropsType> {
       : this.props.showBurgerMenu();
   };
 
-  handleLogout = (event: Event) => {
+  handleLogout = (event: Event, history) => {
     event.preventDefault();
-    logoutAPI
+    axiosPost(LOGOUT_ACCESS)
       .POST()
       .then(response => {
         this.props.logoutUser();
-        // Need to go back to '/' location, but can't do that because of missing router in header...
+        history.push("/");
       })
       .catch(error => {
-        // Need to go back to '/' location, but can't do that because of missing router in header...
+        history.push("/message", {
+          serverError: true
+        });
       });
   };
 

@@ -2,8 +2,8 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
-import { addFavArticle, removeFavArticle } from "../states/actions";
-import singleArticleAPI from "../api/singleArticle";
+import { addFavArticle, removeFavArticle } from "../../states/actions";
+import singleArticleAPI from "../../api/singleArticle";
 import "./Article.scss";
 
 type ArticleType = $ReadOnly<{|

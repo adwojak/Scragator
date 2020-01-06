@@ -1,7 +1,8 @@
 // @flow
 import * as React from "react";
 import { connect } from "react-redux";
-import servicesAPI from "../api/services";
+import { axiosGet } from "../api/apiBase";
+import { SERVICES } from "../api/urls";
 import Service from "./Service";
 
 const mapStateToProps = state => {
@@ -32,8 +33,7 @@ class ServicesList extends React.Component {
   };
 
   pageFetch = () => {
-    servicesAPI
-      .GET()
+    axiosGet(SERVICES)
       .then(response => {
         this.setState({
           services: this.parseService(response.data)

@@ -1,0 +1,15 @@
+.Profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 100px;
+
+  .Button {
+    width: 200px;
+  }
+
+  .ButtonWarning {
+    color: black;
+    background-color: red;
+  }
+}

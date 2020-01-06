@@ -1,10 +1,8 @@
 // @flow
 import * as React from "react";
 import { connect } from "react-redux";
-import InfiniteScroll from "react-infinite-scroll-component";
-import articlesApi from "../api/articles";
-import Article from "./Article";
-import "./Home.scss";
+import { axiosPost, axiosGet } from "../api/apiBase";
+import ScrollingPage from "../libs/components/ScrollingPage";
 
 const mapStateToProps = state => {
   return {
@@ -39,11 +37,20 @@ class ArticlesList extends React.Component {
     return [...this.state.data, ...newData];
   };
 
+  makeRequest = (url, method, rest) => {
+    if (method === "POST") {
+      return axiosPost(url, {
+        page: this.state.page,
+        ...rest
+      });
+    } else {
+      return axiosGet(url);
+    }
+  };
+
   pageFetch = () => {
-    articlesApi
-      .POST({
-        page: this.state.page
-      })
+    const { url, method = "POST", ...rest } = this.props.location.state;
+    this.makeRequest(url, method, rest)
       .then(response => {
         this.setState({
           data: this.mergeArticles(response.data),
@@ -60,19 +67,11 @@ class ArticlesList extends React.Component {
 
   render() {
     return (
-      <ul className="Articles">
-        <InfiniteScroll
-          dataLength={this.state.data.length}
-          next={this.pageFetch}
-          loader={<h4>Loading...</h4>}
-          hasMore={this.state.hasMore}
-          endMessage={<p>End</p>}
-        >
-          {this.state.data.map(article => {
-            return <Article key={article.id} article={article} />;
-          })}
-        </InfiniteScroll>
-      </ul>
+      <ScrollingPage
+        data={this.state.data}
+        pageFetch={this.pageFetch}
+        hasMore={this.state.hasMore}
+      />
     );
   }
 }
