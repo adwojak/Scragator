@@ -1,7 +1,5 @@
 // @flow
 import * as React from "react";
-import { connect } from "react-redux";
-import { registerUser } from "../states/actions";
 import Button from "../libs/components/Button";
 import Input from "../libs/components/Input";
 import Form from "../libs/components/Form";
@@ -11,27 +9,13 @@ import PasswordValidator from "../libs/validators/PasswordValidator";
 import registerAPI from "../api/register";
 import "./Register.scss";
 
-function mapDispatchToProps(dispatch: Object): Object {
-  return {
-    registerUser: (
-      email: string,
-      password: string,
-      repeatPassword: string
-    ): Object => dispatch(registerUser({ email, password, repeatPassword }))
-  };
-}
-
-type PropsType = $ReadOnly<{|
-  registerUser: Object
-|}>;
-
 type StateType = $ReadOnly<{|
   email: string,
   password: string,
   repeatPassword: string
 |}>;
 
-class Register extends Form<PropsType, StateType> {
+class Register extends Form<null, StateType> {
   formInputs = ["email", "password", "repeatPassword"];
   state = this.createLocalState(this.formInputs);
 
@@ -104,7 +88,4 @@ class Register extends Form<PropsType, StateType> {
   }
 }
 
-export default connect<_, PropsType, _, _, _, _>(
-  null,
-  mapDispatchToProps
-)(Register);
+export default Register;

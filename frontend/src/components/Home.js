@@ -1,33 +1,84 @@
 // @flow
 import * as React from "react";
+import { connect } from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
+import articlesApi from "../api/articles";
 import Article from "./Article";
 import "./Home.scss";
 
-const favouriteArticles = [1, 3, 5, 7];
-const exampleArticle = number => {
+const mapStateToProps = state => {
   return {
-    id: String(number),
-    title: `Article title Article title Article title Article title Article title Article title Article title Article tit ${number}`,
-    service: `Service ${number}`,
-    author: `Author ${number}`,
-    date: "12",
-    url: "",
-    img: "https://miro.medium.com/max/590/1*cBFSQ9Ytv_D0jwGtpuL5WA.png",
-    isFavourite: favouriteArticles.includes(number)
+    isLogged: state.isLogged,
+    favouriteArticles: state.favouriteArticles
   };
 };
-const exampleArticlesList = () => {
-  return Array.from({ length: 10 }, (value, key) => exampleArticle(key));
-};
 
-const ArticlesList = () => {
-  return (
-    <ul className="Articles">
-      {exampleArticlesList().map(article => (
-        <Article key={article.id} article={article} />
-      ))}
-    </ul>
-  );
-};
+class ArticlesList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.pageFetch();
+  }
 
-export default ArticlesList;
+  state = {
+    data: Array.from({}),
+    hasMore: true,
+    page: 1
+  };
+
+  mergeArticles = responseData => {
+    const newData = responseData.map(article => {
+      return {
+        author: article.author,
+        id: article.id,
+        service: article.name,
+        title: article.title,
+        date: article.upload_date,
+        isFavourite: this.props.favouriteArticles.includes(article.id)
+      };
+    });
+    return [...this.state.data, ...newData];
+  };
+
+  pageFetch = () => {
+    articlesApi
+      .POST({
+        page: this.state.page
+      })
+      .then(response => {
+        this.setState({
+          data: this.mergeArticles(response.data),
+          page: this.state.page + 1,
+          hasMore: response.data.length > 0
+        });
+      })
+      .catch(error => {
+        this.props.history.push("/message", {
+          serverError: true
+        });
+      });
+  };
+
+  onMount() {
+    this.pageFetch();
+  }
+
+  render() {
+    return (
+      <ul className="Articles">
+        <InfiniteScroll
+          dataLength={this.state.data.length}
+          next={this.pageFetch}
+          loader={<h4>Loading...</h4>}
+          hasMore={this.state.hasMore}
+          endMessage={<p>End</p>}
+        >
+          {this.state.data.map(article => {
+            return <Article key={article.id} article={article} />;
+          })}
+        </InfiniteScroll>
+      </ul>
+    );
+  }
+}
+
+export default connect<_, _, _, _, _, _>(mapStateToProps)(ArticlesList);

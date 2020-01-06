@@ -20,7 +20,8 @@ class RemoveFavouriteArticle(Resource):
             user.favourite_articles: list = user_fav_articles
             user.commit_db()
             return jsonify({
-                'success': True
+                'success': True,
+                'user_fav_articles': user_fav_articles
             })
         return jsonify({
             'error': True

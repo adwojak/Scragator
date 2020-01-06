@@ -25,8 +25,10 @@ class ArticleModel(db.Model):
 
     def get_article(self) -> dict:
         return {
+            'id': self.id,
             'url': self.url,
             'title': self.title,
+            'name': self.name,
             'author': self.author,
             'upload_date': self.upload_date,
             'hash': str(self.hash)

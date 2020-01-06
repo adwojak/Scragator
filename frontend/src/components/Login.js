@@ -17,8 +17,19 @@ function mapDispatchToProps(dispatch: Object): Object {
     loginUser: (
       email: string,
       accessToken: string,
-      refreshToken: string
-    ): Object => dispatch(loginUser({ email, accessToken, refreshToken }))
+      refreshToken: string,
+      favouriteArticles: Array,
+      favoutireServices: Array
+    ): Object =>
+      dispatch(
+        loginUser({
+          email,
+          accessToken,
+          refreshToken,
+          favouriteArticles,
+          favoutireServices
+        })
+      )
   };
 }
 
@@ -56,7 +67,9 @@ class Login extends Form<PropsType, StateType> {
           this.props.loginUser(
             email.value,
             data.access_token,
-            data.refresh_token
+            data.refresh_token,
+            data.favourite_articles,
+            data.favourite_services
           );
           this.props.history.push("/");
         } else {

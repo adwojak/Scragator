@@ -4,7 +4,8 @@ import {
   LOGOUT_USER,
   SHOW_BURGER_MENU,
   HIDE_BURGER_MENU,
-  REGISTER_USER
+  ADD_FAV_ARTICLE,
+  REMOVE_FAV_ARTICLE
 } from "./action-types";
 import type { InitialStateType } from "./types";
 
@@ -12,7 +13,9 @@ const initialState = {
   accessToken: null,
   refreshToken: null,
   isLogged: false,
-  burgerMenuVisible: false
+  burgerMenuVisible: false,
+  favouriteArticles: [],
+  favouriteServices: []
 };
 
 type ActionType = $ReadOnly<{|
@@ -33,6 +36,8 @@ const rootReducer = (
         email: action.payload.email,
         accessToken: action.payload.accessToken,
         refreshToken: action.payload.refreshToken,
+        favouriteArticles: action.payload.favouriteArticles,
+        favouriteServices: action.payload.favoutireServices,
         isLogged: Boolean(action.payload.accessToken)
       });
     case LOGOUT_USER:
@@ -40,13 +45,9 @@ const rootReducer = (
         email: "",
         accessToken: null,
         refreshToken: null,
+        favouriteArticles: [],
+        favouriteServices: [],
         isLogged: false
-      });
-    case REGISTER_USER:
-      return Object.assign({}, state, {
-        email: action.payload.email,
-        password: action.payload.password,
-        repeatPassword: action.payload.repeatPassword
       });
     case SHOW_BURGER_MENU:
       return Object.assign({}, state, {
@@ -55,6 +56,11 @@ const rootReducer = (
     case HIDE_BURGER_MENU:
       return Object.assign({}, state, {
         burgerMenuVisible: false
+      });
+    case ADD_FAV_ARTICLE:
+    case REMOVE_FAV_ARTICLE:
+      return Object.assign({}, state, {
+        favouriteArticles: action.payload.favouriteArticles
       });
     default:
       return state;
