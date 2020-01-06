@@ -5,7 +5,9 @@ import {
   SHOW_BURGER_MENU,
   HIDE_BURGER_MENU,
   ADD_FAV_ARTICLE,
-  REMOVE_FAV_ARTICLE
+  REMOVE_FAV_ARTICLE,
+  ADD_FAV_SERVICE,
+  REMOVE_FAV_SERVICE
 } from "./action-types";
 import type { InitialStateType } from "./types";
 
@@ -61,6 +63,11 @@ const rootReducer = (
     case REMOVE_FAV_ARTICLE:
       return Object.assign({}, state, {
         favouriteArticles: action.payload.favouriteArticles
+      });
+    case ADD_FAV_SERVICE:
+    case REMOVE_FAV_SERVICE:
+      return Object.assign({}, state, {
+        favouriteServices: action.payload.favouriteServices
       });
     default:
       return state;

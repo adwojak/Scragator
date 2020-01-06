@@ -58,10 +58,6 @@ class ArticlesList extends React.Component {
       });
   };
 
-  onMount() {
-    this.pageFetch();
-  }
-
   render() {
     return (
       <ul className="Articles">

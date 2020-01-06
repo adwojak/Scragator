@@ -5,7 +5,9 @@ import {
   SHOW_BURGER_MENU,
   HIDE_BURGER_MENU,
   ADD_FAV_ARTICLE,
-  REMOVE_FAV_ARTICLE
+  REMOVE_FAV_ARTICLE,
+  ADD_FAV_SERVICE,
+  REMOVE_FAV_SERVICE
 } from "./action-types";
 import type { ActionReturnType } from "./types";
 
@@ -31,4 +33,12 @@ export const addFavArticle = (payload: Object): ActionReturnType => {
 
 export const removeFavArticle = (payload: Object): ActionReturnType => {
   return { type: REMOVE_FAV_ARTICLE, payload };
+};
+
+export const addFavService = (payload: Object): ActionReturnType => {
+  return { type: ADD_FAV_SERVICE, payload };
+};
+
+export const removeFavService = (payload: Object): ActionReturnType => {
+  return { type: REMOVE_FAV_SERVICE, payload };
 };

@@ -1,50 +1,60 @@
 // @flow
 import * as React from "react";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 import servicesAPI from "../api/services";
+import Service from "./Service";
 
-const ServicesList = () => {
-  const [services, setServices] = React.useState([]);
-  const isLogged = useSelector((state: Object): Object => state.isLogged);
-  const history = useHistory();
-  const favouriteServices = useSelector(
-    (state: Object): Object => state.favouriteServices
-  );
+const mapStateToProps = state => {
+  return {
+    isLogged: state.isLogged,
+    favouriteServices: state.favouriteServices
+  };
+};
 
-  const parseService = data => {
-    return data.map(service => { return {
-      id: 1,
-      serviceName: data,
-      serviceImg: "",
-      isFavourite: favouriteServices.includes(1)
-    }});
+class ServicesList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.pageFetch();
+  }
 
-  const getServices = () => {
+  state = {
+    services: Array.from({})
+  };
+
+  parseService = data => {
+    return data.map(service => {
+      return {
+        serviceName: service,
+        serviceImg: "",
+        isFavourite: this.props.favouriteServices.includes(service)
+      };
+    });
+  };
+
+  pageFetch = () => {
     servicesAPI
       .GET()
       .then(response => {
-        setServices(parseService(response.data));
+        this.setState({
+          services: this.parseService(response.data)
+        });
       })
       .catch(error => {
-        history.push("/message", {
+        this.props.history.push("/message", {
           serverError: true
         });
       });
   };
 
-  React.useEffect(() => {
-    getServices();
-  });
-  debugger;
+  render() {
+    return (
+      <div>
+        {this.state.services.map(service => (
+          <Service key={service.id} service={service} />
+        ))}
+      </div>
+    );
+  }
+}
 
-  return (
-    <div>
-      {services.map(service => (
-        <p>{service}</p>
-      ))}
-    </div>
-  );
-};
-
-export default ServicesList;
+export default connect<_, _, _, _, _, _>(mapStateToProps)(ServicesList);

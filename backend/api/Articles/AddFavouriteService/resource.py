@@ -19,7 +19,8 @@ class AddFavouriteService(Resource):
             user.favourite_services: list = user_fav_services
             user.commit_db()
             return jsonify({
-                'success': True
+                'success': True,
+                'user_fav_services': user_fav_services
             })
         return jsonify({
             'error': True
