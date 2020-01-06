@@ -9,12 +9,16 @@ import Form from "../libs/components/Form";
 import Label from "../libs/components/Label";
 import EmailValidator from "../libs/validators/EmailValidator";
 import PasswordValidator from "../libs/validators/PasswordValidator";
+import loginAPI from "../api/login";
 import "./Login.scss";
 
 function mapDispatchToProps(dispatch: Object): Object {
   return {
-    loginUser: (email: string, password: string): Object =>
-      dispatch(loginUser({ email, password }))
+    loginUser: (
+      email: string,
+      accessToken: string,
+      refreshToken: string
+    ): Object => dispatch(loginUser({ email, accessToken, refreshToken }))
   };
 }
 
@@ -33,10 +37,39 @@ class Login extends Form<PropsType, StateType> {
 
   executeValidFormSubmit = () => {
     const { email, password } = this.state;
-    // Handle login here (axios to endpoint) and if login error - return msg and display
-    // Then call loginUser
-    // Save favourite articles and services in store
-    this.props.loginUser(email.value, password.value);
+    loginAPI
+      .POST({
+        email: email.value,
+        password: password.value
+      })
+      .then(response => {
+        const data = response.data;
+        if (data.form_error === "BAD_EMAIL") {
+          this.setState({
+            formError: "Wrong email"
+          });
+        } else if (data.form_error === "BAD_PASSWORD") {
+          this.setState({
+            formError: "Bad password"
+          });
+        } else if (data.access_token || data.refresh_token) {
+          this.props.loginUser(
+            email.value,
+            data.access_token,
+            data.refresh_token
+          );
+          this.props.history.push("/");
+        } else {
+          this.props.history.push("/message", {
+            serverError: true
+          });
+        }
+      })
+      .catch(error => {
+        this.props.history.push("/message", {
+          serverError: true
+        });
+      });
   };
 
   render(): React.Node {

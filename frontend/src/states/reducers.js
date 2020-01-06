@@ -9,6 +9,8 @@ import {
 import type { InitialStateType } from "./types";
 
 const initialState = {
+  accessToken: null,
+  refreshToken: null,
   isLogged: false,
   burgerMenuVisible: false
 };
@@ -29,13 +31,15 @@ const rootReducer = (
     case LOGIN_USER:
       return Object.assign({}, state, {
         email: action.payload.email,
-        password: action.payload.password,
-        isLogged: true
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+        isLogged: Boolean(action.payload.accessToken)
       });
     case LOGOUT_USER:
       return Object.assign({}, state, {
         email: "",
-        password: "",
+        accessToken: null,
+        refreshToken: null,
         isLogged: false
       });
     case REGISTER_USER:

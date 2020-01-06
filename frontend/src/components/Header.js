@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { logoutUser, showBurgerMenu, hideBurgerMenu } from "../states/actions";
 import type { InitialStateType } from "../states/types";
+import logoutAPI from "../api/logout";
 import "./Header.scss";
 import homeIcon from "../static/images/houseIcon.png";
 
@@ -131,7 +132,15 @@ class Header extends React.Component<PropsType> {
 
   handleLogout = (event: Event) => {
     event.preventDefault();
-    this.props.logoutUser();
+    logoutAPI
+      .POST()
+      .then(response => {
+        this.props.logoutUser();
+        // Need to go back to '/' location, but can't do that because of missing router in header...
+      })
+      .catch(error => {
+        // Need to go back to '/' location, but can't do that because of missing router in header...
+      });
   };
 
   render(): React.Node {

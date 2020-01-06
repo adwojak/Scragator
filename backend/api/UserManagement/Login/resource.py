@@ -1,6 +1,6 @@
 from flask import Response, jsonify
 from flask_restful import request
-from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required
+from flask_jwt_extended import create_access_token, create_refresh_token
 
 from backend.models.models import UserModel
 from backend.libs.Resource.AuthResource import AuthResource
@@ -19,7 +19,7 @@ class LoginUser(AuthResource):
 
             if not user:
                 return jsonify({
-                    'form_error': 'Wrong email'
+                    'form_error': 'BAD_EMAIL'
                 })
 
             if self.verify_password(user.password, form.password.data):
@@ -29,7 +29,7 @@ class LoginUser(AuthResource):
                 })
             else:
                 return jsonify({
-                    'form_error': 'Bad password'
+                    'form_error': 'BAD_PASSWORD'
                 })
         else:
             return jsonify(form.errors)

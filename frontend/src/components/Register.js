@@ -64,7 +64,6 @@ class Register extends Form<PropsType, StateType> {
           serverError: true
         });
       });
-    this.props.registerUser(email.value, password.value, repeatPassword.value);
   };
 
   render(): React.Node {
