@@ -2,6 +2,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { axiosPost, axiosGet } from "../api/apiBase";
+import { HOME } from "../api/urls";
 import ScrollingPage from "../libs/components/ScrollingPage";
 
 const mapStateToProps = state => {
@@ -49,7 +50,8 @@ class ArticlesList extends React.Component {
   };
 
   pageFetch = () => {
-    const { url, method = "POST", ...rest } = this.props.location.state;
+    const { url = HOME, method = "POST", ...rest } =
+      this.props.location.state || {};
     this.makeRequest(url, method, rest)
       .then(response => {
         this.setState({

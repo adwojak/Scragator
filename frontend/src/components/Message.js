@@ -34,11 +34,32 @@ const UserCreated = props => {
   );
 };
 
+const UserDeleted = props => {
+  return (
+    <React.Fragment>
+      <p className="TitleNormal">User has been deleted!</p>
+      <Button
+        onClick={() => {
+          props.history.push("/register");
+        }}
+      >
+        Proceed to register
+      </Button>
+    </React.Fragment>
+  );
+};
+
 const Message = props => {
-  const { isCreated, serverError } = useLocation().state;
+  const { isCreated, isDeleted, serverError } = useLocation().state;
   return (
     <div className="Message">
-      {isCreated ? UserCreated(props) : serverError ? Error(props) : null}
+      {isCreated
+        ? UserCreated(props)
+        : isDeleted
+        ? UserDeleted(props)
+        : serverError
+        ? Error(props)
+        : null}
     </div>
   );
 };

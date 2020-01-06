@@ -2,6 +2,7 @@
 import {
   LOGIN_USER,
   LOGOUT_USER,
+  DELETE_USER,
   SHOW_BURGER_MENU,
   HIDE_BURGER_MENU,
   ADD_FAV_ARTICLE,
@@ -17,6 +18,10 @@ export const loginUser = (payload: Object): ActionReturnType => {
 
 export const logoutUser = (payload: Object): ActionReturnType => {
   return { type: LOGOUT_USER, payload };
+};
+
+export const deleteUser = (payload: Object): ActionReturnType => {
+  return { type: DELETE_USER, payload };
 };
 
 export const showBurgerMenu = (payload: Object): ActionReturnType => {

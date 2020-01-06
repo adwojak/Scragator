@@ -33,7 +33,8 @@ class ServicesList extends React.Component {
   };
 
   pageFetch = () => {
-    axiosGet(SERVICES)
+    const { url = SERVICES, method = "POST" } = this.props.location.state || {};
+    axiosGet(url)
       .then(response => {
         this.setState({
           services: this.parseService(response.data)

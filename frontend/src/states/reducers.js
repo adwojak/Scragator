@@ -2,6 +2,7 @@
 import {
   LOGIN_USER,
   LOGOUT_USER,
+  DELETE_USER,
   SHOW_BURGER_MENU,
   HIDE_BURGER_MENU,
   ADD_FAV_ARTICLE,
@@ -42,6 +43,7 @@ const rootReducer = (
         favouriteServices: action.payload.favoutireServices,
         isLogged: Boolean(action.payload.accessToken)
       });
+    case DELETE_USER:
     case LOGOUT_USER:
       return Object.assign({}, state, {
         email: "",
