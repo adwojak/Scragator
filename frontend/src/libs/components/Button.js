@@ -3,7 +3,7 @@ import * as React from "react";
 import "./Button.scss";
 
 type ButtonType = $ReadOnly<{|
-  buttonText: string,
+  children: string,
   type?: string,
   disabled?: boolean,
   className?: string

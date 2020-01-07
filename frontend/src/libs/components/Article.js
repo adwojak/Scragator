@@ -8,6 +8,7 @@ import "./Article.scss";
 
 type ArticleType = $ReadOnly<{|
   article: {
+    id: number,
     date: string,
     author: string,
     title: string,
@@ -26,7 +27,7 @@ const Article = (props: ArticleType): React.Node => {
     singleArticleAPI.POST.addFavArticle({
       article_id: id
     })
-      .then(response => {
+      .then((response: Object) => {
         dispatch(
           addFavArticle({
             favouriteArticles: response.data.user_fav_articles
@@ -34,7 +35,7 @@ const Article = (props: ArticleType): React.Node => {
         );
         setFavourite(true);
       })
-      .catch(error => {
+      .catch((error: Error) => {
         this.props.history.push("/message", {
           serverError: true
         });
@@ -45,7 +46,7 @@ const Article = (props: ArticleType): React.Node => {
     singleArticleAPI.POST.removeFavArticle({
       article_id: id
     })
-      .then(response => {
+      .then((response: Object) => {
         dispatch(
           removeFavArticle({
             favouriteArticles: response.data.user_fav_articles
@@ -53,7 +54,7 @@ const Article = (props: ArticleType): React.Node => {
         );
         setFavourite(false);
       })
-      .catch(error => {
+      .catch((error: Error) => {
         this.props.history.push("/message", {
           serverError: true
         });
@@ -73,7 +74,10 @@ const Article = (props: ArticleType): React.Node => {
   };
 
   return (
-    <li className="Article">
+    <li className="Article" style={{
+      backgroundImage: 'url(https://m.autokult.pl/tesla-model-3jp-jpg-121a-8e93371,750,470,0,0.jpg)',
+      height: `${Math.floor(Math.random() * 80) + 121}px`
+    }}>
       <span className="ArticleBookmark" onClick={bookmarkClicked}></span>
       <span
         className={classNames({ Favourite: favourite })}

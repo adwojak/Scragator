@@ -4,8 +4,14 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Article from "./Article";
 import "./ScrollingPage.scss";
 
-class ScrollingPage extends React.Component {
-  render() {
+type PropsType = $ReadOnly<{|
+data: Array,
+pageFetch: Function,
+hasMore: boolean  
+|}>;
+
+class ScrollingPage extends React.Component<PropsType, null> {
+  render(): React.Node {
     const { data, pageFetch, hasMore } = this.props;
 
     return (
@@ -13,11 +19,11 @@ class ScrollingPage extends React.Component {
         <InfiniteScroll
           dataLength={data.length}
           next={pageFetch}
-          loader={<h4>Loading...</h4>}
+          loader={<h4 class="Loading">Loading...</h4>}
           hasMore={hasMore}
-          endMessage={<p>End</p>}
+          endMessage={<p class="End">End</p>}
         >
-          {data.map(article => {
+          {data.map((article: Object): React.Node => {
             return <Article key={article.id} article={article} />;
           })}
         </InfiniteScroll>

@@ -1,10 +1,20 @@
 .Articles {
+  column-width: 300px;
+  column-gap: 30px;
+  width: 90%;
+  max-width: 1400px;
+  margin: 50px auto;
+}
+
+.Loading {
+  font-size: 30px;
+}
+
+.End {
+  position: absolute;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  color: white;
+  width: 100%;
+  left: 0;
+  font-size: 30px;
+  padding-top: 50px;
 }
