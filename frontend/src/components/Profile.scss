@@ -12,4 +12,18 @@
     color: black;
     background-color: red;
   }
+
+  .DeleteBox {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+
+    .ConfirmText {
+      font-size: 30px;
+      font-weight: bold;
+      color: white;
+    }
+  }
 }

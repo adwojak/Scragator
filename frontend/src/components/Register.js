@@ -22,12 +22,11 @@ class Register extends Form<null, StateType> {
 
   executeValidFormSubmit = () => {
     const { email, password, repeatPassword } = this.state;
-    axiosPost(REGISTER)
-      .POST({
-        email: email.value,
-        password: password.value,
-        password_confirm: repeatPassword.value
-      })
+    axiosPost(REGISTER, {
+      email: email.value,
+      password: password.value,
+      password_confirm: repeatPassword.value
+    })
       .then(response => {
         const data = response.data;
         if (data.user_exists) {

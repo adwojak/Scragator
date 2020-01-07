@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { axiosPost, axiosGet } from "../api/apiBase";
 import { HOME } from "../api/urls";
 import ScrollingPage from "../libs/components/ScrollingPage";
+import ArticleWindow from "../libs/components/ArticleWindow";
 
 const mapStateToProps = state => {
   return {
@@ -21,7 +22,8 @@ class ArticlesList extends React.Component {
   state = {
     data: Array.from({}),
     hasMore: true,
-    page: 1
+    page: 1,
+    displayedArticle: null
   };
 
   mergeArticles = responseData => {
@@ -32,6 +34,7 @@ class ArticlesList extends React.Component {
         service: article.name,
         title: article.title,
         date: article.upload_date,
+        url: article.url,
         isFavourite: this.props.favouriteArticles.includes(article.id)
       };
     });
@@ -67,13 +70,29 @@ class ArticlesList extends React.Component {
       });
   };
 
+  setDisplayArticle = url => {
+    this.setState({
+      displayedArticle: url
+    });
+  };
+
   render() {
     return (
-      <ScrollingPage
-        data={this.state.data}
-        pageFetch={this.pageFetch}
-        hasMore={this.state.hasMore}
-      />
+      <React.Fragment>
+        {this.state.displayedArticle ? (
+          <ArticleWindow
+            url={this.state.displayedArticle}
+            setDisplayArticle={this.setDisplayArticle}
+          />
+        ) : (
+          <ScrollingPage
+            data={this.state.data}
+            pageFetch={this.pageFetch}
+            hasMore={this.state.hasMore}
+            setDisplayArticle={this.setDisplayArticle}
+          />
+        )}
+      </React.Fragment>
     );
   }
 }

@@ -1,0 +1,15 @@
+.OuterFrame {
+  display: flex;
+  justify-content: center;
+
+  .Frame {
+    position: absolute;
+    width: 80%;
+    height: 90vh;
+    border: none;
+  }
+
+  .FrameButton {
+    position: absolute;
+  }
+}

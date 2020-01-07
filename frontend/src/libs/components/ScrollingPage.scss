@@ -1,5 +1,5 @@
 .Articles {
-  column-width: 300px;
+  column-width: 400px;
   column-gap: 30px;
   width: 90%;
   max-width: 1400px;
@@ -8,13 +8,4 @@
 
 .Loading {
   font-size: 30px;
-}
-
-.End {
-  position: absolute;
-  display: flex;
-  width: 100%;
-  left: 0;
-  font-size: 30px;
-  padding-top: 50px;
 }

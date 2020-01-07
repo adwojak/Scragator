@@ -12,6 +12,7 @@ import "./Profile.scss";
 const Profile = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [deleteBoxDisplayed, setDeleteBoxDisplayed] = React.useState(false);
   const savedArticles = () => {
     history.push("/savedArticles", { url: SAVED_ARTICLES });
   };
@@ -33,6 +34,20 @@ const Profile = () => {
       });
   };
 
+  const DeleteBox = () => {
+    return (
+      <div className="DeleteBox">
+        <p className="ConfirmText">Confirm deletion</p>
+        <Button
+          className="ButtonBig Button ButtonWarning"
+          onClick={deleteProfile}
+        >
+          CONFIRM
+        </Button>
+      </div>
+    );
+  };
+
   return (
     <div className="Profile">
       <Button className="ButtonBig Button" onClick={savedArticles}>
@@ -43,10 +58,13 @@ const Profile = () => {
       </Button>
       <Button
         className="ButtonBig Button ButtonWarning"
-        onClick={deleteProfile}
+        onClick={() => {
+          setDeleteBoxDisplayed(!deleteBoxDisplayed);
+        }}
       >
         Delete profile
       </Button>
+      {deleteBoxDisplayed && <DeleteBox />}
     </div>
   );
 };

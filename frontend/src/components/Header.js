@@ -45,7 +45,19 @@ export const HeaderIcon = (): React.Node => {
 };
 
 export const HeaderTitle = (): React.Node => {
-  return <h1 className="Title">Quokka</h1>;
+  const history = useHistory();
+  return (
+    <h1
+      className="Title"
+      onClick={() => {
+        history.replace("/", {
+          url: HOME
+        });
+      }}
+    >
+      Quokka
+    </h1>
+  );
 };
 
 export const HeaderSearchBar = (): React.Node => {
@@ -168,9 +180,9 @@ class Header extends React.Component<PropsType> {
   handleLogout = (event: Event, history) => {
     event.preventDefault();
     axiosPost(LOGOUT_ACCESS)
-      .POST()
       .then(response => {
         this.props.logoutUser();
+        history.push("/services");
         history.push("/");
       })
       .catch(error => {

@@ -28,7 +28,7 @@ class App extends Component {
           <LoginRoute path="/profile" component={Profile} />
           <LoginRoute path="/savedArticles" component={ArticlesList} />
           <LoginRoute path="/savedServices" component={ServicesList} />
-          {/* <Route path="/profile" component={Profile} /> */}
+          <LoginRoute path="/serviceArticles" component={ArticlesList} />
         </Switch>
       </Fragment>
     );

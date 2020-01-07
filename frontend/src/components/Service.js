@@ -1,15 +1,18 @@
 // @flow
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import classNames from "classnames";
 import { addFavService, removeFavService } from "../states/actions";
 import singleServiceAPI from "../api/singleService";
+import { SERVICE_ARTICLES } from "../api/urls";
 
 const Service = props => {
   const { serviceName, serviceImg, isFavourite } = props.service;
   const [favourite, setFavourite] = React.useState(isFavourite);
   const isLogged = useSelector((state: Object): Object => state.isLogged);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const callAddFavService = () => {
     singleServiceAPI.POST.addFavService({
@@ -61,11 +64,19 @@ const Service = props => {
     }
   };
 
+  const displayArticles = () => {
+    history.replace("/serviceArticles", {
+      url: SERVICE_ARTICLES,
+      service: serviceName
+    });
+  };
+
   return (
     <div>
       <p>{serviceName}</p>
       <p>{favourite ? "YES" : "NO"}</p>
       <button onClick={bookmarkClicked}>CLICK</button>
+      <button onClick={displayArticles}>Display articles</button>
     </div>
   );
 };
