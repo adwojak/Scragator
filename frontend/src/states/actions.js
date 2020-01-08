@@ -49,6 +49,6 @@ export const removeFavService = (payload: Object): ActionReturnType => {
   return { type: REMOVE_FAV_SERVICE, payload };
 };
 
-export const showPopup = (payload: Object): ActionReturnType =>  {
+export const showPopup = (payload: Object): ActionReturnType => {
   return { type: SHOW_POPUP, payload };
 };

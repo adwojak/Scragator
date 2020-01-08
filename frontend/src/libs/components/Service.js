@@ -2,13 +2,25 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import classNames from 'classnames';
-import { addFavService, removeFavService, showPopup } from "../../states/actions";
+import classNames from "classnames";
+import {
+  addFavService,
+  removeFavService,
+  showPopup
+} from "../../states/actions";
 import singleServiceAPI from "../../api/singleService";
 import { SERVICE_ARTICLES } from "../../api/urls";
-import './Service.scss';
+import "./Service.scss";
 
-const Service = props => {
+type PropsType = $ReadOnly<{|
+  service: {
+    serviceName: string,
+    serviceImg: string,
+    isFavourite: boolean
+  }
+|}>;
+
+const Service = (props: PropsType): React.Node => {
   const { serviceName, serviceImg, isFavourite } = props.service;
   const [favourite, setFavourite] = React.useState(isFavourite);
   const isLogged = useSelector((state: Object): Object => state.isLogged);
@@ -19,7 +31,7 @@ const Service = props => {
     singleServiceAPI.POST.addFavService({
       service_name: serviceName
     })
-      .then(response => {
+      .then((response: Object) => {
         dispatch(
           addFavService({
             favouriteServices: response.data.user_fav_services
@@ -27,7 +39,7 @@ const Service = props => {
         );
         setFavourite(true);
       })
-      .catch(error => {
+      .catch((error: Error) => {
         this.props.history.push("/message", {
           serverError: true
         });
@@ -38,7 +50,7 @@ const Service = props => {
     singleServiceAPI.POST.removeFavService({
       service_name: serviceName
     })
-      .then(response => {
+      .then((response: Object) => {
         dispatch(
           removeFavService({
             favouriteServices: response.data.user_fav_services
@@ -46,7 +58,7 @@ const Service = props => {
         );
         setFavourite(false);
       })
-      .catch(error => {
+      .catch((error: Error) => {
         this.props.history.push("/message", {
           serverError: true
         });
@@ -61,20 +73,18 @@ const Service = props => {
         callAddFavService();
       }
     } else {
-      dispatch(showPopup({popupContent: {
-        popupTitle: "You need to be logged in to save articles!"
-      }}));
+      dispatch(showPopup({ showPopup: true }));
     }
   };
 
-  const displayArticles = (event) => {
+  const displayArticles = (event: Event) => {
     const notTriggerOnClasses = ["ServiceBookmark", "Favourite"];
     if (!notTriggerOnClasses.includes(event.target.className)) {
-          history.replace("/serviceArticles", {
-      url: SERVICE_ARTICLES,
-      service: serviceName
-    });
-  }
+      history.replace("/serviceArticles", {
+        url: SERVICE_ARTICLES,
+        service: serviceName
+      });
+    }
   };
 
   return (

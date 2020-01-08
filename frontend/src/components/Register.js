@@ -27,7 +27,7 @@ class Register extends Form<null, StateType> {
       password: password.value,
       password_confirm: repeatPassword.value
     })
-      .then(response => {
+      .then((response: Object) => {
         const data = response.data;
         if (data.user_exists) {
           this.setState({
@@ -43,7 +43,7 @@ class Register extends Form<null, StateType> {
           });
         }
       })
-      .catch(error => {
+      .catch((error: Error) => {
         this.setState({
           serverError: true
         });

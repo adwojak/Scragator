@@ -4,10 +4,15 @@ import { connect } from "react-redux";
 import { axiosGet } from "../api/apiBase";
 import { SERVICES } from "../api/urls";
 import Service from "../libs/components/Service";
-import './ServicesList.scss';
-import Niebezpiecznik from '../static/images/niebezpiecznik.png';
+import Placeholder from "../static/images/placeholder.png";
+import "./ServicesList.scss";
 
-const mapStateToProps = state => {
+type StateType = $ReadOnly<{|
+  isLogged: boolean,
+  favouriteServices: Array
+|}>;
+
+const mapStateToProps = (state: StateType): Object => {
   return {
     isLogged: state.isLogged,
     favouriteServices: state.favouriteServices
@@ -15,36 +20,21 @@ const mapStateToProps = state => {
 };
 
 class ServicesList extends React.Component {
-  constructor(props) {
+  constructor(props: Object) {
     super(props);
-    // this.pageFetch();
+    this.pageFetch();
   }
 
   state = {
-    // services: Array.from({})
-    services: [{
-      serviceName: "Niebezpiecznik",
-      serviceImg: Niebezpiecznik,
-      isFavourite: true
-    },
-    {
-      serviceName: "Niebezpiecznik",
-      serviceImg: Niebezpiecznik,
-      isFavourite: true
-    },
-    {
-      serviceName: "Niebezpiecznik",
-      serviceImg: Niebezpiecznik,
-      isFavourite: true
-    }]
+    services: Array.from({})
   };
 
-  parseService = data => {
-    return data.map(service => {
+  parseService = (data: Object): Array => {
+    return data.map((service: Object): Object => {
       return {
-        serviceName: service,
-        serviceImg: "",
-        isFavourite: this.props.favouriteServices.includes(service)
+        serviceName: service.name,
+        serviceImg: service.img || Placeholder,
+        isFavourite: this.props.favouriteServices.includes(service.name)
       };
     });
   };
@@ -52,22 +42,22 @@ class ServicesList extends React.Component {
   pageFetch = () => {
     const { url = SERVICES, method = "POST" } = this.props.location.state || {};
     axiosGet(url)
-      .then(response => {
+      .then((response: Object) => {
         this.setState({
           services: this.parseService(response.data)
         });
       })
-      .catch(error => {
+      .catch((error: Error) => {
         this.props.history.push("/message", {
           serverError: true
         });
       });
   };
 
-  render() {
+  render(): React.Node {
     return (
       <div className="ServicesList">
-        {this.state.services.map(service => (
+        {this.state.services.map((service: Object): React.Node => (
           <Service key={service.id} service={service} />
         ))}
       </div>

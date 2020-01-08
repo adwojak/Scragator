@@ -2,7 +2,11 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
-import { addFavArticle, removeFavArticle } from "../../states/actions";
+import {
+  addFavArticle,
+  removeFavArticle,
+  showPopup
+} from "../../states/actions";
 import singleArticleAPI from "../../api/singleArticle";
 import "./Article.scss";
 
@@ -13,6 +17,7 @@ type ArticleType = $ReadOnly<{|
     author: string,
     title: string,
     service: string,
+    url: string,
     isFavourite: boolean
   },
   setDisplayArticle: Function
@@ -72,47 +77,16 @@ const Article = (props: ArticleType): React.Node => {
         callAddFavArticle();
       }
     } else {
-      console.log("You need to be logged in to save articles!");
+      dispatch(showPopup({ showPopup: true }));
     }
   };
 
-  const openWindow = event => {
+  const openWindow = (event: Event) => {
     const notTriggerOnClasses = ["ArticleBookmark", "Favourite"];
     if (!notTriggerOnClasses.includes(event.target.className)) {
       setDisplayArticle(url);
-      // return (
-      //   <div>
-      //     <iframe
-      //       src={url}
-      //       width={`80%`}
-      //       height={`100%`}
-      //       style={{ position: `fixed`, float: `left` }}
-      //       frameborder={0}
-      //     ></iframe>
-      //   </div>
-      // );fixed
     }
   };
-
-  // const ArticleWindow = () => {
-  //   return (
-  //     <div
-  //       style={{
-  //         display: "flow",
-  //         alignItems: "center",
-  //         zIndex: "100"
-  //       }}
-  //     >
-  //       <iframe
-  //         src={url}
-  //         width={`80%`}
-  //         height={`100%`}
-  //         style={{ position: `absolute`, float: `left` }}
-  //         frameborder={0}
-  //       ></iframe>
-  //     </div>
-  //   );
-  // };
 
   return (
     <li

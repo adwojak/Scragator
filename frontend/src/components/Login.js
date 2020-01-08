@@ -53,7 +53,7 @@ class Login extends Form<PropsType, StateType> {
       email: email.value,
       password: password.value
     })
-      .then(response => {
+      .then((response: Object) => {
         const data = response.data;
         if (data.form_error === "BAD_EMAIL") {
           this.setState({
@@ -80,7 +80,7 @@ class Login extends Form<PropsType, StateType> {
           });
         }
       })
-      .catch(error => {
+      .catch((error: Error) => {
         this.props.history.push("/message", {
           serverError: true
         });

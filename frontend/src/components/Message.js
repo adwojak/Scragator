@@ -1,9 +1,10 @@
+// @flow
 import * as React from "react";
 import { useLocation } from "react-router-dom";
 import Button from "../libs/components/Button";
 import "./Message.scss";
 
-const Error = props => {
+const Error = (props: Object): React.Node => {
   return (
     <React.Fragment>
       <p className="TitleNormal Error">Error</p>
@@ -19,7 +20,7 @@ const Error = props => {
   );
 };
 
-const UserCreated = props => {
+const UserCreated = (props: Object): React.Node => {
   return (
     <React.Fragment>
       <p className="TitleNormal">User has been created!</p>
@@ -34,7 +35,7 @@ const UserCreated = props => {
   );
 };
 
-const UserDeleted = props => {
+const UserDeleted = (props: Object): React.Node => {
   return (
     <React.Fragment>
       <p className="TitleNormal">User has been deleted!</p>
@@ -49,7 +50,7 @@ const UserDeleted = props => {
   );
 };
 
-const Message = props => {
+const Message = (props: Object): React.Node => {
   const { isCreated, isDeleted, serverError } = useLocation().state;
   return (
     <div className="Message">

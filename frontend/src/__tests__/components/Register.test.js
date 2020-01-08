@@ -47,9 +47,7 @@ describe("Register", () => {
   });
 
   it("Create local state", () => {
-    const registerInstance = setupRegisterComponent()
-      .dive()
-      .instance();
+    const registerInstance = setupRegisterComponent().instance();
     registerInstance.createLocalState(formInputs);
     expect(registerInstance.state).toMatchObject(stateData, {
       defaultFormInputs: formInputs,
@@ -58,9 +56,7 @@ describe("Register", () => {
   });
 
   it("Submit form", () => {
-    const registerInstance = setupRegisterComponent()
-      .dive()
-      .instance();
+    const registerInstance = setupRegisterComponent().instance();
     registerInstance.createLocalState(formInputs);
 
     registerInstance.setInputData(emailDataToUpdate, false);
@@ -75,9 +71,7 @@ describe("Register", () => {
   });
 
   it("Submit form - password not match", () => {
-    const registerInstance = setupRegisterComponent()
-      .dive()
-      .instance();
+    const registerInstance = setupRegisterComponent().instance();
     registerInstance.createLocalState(formInputs);
 
     registerInstance.setInputData(emailDataToUpdate, false);
@@ -90,6 +84,5 @@ describe("Register", () => {
       false
     );
     registerInstance.handleSubmit(event);
-    // registerInstance.executeValidFormSubmit();
   });
 });

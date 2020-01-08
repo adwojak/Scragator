@@ -2,89 +2,88 @@
 @import "../../components/mixins.scss";
 
 .Service {
-    position: relative;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 50px;
+
+  width: 80%;
+  height: 100px;
+  background-color: black;
+  margin: 15px;
+
+  @media (min-width: $mobileMedia) {
+    max-width: 500px;
+  }
+
+  .Image {
+    height: inherit;
+    margin-right: 10px;
+    border-radius: 100%;
+  }
+
+  .Name {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
 
-    width: 80%;
-    height: 100px;
-    background-color: black;
-    margin: 15px;
+    width: 100%;
+    margin-right: 80px;
 
-    @media(min-width: $mobileMedia) {
-        max-width: 500px;
+    font-size: 30px;
+    font-size: 4vw;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+
+    @media (min-width: $mobileMedia) {
+      font-size: 30px;
     }
+  }
 
+  .ServiceBookmark {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    width: 50px;
+    height: 80px;
+    background: linear-gradient(180deg, $flagColor 50%, transparent 50%);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 
-    .Image {
-        height: inherit;
-        margin-right: 10px;
-        border-radius: 100%;
+    ~ .Favourite {
+      @include star(20px, $starColor, 45px, 17px);
     }
+  }
 
-    .Name {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+  .ServiceBookmark:before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 27px solid $flagColor;
+    border-left: 27px solid transparent;
 
-        width: 100%;
-        margin-right: 80px;
+    transform: scale(1, -1);
+    margin-bottom: 15px;
+  }
 
-        font-size: 30px;
-        font-size: 4vw;
-        font-weight: bold;
-        text-align: center;
-        color: white;
+  .ServiceBookmark:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 27px solid $flagColor;
+    border-right: 27px solid transparent;
 
-        @media(min-width: $mobileMedia) {
-            font-size: 30px;
-        }
-    }
-
-    .ServiceBookmark {
-        position: absolute;
-        right: 30px;
-        top: 20px;
-        width: 50px;
-        height: 80px;
-        background: linear-gradient(180deg, $flagColor 50%, transparent 50%);
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    
-        ~ .Favourite {
-          @include star(20px, $starColor, 45px, 17px);
-        }
-      }
-    
-      .ServiceBookmark:before {
-        content: "";
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 0;
-        height: 0;
-        border-bottom: 27px solid $flagColor;
-        border-left: 27px solid transparent;
-    
-        transform: scale(1, -1);
-        margin-bottom: 15px;
-      }
-    
-      .ServiceBookmark:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 0;
-        height: 0;
-        border-bottom: 27px solid $flagColor;
-        border-right: 27px solid transparent;
-    
-        transform: scale(1, -1);
-        margin-bottom: 15px;
-      }
+    transform: scale(1, -1);
+    margin-bottom: 15px;
+  }
 }

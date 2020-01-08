@@ -16,11 +16,11 @@ const store = {
   burgerMenuVisible: false
 };
 
-const ExampleComponent = () => {
+const ExampleComponent = (): React.Node => {
   return <p></p>;
 };
 
-const setupAnonymousRouteComponent = newStore => {
+const setupAnonymousRouteComponent = (newStore: Object): ReactWrapper => {
   return mount(
     <Provider store={mockStore(Object.assign({}, store, newStore))}>
       <MemoryRouter>

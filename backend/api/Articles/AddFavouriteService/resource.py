@@ -10,7 +10,7 @@ class AddFavouriteService(Resource):
 
     @jwt_required
     def post(self) -> Response:
-        service_name:str = request.form.get('service_name')
+        service_name: str = request.form.get('service_name')
         user: UserModel = UserModel.query.filter_by(email=get_jwt_identity()).first()
 
         if user and service_name and service_name not in user.favourite_services:

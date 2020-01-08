@@ -6,7 +6,12 @@ import { HOME } from "../api/urls";
 import ScrollingPage from "../libs/components/ScrollingPage";
 import ArticleWindow from "../libs/components/ArticleWindow";
 
-const mapStateToProps = state => {
+type StateType = $ReadOnly<{|
+  isLogged: boolean,
+  favouriteArticles: Array
+|}>;
+
+const mapStateToProps = (state: StateType): Object => {
   return {
     isLogged: state.isLogged,
     favouriteArticles: state.favouriteArticles
@@ -14,9 +19,9 @@ const mapStateToProps = state => {
 };
 
 class ArticlesList extends React.Component {
-  constructor(props) {
+  constructor(props: Object) {
     super(props);
-    // this.pageFetch();
+    this.pageFetch();
   }
 
   state = {
@@ -26,8 +31,8 @@ class ArticlesList extends React.Component {
     displayedArticle: null
   };
 
-  mergeArticles = responseData => {
-    const newData = responseData.map(article => {
+  mergeArticles = (responseData: Object): Array => {
+    const newData = responseData.map((article: Object): Object => {
       return {
         author: article.author,
         id: article.id,
@@ -41,7 +46,7 @@ class ArticlesList extends React.Component {
     return [...this.state.data, ...newData];
   };
 
-  makeRequest = (url, method, rest) => {
+  makeRequest = (url: string, method: string, rest: Object): Promise => {
     if (method === "POST") {
       return axiosPost(url, {
         page: this.state.page,
@@ -56,27 +61,27 @@ class ArticlesList extends React.Component {
     const { url = HOME, method = "POST", ...rest } =
       this.props.location.state || {};
     this.makeRequest(url, method, rest)
-      .then(response => {
+      .then((response: Object) => {
         this.setState({
           data: this.mergeArticles(response.data),
           page: this.state.page + 1,
           hasMore: response.data.length > 0
         });
       })
-      .catch(error => {
+      .catch((error: Error) => {
         this.props.history.push("/message", {
           serverError: true
         });
       });
   };
 
-  setDisplayArticle = url => {
+  setDisplayArticle = (url: string) => {
     this.setState({
       displayedArticle: url
     });
   };
 
-  render() {
+  render(): React.Node {
     return (
       <React.Fragment>
         {this.state.displayedArticle ? (

@@ -8,7 +8,7 @@ import { axiosPost } from "../api/apiBase";
 import { SAVED_ARTICLES, SAVED_SERVICES, DELETE_USER } from "../api/urls";
 import "./Profile.scss";
 
-const Profile = () => {
+const Profile = (): React.Node => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [deleteBoxDisplayed, setDeleteBoxDisplayed] = React.useState(false);
@@ -24,16 +24,16 @@ const Profile = () => {
     axiosPost(DELETE_USER, {
       is_confirmed: true
     })
-      .then(response => {
+      .then((response: Object) => {
         dispatch(deleteUser());
         history.push("/message", { isDeleted: true });
       })
-      .catch(error => {
+      .catch((error: Error) => {
         history.push("/message", { serverError: true });
       });
   };
 
-  const DeleteBox = () => {
+  const DeleteBox = (): React.Node => {
     return (
       <div className="DeleteBox">
         <p className="ConfirmText">Confirm deletion</p>

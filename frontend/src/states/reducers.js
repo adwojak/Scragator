@@ -20,14 +20,19 @@ const initialState = {
   favouriteArticles: cookies.get("favouriteArticles") || [],
   favouriteServices: cookies.get("favouriteServices") || [],
   burgerMenuVisible: false,
-  popupContent: null
+  showPopup: false
 };
 
 type ActionType = $ReadOnly<{|
   type: string,
   payload: {
     email: string,
-    password: string
+    accessToken: string,
+    refreshToken: string,
+    favouriteArticles: Array,
+    favouriteServices: Array,
+    isLogged: boolean,
+    showPopup: boolean
   }
 |}>;
 
@@ -70,22 +75,20 @@ const rootReducer = (
       });
     case ADD_FAV_ARTICLE:
     case REMOVE_FAV_ARTICLE:
-      const favouriteArticles = action.payload.favouriteArticles;
-      cookies.set("favouriteArticles", favouriteArticles);
+      cookies.set("favouriteArticles", action.payload.favouriteArticles);
       return Object.assign({}, state, {
-        favouriteArticles: favouriteArticles
+        favouriteArticles: action.payload.favouriteArticles
       });
     case ADD_FAV_SERVICE:
     case REMOVE_FAV_SERVICE:
-      const favouriteServices = action.payload.favouriteServic;
-      cookies.set("favouriteServices", favouriteServices);
+      cookies.set("favouriteServices", action.payload.favouriteServices);
       return Object.assign({}, state, {
-        favouriteServices: favouriteServices
+        favouriteServices: action.payload.favouriteServices
       });
     case SHOW_POPUP:
       return Object.assign({}, state, {
-        popupContent: action.payload.popupContent
-      })
+        showPopup: action.payload.showPopup
+      });
     default:
       return state;
   }

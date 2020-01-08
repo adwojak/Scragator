@@ -63,7 +63,7 @@ export const HeaderTitle = (): React.Node => {
 export const HeaderSearchBar = (): React.Node => {
   const [inputValue, setInputValue] = React.useState("");
   const history = useHistory();
-  const submitSearch = event => {
+  const submitSearch = (event: Event) => {
     event.preventDefault();
     history.replace("/search", {
       url: SEARCH,
@@ -78,7 +78,7 @@ export const HeaderSearchBar = (): React.Node => {
         type="search"
         name="search"
         value={inputValue}
-        onChange={e => setInputValue(e.target.value)}
+        onChange={(event: Event): null => setInputValue(event.target.value)}
       />
     </form>
   );
@@ -137,7 +137,9 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
                 <button
                   type="button"
                   className="LinkButton"
-                  onClick={event => props.handleLogout(event, history)}
+                  onClick={(event: Event): null =>
+                    props.handleLogout(event, history)
+                  }
                 >
                   LOGOUT
                 </button>
@@ -177,15 +179,15 @@ class Header extends React.Component<PropsType> {
       : this.props.showBurgerMenu();
   };
 
-  handleLogout = (event: Event, history) => {
+  handleLogout = (event: Event, history: Object) => {
     event.preventDefault();
     axiosPost(LOGOUT_ACCESS)
-      .then(response => {
+      .then((response: Object) => {
         this.props.logoutUser();
         history.push("/services");
         history.push("/");
       })
-      .catch(error => {
+      .catch((error: Error) => {
         history.push("/message", {
           serverError: true
         });
