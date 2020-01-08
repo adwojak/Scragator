@@ -19,7 +19,7 @@ from backend.api.UserManagement.DeleteUser.resource import DeleteUser
 
 routing: dict = {
     ManagerResource: ['/execute_observers'],
-    PaginateArticle: ['/page'],
+    PaginateArticle: ['/'],
     FilteredPager: ['/service_articles'],
     SavedArticlesPager: ['/saved_articles'],
     SavedServices: ['/saved_services'],

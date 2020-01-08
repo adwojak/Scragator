@@ -1,12 +1,13 @@
 // @flow
 import { axiosPost } from "./apiBase";
+import { ADD_FAV_ARTICLE, REMOVE_FAV_ARTICLE } from "./urls";
 
 const addFavArticle = (data: Object): Promise => {
-  return axiosPost("http://127.0.0.1:5000/add_fav_article", data);
+  return axiosPost(ADD_FAV_ARTICLE, data);
 };
 
 const removeFavArticle = (data: Object): Promise => {
-  return axiosPost("http://127.0.0.1:5000/remove_fav_article", data);
+  return axiosPost(REMOVE_FAV_ARTICLE, data);
 };
 
 const singleArticleApi = {
