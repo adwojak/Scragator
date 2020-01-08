@@ -8,6 +8,7 @@ import {
   showPopup
 } from "../../states/actions";
 import singleArticleAPI from "../../api/singleArticle";
+import ArticlePlaceholder from "../../static/images/articlePlaceholder.jpg";
 import "./Article.scss";
 
 type ArticleType = $ReadOnly<{|
@@ -91,8 +92,7 @@ const Article = (props: ArticleType): React.Node => {
     <li
       className="Article"
       style={{
-        backgroundImage:
-          "url(https://m.autokult.pl/tesla-model-3jp-jpg-121a-8e93371,750,470,0,0.jpg)",
+        backgroundImage: `url(${ArticlePlaceholder})`,
         height: `${Math.floor(Math.random() * 130) + 151}px`
       }}
       onClick={openWindow}

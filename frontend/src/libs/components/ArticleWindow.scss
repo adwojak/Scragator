@@ -11,5 +11,14 @@
 
   .FrameButton {
     position: absolute;
+    outline: none;
+    border: none;
+    width: 200px;
+    height: 80px;
+    font-size: 40px;
+    font-weight: bold;
+    // background-color: transparent;
+    // color: white;
+    border-radius: 40px;
   }
 }

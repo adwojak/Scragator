@@ -9,8 +9,12 @@ class ScrapperNames(Enum):
     def list_values(cls) -> list:
         list_values = []
         for el in map(lambda el: el.value, cls):
-            list_values.append({
-                'name': el[0],
-                'img': el[1]
-            })
+            list_values.append(cls.parse_scrapper(el))
         return list_values
+
+    @staticmethod
+    def parse_scrapper( scrapper):
+        return {
+            'name': scrapper[0],
+            'img': scrapper[1]
+        }

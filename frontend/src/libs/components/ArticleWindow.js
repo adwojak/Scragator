@@ -16,7 +16,7 @@ const ArticleWindow = (props: PropsType): React.Node => {
         className="FrameButton"
         onClick={(): null => setDisplayArticle(null)}
       >
-        Return
+        RETURN
       </button>
     </div>
   );
