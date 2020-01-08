@@ -13,6 +13,7 @@ import AnonymousRoute from "./components/AnonymousRoute";
 import ResetPassword from "./components/ResetPassword";
 import Message from "./components/Message";
 import Popup from "./components/Popup";
+import NotFound from "./components/NotFound";
 import "./App.scss";
 
 const App = (): React.Node => {
@@ -33,6 +34,7 @@ const App = (): React.Node => {
         <LoginRoute path="/profile" component={Profile} />
         <LoginRoute path="/savedArticles" component={ArticlesList} />
         <LoginRoute path="/savedServices" component={ServicesList} />
+        <Route path="/*" component={NotFound} />
       </Switch>
     </React.Fragment>
   );

@@ -3,7 +3,6 @@ import axios from "axios";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
 import qs from "qs";
 import Cookies from "universal-cookie";
-import store from "../states/store";
 import { TOKEN_REFRESH } from "./urls";
 
 const headers = Object.freeze({

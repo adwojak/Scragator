@@ -2,7 +2,8 @@ from enum import Enum
 
 
 class ScrapperNames(Enum):
-    NIEBEZPIECZNIK: tuple = ('Niebezpiecznik', 'https://pbs.twimg.com/profile_images/488053457727655936/EjMtWPSx_400x400.png')
+    NIEBEZPIECZNIK: tuple = ('Niebezpiecznik',
+                             'https://pbs.twimg.com/profile_images/488053457727655936/EjMtWPSx_400x400.png')
 
     @classmethod
     def list_values(cls) -> list:

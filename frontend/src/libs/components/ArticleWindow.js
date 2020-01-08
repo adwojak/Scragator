@@ -11,7 +11,7 @@ const ArticleWindow = (props: PropsType): React.Node => {
   const { url, setDisplayArticle } = props;
   return (
     <div className="OuterFrame">
-      <iframe className="Frame" src={url}></iframe>
+      <iframe className="Frame" title={url} src={url}></iframe>
       <button
         className="FrameButton"
         onClick={(): null => setDisplayArticle(null)}

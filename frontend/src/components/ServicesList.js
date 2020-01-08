@@ -40,7 +40,7 @@ class ServicesList extends React.Component {
   };
 
   pageFetch = () => {
-    const { url = SERVICES, method = "POST" } = this.props.location.state || {};
+    const { url = SERVICES } = this.props.location.state || {};
     axiosGet(url)
       .then((response: Object) => {
         this.setState({

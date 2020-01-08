@@ -27,7 +27,6 @@ const Article = (props: ArticleType): React.Node => {
   const { id, date, author, title, service, url, isFavourite } = props.article;
   const { setDisplayArticle } = props;
   const [favourite, setFavourite] = React.useState(isFavourite);
-  const [renderArticle, setRenderArticle] = React.useState(false);
   const isLogged = useSelector((state: Object): Object => state.isLogged);
   const dispatch = useDispatch();
 
