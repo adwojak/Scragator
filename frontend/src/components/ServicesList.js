@@ -3,7 +3,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { axiosGet } from "../api/apiBase";
 import { SERVICES } from "../api/urls";
-import Service from "./Service";
+import Service from "../libs/components/Service";
+import './ServicesList.scss';
+import Niebezpiecznik from '../static/images/niebezpiecznik.png';
 
 const mapStateToProps = state => {
   return {
@@ -15,11 +17,26 @@ const mapStateToProps = state => {
 class ServicesList extends React.Component {
   constructor(props) {
     super(props);
-    this.pageFetch();
+    // this.pageFetch();
   }
 
   state = {
-    services: Array.from({})
+    // services: Array.from({})
+    services: [{
+      serviceName: "Niebezpiecznik",
+      serviceImg: Niebezpiecznik,
+      isFavourite: true
+    },
+    {
+      serviceName: "Niebezpiecznik",
+      serviceImg: Niebezpiecznik,
+      isFavourite: true
+    },
+    {
+      serviceName: "Niebezpiecznik",
+      serviceImg: Niebezpiecznik,
+      isFavourite: true
+    }]
   };
 
   parseService = data => {
@@ -49,7 +66,7 @@ class ServicesList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="ServicesList">
         {this.state.services.map(service => (
           <Service key={service.id} service={service} />
         ))}

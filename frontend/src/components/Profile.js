@@ -1,7 +1,6 @@
 // @flow
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import classNames from "classnames";
 import { useHistory } from "react-router-dom";
 import { deleteUser } from "../states/actions";
 import Button from "../libs/components/Button";

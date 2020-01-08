@@ -9,16 +9,18 @@ import {
   ADD_FAV_ARTICLE,
   REMOVE_FAV_ARTICLE,
   ADD_FAV_SERVICE,
-  REMOVE_FAV_SERVICE
+  REMOVE_FAV_SERVICE,
+  SHOW_POPUP
 } from "./action-types";
 import type { InitialStateType } from "./types";
 
 const cookies = new Cookies();
 const initialState = {
   isLogged: Boolean(cookies.get("accessToken")),
-  burgerMenuVisible: false,
   favouriteArticles: cookies.get("favouriteArticles") || [],
-  favouriteServices: cookies.get("favouriteServices") || []
+  favouriteServices: cookies.get("favouriteServices") || [],
+  burgerMenuVisible: false,
+  popupContent: null
 };
 
 type ActionType = $ReadOnly<{|
@@ -80,6 +82,10 @@ const rootReducer = (
       return Object.assign({}, state, {
         favouriteServices: favouriteServices
       });
+    case SHOW_POPUP:
+      return Object.assign({}, state, {
+        popupContent: action.payload.popupContent
+      })
     default:
       return state;
   }

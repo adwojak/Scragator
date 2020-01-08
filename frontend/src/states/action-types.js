@@ -5,6 +5,7 @@ export const DELETE_USER = "DELETE_USER";
 
 export const SHOW_BURGER_MENU = "SHOW_BURGER_MENU";
 export const HIDE_BURGER_MENU = "HIDE_BURGER_MENU";
+export const SHOW_POPUP = "SHOW_POPUP";
 
 export const ADD_FAV_ARTICLE = "ADD_FAV_ARTICLE";
 export const REMOVE_FAV_ARTICLE = "REMOVE_FAV_ARTICLE";

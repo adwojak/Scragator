@@ -2,10 +2,11 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import classNames from "classnames";
-import { addFavService, removeFavService } from "../states/actions";
-import singleServiceAPI from "../api/singleService";
-import { SERVICE_ARTICLES } from "../api/urls";
+import classNames from 'classnames';
+import { addFavService, removeFavService, showPopup } from "../../states/actions";
+import singleServiceAPI from "../../api/singleService";
+import { SERVICE_ARTICLES } from "../../api/urls";
+import './Service.scss';
 
 const Service = props => {
   const { serviceName, serviceImg, isFavourite } = props.service;
@@ -60,23 +61,31 @@ const Service = props => {
         callAddFavService();
       }
     } else {
-      console.log("You need to be logged in to save articles!");
+      dispatch(showPopup({popupContent: {
+        popupTitle: "You need to be logged in to save articles!"
+      }}));
     }
   };
 
-  const displayArticles = () => {
-    history.replace("/serviceArticles", {
+  const displayArticles = (event) => {
+    const notTriggerOnClasses = ["ServiceBookmark", "Favourite"];
+    if (!notTriggerOnClasses.includes(event.target.className)) {
+          history.replace("/serviceArticles", {
       url: SERVICE_ARTICLES,
       service: serviceName
     });
+  }
   };
 
   return (
-    <div>
-      <p>{serviceName}</p>
-      <p>{favourite ? "YES" : "NO"}</p>
-      <button onClick={bookmarkClicked}>CLICK</button>
-      <button onClick={displayArticles}>Display articles</button>
+    <div className="Service" onClick={displayArticles}>
+      <img className="Image" src={serviceImg} alt={serviceName} />
+      <p className="Name">{serviceName}</p>
+      <span className="ServiceBookmark" onClick={bookmarkClicked}></span>
+      <span
+        className={classNames({ Favourite: favourite })}
+        onClick={bookmarkClicked}
+      ></span>
     </div>
   );
 };

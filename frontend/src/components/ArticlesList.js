@@ -16,7 +16,7 @@ const mapStateToProps = state => {
 class ArticlesList extends React.Component {
   constructor(props) {
     super(props);
-    this.pageFetch();
+    // this.pageFetch();
   }
 
   state = {
