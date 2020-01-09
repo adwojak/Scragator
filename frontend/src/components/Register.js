@@ -1,5 +1,6 @@
 // @flow
 import * as React from "react";
+import { withTranslation } from 'react-i18next';
 import Button from "../libs/components/Button";
 import Input from "../libs/components/Input";
 import Form from "../libs/components/Form";
@@ -22,6 +23,7 @@ class Register extends Form<null, StateType> {
 
   executeValidFormSubmit = () => {
     const { email, password, repeatPassword } = this.state;
+    const { t } = this.props;
     axiosPost(REGISTER, {
       email: email.value,
       password: password.value,
@@ -31,7 +33,7 @@ class Register extends Form<null, StateType> {
         const data = response.data;
         if (data.user_exists) {
           this.setState({
-            formError: "User already exists!"
+            formError: t("USER_EXISTS")
           });
         } else if (data.created) {
           this.props.history.push("/message", {
@@ -44,17 +46,18 @@ class Register extends Form<null, StateType> {
         }
       })
       .catch((error: Error) => {
-        this.setState({
+        this.props.history.push("/message", {
           serverError: true
         });
       });
   };
 
   render(): React.Node {
+    const { t } = this.props;
     return (
       <form onSubmit={this.handleSubmit} className="Form" noValidate>
         <div>
-          <Label htmlFor="register">REGISTER</Label>
+          <Label htmlFor="register">{t("REGISTER")}</Label>
           {this.state.formError && (
             <p className="FormError">{this.state.formError}</p>
           )}
@@ -67,7 +70,7 @@ class Register extends Form<null, StateType> {
           />
           <Input
             id="password"
-            placeholder="Password..."
+            placeholder={t("PASSWD_HOLDER")}
             type="password"
             required
             setInputData={this.setInputData}
@@ -75,17 +78,17 @@ class Register extends Form<null, StateType> {
           />
           <Input
             id="repeatPassword"
-            placeholder="Repeat password..."
+            placeholder={t("REPEAT_PASSWD_HOLDER")}
             type="password"
             required
             setInputData={this.setInputData}
             validator={PasswordValidator}
           />
         </div>
-        <Button>REGISTER</Button>
+        <Button>{t("REGISTER")}</Button>
       </form>
     );
   }
 }
 
-export default Register;
+export default withTranslation()(Register);

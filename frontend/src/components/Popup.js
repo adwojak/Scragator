@@ -2,12 +2,14 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import { showPopup } from "../states/actions";
 import "./Popup.scss";
 
 const Popup = (props: Object): none => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { t } = useTranslation();
   const closePopup = (event: Event) => {
     event.preventDefault();
     dispatch(
@@ -20,7 +22,7 @@ const Popup = (props: Object): none => {
   return (
     <div className="Popup">
       <div className="Box">
-        <h2>You need to be logged in to save articles!</h2>
+        <h2>{t("NEED_LOGIN")}</h2>
         <button className="Close" onClick={closePopup}>
           &times;
         </button>
@@ -32,7 +34,7 @@ const Popup = (props: Object): none => {
               history.replace("/register");
             }}
           >
-            Register
+            {t("REGISTER_TITLECASE")}
           </button>
           <button
             className="Navigate"
@@ -41,7 +43,7 @@ const Popup = (props: Object): none => {
               history.replace("/login");
             }}
           >
-            Login
+            {t("LOGIN_TITLECASE")}
           </button>
         </div>
       </div>

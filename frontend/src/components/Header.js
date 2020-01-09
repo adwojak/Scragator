@@ -4,6 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
+import { useTranslation } from 'react-i18next';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { logoutUser, showBurgerMenu, hideBurgerMenu } from "../states/actions";
 import type { InitialStateType } from "../states/types";
@@ -88,11 +89,18 @@ type NavbarPropsType = $ReadOnly<{|
   ...InitialStateType,
   changeBurgerMenuVisibility: Object,
   handleLogout: Object,
-  hideBurgerMenu: Object
+  hideBurgerMenu: Object,
+  t: Function
 |}>;
 
 export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
   const history = useHistory();
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = ((event: Event) => {
+    i18n.changeLanguage(event.target.value);
+  });
+
   return (
     <nav
       role="navigation"
@@ -117,12 +125,12 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
               }
             }}
           >
-            HOME
+            {t("HOME")}
           </NavLink>
         </li>
         <li>
           <NavLink className="NavLink" to="/services">
-            SERVICES
+          {t("SERVICES")}
           </NavLink>
         </li>
         <div className="ProfileLinks">
@@ -130,7 +138,7 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
             <React.Fragment>
               <li>
                 <NavLink className="NavLink" to="/profile">
-                  PROFILE
+                {t("PROFILE")}
                 </NavLink>
               </li>
               <li>
@@ -141,7 +149,7 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
                     props.handleLogout(event, history)
                   }
                 >
-                  LOGOUT
+                  {t("LOGOUT")}
                 </button>
               </li>
             </React.Fragment>
@@ -149,16 +157,22 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
             <React.Fragment>
               <li>
                 <NavLink className="NavLink" to="/login">
-                  LOGIN
+                {t("LOGIN")}
                 </NavLink>
               </li>
               <li>
                 <NavLink className="NavLink" to="/register">
-                  REGISTER
+                {t("REGISTER")}
                 </NavLink>
               </li>
             </React.Fragment>
           )}
+        <li>
+          <select onChange={changeLanguage}>
+            <option value="en">English</option>
+            <option value="pl">Polski</option>
+          </select>
+        </li>
         </div>
       </ul>
     </nav>
@@ -206,6 +220,7 @@ class Header extends React.Component<PropsType> {
           isLogged={this.props.isLogged}
           handleLogout={this.handleLogout}
           hideBurgerMenu={this.props.hideBurgerMenu}
+          t={this.props.t}
         />
       </div>
     );

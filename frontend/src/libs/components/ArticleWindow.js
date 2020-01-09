@@ -1,5 +1,6 @@
 // @flow
 import * as React from "react";
+import { useTranslation } from 'react-i18next';
 import "./ArticleWindow.scss";
 
 type PropsType = $ReadOnly<{|
@@ -9,6 +10,7 @@ type PropsType = $ReadOnly<{|
 
 const ArticleWindow = (props: PropsType): React.Node => {
   const { url, setDisplayArticle } = props;
+  const { t } = useTranslation();
   return (
     <div className="OuterFrame">
       <iframe className="Frame" title={url} src={url}></iframe>
@@ -16,7 +18,7 @@ const ArticleWindow = (props: PropsType): React.Node => {
         className="FrameButton"
         onClick={(): null => setDisplayArticle(null)}
       >
-        RETURN
+        {t("RETURN")}
       </button>
     </div>
   );

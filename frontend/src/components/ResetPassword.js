@@ -1,5 +1,6 @@
 // @flow
 import * as React from "react";
+import { withTranslation } from 'react-i18next';
 import Button from "../libs/components/Button";
 import Input from "../libs/components/Input";
 import Form from "../libs/components/Form";
@@ -16,15 +17,15 @@ class ResetPassword extends Form<null, StateType> {
 
   executeValidFormSubmit = () => {
     const { email } = this.state;
-    // Handle axios request for rest password
     this.props.resetPassword(email.value);
   };
 
   render(): React.Node {
+    const { t } = this.props;
     return (
       <form onSubmit={this.handleSubmit} className="Form" noValidate>
         <div>
-          <Label htmlFor="resetPassword">RESET PASSWORD</Label>
+          <Label htmlFor="resetPassword">{t("RESET_PASSWD")}</Label>
           <Input
             id="email"
             placeholder="Email..."
@@ -33,10 +34,10 @@ class ResetPassword extends Form<null, StateType> {
             validator={EmailValidator}
           />
         </div>
-        <Button>RESET PASSWORD</Button>
+        <Button>{t("RESET_PASSWD")}</Button>
       </form>
     );
   }
 }
 
-export default ResetPassword;
+export default withTranslation()(ResetPassword);

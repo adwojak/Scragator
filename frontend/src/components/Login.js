@@ -2,6 +2,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { withTranslation } from 'react-i18next';
 import { loginUser } from "../states/actions";
 import Button from "../libs/components/Button";
 import Input from "../libs/components/Input";
@@ -49,6 +50,8 @@ class Login extends Form<PropsType, StateType> {
 
   executeValidFormSubmit = () => {
     const { email, password } = this.state;
+    const { t } = this.props;
+
     axiosPost(LOGIN, {
       email: email.value,
       password: password.value
@@ -57,11 +60,11 @@ class Login extends Form<PropsType, StateType> {
         const data = response.data;
         if (data.form_error === "BAD_EMAIL") {
           this.setState({
-            formError: "Wrong email"
+            formError: t("WRONG_EMAIL")
           });
         } else if (data.form_error === "BAD_PASSWORD") {
           this.setState({
-            formError: "Bad password"
+            formError: t("BAD_PASSWORD")
           });
         } else if (data.access_token || data.refresh_token) {
           this.props.loginUser(
@@ -88,10 +91,11 @@ class Login extends Form<PropsType, StateType> {
   };
 
   render(): React.Node {
+    const { t } = this.props;
     return (
       <form onSubmit={this.handleSubmit} className="Form" noValidate>
         <div>
-          <Label htmlFor="login">LOGIN</Label>
+          <Label htmlFor="login">{t("LOGIN")}</Label>
           {this.state.formError && (
             <p className="FormError">{this.state.formError}</p>
           )}
@@ -104,7 +108,7 @@ class Login extends Form<PropsType, StateType> {
           />
           <Input
             id="password"
-            placeholder="Password..."
+            placeholder={t("PASSWD_HOLDER")}
             type="password"
             required
             setInputData={this.setInputData}
@@ -114,10 +118,10 @@ class Login extends Form<PropsType, StateType> {
         <Button>LOGIN</Button>
         <div className="Links">
           <NavLink className="NavLink" to="/resetPassword">
-            Forgot password?
+            {t("FORGOR_PASSWD")}
           </NavLink>
           <NavLink className="NavLink" to="/register">
-            New user? SIGN UP
+          {t("NEW_USER")}
           </NavLink>
         </div>
       </form>
@@ -128,4 +132,4 @@ class Login extends Form<PropsType, StateType> {
 export default connect<_, PropsType, _, _, _, _>(
   null,
   mapDispatchToProps
-)(Login);
+)(withTranslation()(Login));
