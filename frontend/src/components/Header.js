@@ -2,15 +2,14 @@
 import * as React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
-import { useTranslation } from 'react-i18next';
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 import { logoutUser, showBurgerMenu, hideBurgerMenu } from "../states/actions";
 import type { InitialStateType } from "../states/types";
 import { axiosPost } from "../api/apiBase";
 import { LOGOUT_ACCESS } from "../api/urls";
 import "./Header.scss";
+import BurgerButton from "../libs/components/BurgerButton";
 import homeIcon from "../static/images/houseIcon.png";
 import { HOME, SEARCH } from "../api/urls";
 
@@ -97,9 +96,9 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
   const history = useHistory();
   const { t, i18n } = useTranslation();
 
-  const changeLanguage = ((event: Event) => {
+  const changeLanguage = (event: Event) => {
     i18n.changeLanguage(event.target.value);
-  });
+  };
 
   return (
     <nav
@@ -109,10 +108,9 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
         burgerHidden: !props.burgerMenuVisible
       })}
     >
-      <FontAwesomeIcon
-        icon={faBars}
-        className="burgerMenuIcon"
-        onClick={(): Object => props.changeBurgerMenuVisibility()}
+      <BurgerButton
+        burgerMenuVisible={props.burgerMenuVisible}
+        changeBurgerMenuVisibility={props.changeBurgerMenuVisibility}
       />
       <ul role="menubar" onClick={props.hideBurgerMenu}>
         <li>
@@ -130,7 +128,7 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
         </li>
         <li>
           <NavLink className="NavLink" to="/services">
-          {t("SERVICES")}
+            {t("SERVICES")}
           </NavLink>
         </li>
         <div className="ProfileLinks">
@@ -138,7 +136,7 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
             <React.Fragment>
               <li>
                 <NavLink className="NavLink" to="/profile">
-                {t("PROFILE")}
+                  {t("PROFILE")}
                 </NavLink>
               </li>
               <li>
@@ -157,22 +155,22 @@ export const HeaderNavbar = (props: NavbarPropsType): React.Node => {
             <React.Fragment>
               <li>
                 <NavLink className="NavLink" to="/login">
-                {t("LOGIN")}
+                  {t("LOGIN")}
                 </NavLink>
               </li>
               <li>
                 <NavLink className="NavLink" to="/register">
-                {t("REGISTER")}
+                  {t("REGISTER")}
                 </NavLink>
               </li>
             </React.Fragment>
           )}
-        <li>
-          <select onChange={changeLanguage}>
-            <option value="en">English</option>
-            <option value="pl">Polski</option>
-          </select>
-        </li>
+          <li>
+            <select onChange={changeLanguage}>
+              <option value="en">English</option>
+              <option value="pl">Polski</option>
+            </select>
+          </li>
         </div>
       </ul>
     </nav>

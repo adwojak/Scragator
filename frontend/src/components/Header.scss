@@ -185,16 +185,6 @@
     }
 
     @media (max-width: $mobileMedia) {
-      .burgerMenuIcon {
-        display: flex;
-        justify-content: flex-end;
-        margin-right: 5px;
-        margin-left: 10px;
-        color: $headerMenuHighlightColor;
-        font-size: 50px;
-        cursor: pointer;
-      }
-
       ul[role="menubar"] {
         position: absolute;
         flex-direction: column;

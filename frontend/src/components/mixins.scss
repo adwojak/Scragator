@@ -44,3 +44,59 @@
     @include transform(-50%, 0, 72deg);
   }
 }
+
+@mixin burger-button($size: 100px, $color: white, $animation-duration: 0.5s) {
+  #BurgerButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    width: $size;
+    height: $size;
+    margin-left: 10px;
+    margin-right: 10px;
+    z-index: 11;
+    cursor: pointer;
+
+    &.burgerButtonActive {
+      transition: transform $animation-duration;
+      .BurgerBarShortGroup > .BurgerBarShort {
+        &:nth-of-type(1) {
+          transform: translateX(calc(#{$size} * 0.05))
+            translateY(calc(#{$size} * 0.2)) rotate(-45deg);
+        }
+        &:nth-of-type(2) {
+          transform: translateX(calc(#{$size} * -0.05))
+            translateY(calc(#{$size} * -0.2)) rotate(-45deg);
+        }
+      }
+
+      .BurgerBarLong {
+        &:nth-of-type(1) {
+          transform: translateY(calc(#{$size} * 0.33)) rotate(45deg);
+        }
+        &:nth-of-type(3) {
+          transform: translateY(calc(#{$size} * -0.33)) rotate(45deg);
+        }
+      }
+    }
+
+    .BurgerBarLong {
+      width: inherit;
+      height: calc(#{$size} / 10);
+      background-color: $color;
+      transition: transform $animation-duration;
+    }
+
+    .BurgerBarShortGroup {
+      display: flex;
+
+      .BurgerBarShort {
+        width: calc(#{$size} / 2);
+        height: calc(#{$size} / 10);
+        background-color: $color;
+        transition: transform $animation-duration;
+      }
+    }
+  }
+}
