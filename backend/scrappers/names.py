@@ -8,7 +8,7 @@ class ScrapperNames(Enum):
     @classmethod
     def list_values(cls) -> list:
         list_values = []
-        for el in map(lambda el: el.value, cls):
+        for el in map(lambda elem: elem.value, cls):
             list_values.append(cls.parse_scrapper(el))
         return list_values
 
