@@ -1,0 +1,93 @@
+@import "../../components/constants.scss";
+@import "../../components/mixins.scss";
+
+.Article {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 40px 0;
+  padding: 10px;
+  color: white;
+
+  box-shadow: inset 0 0 0 100vw rgba(48, 63, 143, 0.5);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+
+  &:hover {
+    box-shadow: inset 0 0 0 100vw rgba(0, 0, 0, 0.5);
+  }
+
+  hr {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    height: 2px;
+    width: 45vh;
+    border: none;
+    background-color: blue;
+    margin: 2px 0;
+  }
+
+  .ArticleBookmark {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 30px;
+    height: 60px;
+    background: linear-gradient(180deg, $flagColor 50%, transparent 50%);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    ~ .Favourite {
+      @include star(14px, $starColor, 23px, -7px);
+    }
+  }
+
+  .ArticleBookmark:before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 15px solid $flagColor;
+    border-left: 15px solid transparent;
+
+    transform: scale(1, -1);
+    margin-bottom: 15px;
+  }
+
+  .ArticleBookmark:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 15px solid $flagColor;
+    border-right: 15px solid transparent;
+
+    transform: scale(1, -1);
+    margin-bottom: 15px;
+  }
+
+  .ArticleDate {
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .ArticleAuthor {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .ArticleTitle {
+    padding-bottom: 5px;
+  }
+}

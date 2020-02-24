@@ -165,6 +165,8 @@ About
 migrations/
 *.db
 INFORMATIONS
+flow-typed/
+coverage/
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 

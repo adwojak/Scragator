@@ -4,7 +4,7 @@ from backend.scrappers.names import ScrapperNames
 from backend.scrappers.niebezpiecznik import Niebezpiecznik
 
 observers_elements: list = [
-    [ScrapperNames.NIEBEZPIECZNIK.value, 'http://www.niebezpiecznik.pl/', Niebezpiecznik],
+    [ScrapperNames.NIEBEZPIECZNIK.value[0], 'http://www.niebezpiecznik.pl/', Niebezpiecznik],
 ]
 
 observers_mapping: list = [AttrDict(

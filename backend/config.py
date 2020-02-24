@@ -17,6 +17,6 @@ class Config(object):
             'id': 'execute_observers',
             'func': lambda: rget('http://localhost:5000/execute_observers'),
             'trigger': 'interval',
-            'seconds': 159999
+            'seconds': 60 * 5
         }
     ]

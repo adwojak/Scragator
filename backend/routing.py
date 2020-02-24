@@ -8,6 +8,7 @@ from backend.api.Articles.RemoveFavouriteService.resource import RemoveFavourite
 from backend.api.Articles.SearchArticlesPager.resource import SearchArticlesPager
 from backend.api.Manager.resource import ManagerResource
 from backend.api.Services.resource import Services
+from backend.api.SavedServicesPager.resource import SavedServices
 from backend.api.UserManagement.Register.resource import RegisterUser
 from backend.api.UserManagement.Login.resource import LoginUser
 from backend.api.UserManagement.TokenRefresh.resource import TokenRefresh
@@ -18,9 +19,10 @@ from backend.api.UserManagement.DeleteUser.resource import DeleteUser
 
 routing: dict = {
     ManagerResource: ['/execute_observers'],
-    PaginateArticle: ['/page'],
-    FilteredPager: ['/filter_by'],
+    PaginateArticle: ['/'],
+    FilteredPager: ['/service_articles'],
     SavedArticlesPager: ['/saved_articles'],
+    SavedServices: ['/saved_services'],
     AddFavouriteArticle: ['/add_fav_article'],
     RemoveFavouriteArticle: ['/remove_fav_article'],
     AddFavouriteService: ['/add_fav_service'],

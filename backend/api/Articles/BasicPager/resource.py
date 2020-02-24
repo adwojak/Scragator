@@ -7,7 +7,7 @@ from backend.models.models import ArticleModel
 
 class PaginateArticle(Resource):
 
-    def get(self) -> Response:
+    def post(self) -> Response:
         page_int: int = request.form.get('page')
         try:
             page: int = int(page_int)
