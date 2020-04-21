@@ -13,7 +13,7 @@ class ScrapperNames(Enum):
         return list_values
 
     @staticmethod
-    def parse_scrapper( scrapper):
+    def parse_scrapper(scrapper):
         return {
             'name': scrapper[0],
             'img': scrapper[1]

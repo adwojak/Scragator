@@ -10,4 +10,3 @@ class BaseService(object):
 
     def model_query(self) -> BaseQuery:
         return self.model.query
-
