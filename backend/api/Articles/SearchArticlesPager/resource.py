@@ -2,7 +2,7 @@ from flask import Response, jsonify
 from flask_restful import Resource, request
 from werkzeug.exceptions import NotFound
 
-from backend.models.models import ArticleModel
+from backend.services.articles.article import ArticleService
 
 
 class SearchArticlesPager(Resource):
@@ -10,11 +10,12 @@ class SearchArticlesPager(Resource):
     def post(self) -> Response:
         page_int: int = request.form.get('page')
         search_string: str = request.form.get('search_string')
+        article_service = ArticleService()
+
         try:
             page: int = int(page_int)
-            article_models: list = ArticleModel.query.filter(ArticleModel.title.match(search_string)).paginate(
-                page=page, per_page=8).items
-            return jsonify([article.get_article() for article in article_models])
+            articles: list = article_service.get_items(page, article_service.filter_by_title(search_string))
+            return jsonify([article.get_article() for article in articles])
         except NotFound:
             return jsonify({
                 'error': True
