@@ -1,15 +1,16 @@
 from flask import Response, jsonify
 from flask_restful import Resource
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required
 
-from backend.models.models import UserModel
+from backend.services.user.user import UserService
 
 
 class Profile(Resource):
 
     @jwt_required
     def get(self) -> Response:
-        user: UserModel = UserModel.query.filter_by(email=get_jwt_identity()).first()
+        user_service: UserService = UserService()
+        user: user_service.model = user_service.get_logged_user()
 
         if user:
             return jsonify({

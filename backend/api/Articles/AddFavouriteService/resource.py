@@ -1,9 +1,9 @@
 from copy import deepcopy
 from flask import Response, jsonify, request
 from flask_restful import Resource
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required
 
-from backend.models.models import UserModel
+from backend.services.user.user import UserService
 
 
 class AddFavouriteService(Resource):
@@ -11,7 +11,8 @@ class AddFavouriteService(Resource):
     @jwt_required
     def post(self) -> Response:
         service_name: str = request.form.get('service_name')
-        user: UserModel = UserModel.query.filter_by(email=get_jwt_identity()).first()
+        user_service: UserService = UserService()
+        user: user_service.model = user_service.get_logged_user()
 
         if user and service_name and service_name not in user.favourite_services:
             user_fav_services: list = deepcopy(user.favourite_services)
