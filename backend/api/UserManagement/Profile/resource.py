@@ -10,13 +10,13 @@ class Profile(Resource):
     @jwt_required
     def get(self) -> Response:
         user_service: UserService = UserService()
-        user: user_service.model = user_service.get_logged_user()
 
-        if user:
+        try:
             return jsonify({
-                'favourite_articles': user.favourite_articles,
-                'favourite_services': user.favourite_services,
+                'favourite_articles': user_service.get_fav_articles(),
+                'favourite_services': user_service.get_fav_services(),
             })
-        return jsonify({
-            'error': True
-        })
+        except:
+            return jsonify({
+                'error': True
+            })

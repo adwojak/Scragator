@@ -11,7 +11,6 @@ class SavedServices(Resource):
     @jwt_required
     def get(self) -> Response:
         user_service: UserService = UserService()
-        user: user_service.model = user_service.get_logged_user()
-        favourite_services: list = user.favourite_services
+        favourite_services: list = user_service.get_fav_services()
         return jsonify([ScrapperNames.parse_scrapper(getattr(ScrapperNames, service.upper()).value)
                         for service in favourite_services])

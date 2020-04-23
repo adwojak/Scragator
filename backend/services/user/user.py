@@ -13,4 +13,11 @@ class UserService(BaseService):
         return self.get_user(get_jwt_identity())
 
     def create_user(self, email, hashed_password):
-        return self.model.__call__(email=email, password=hashed_password)
+        user: UserModel = self.model.__call__(email=email, password=hashed_password)
+        return self.commit_to_db(user)
+
+    def get_fav_services(self):
+        return self.get_logged_user().favourite_services
+
+    def get_fav_articles(self):
+        return self.get_logged_user().favourite_articles

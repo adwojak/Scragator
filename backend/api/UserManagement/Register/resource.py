@@ -1,7 +1,6 @@
 from flask import Response, jsonify
 from flask_restful import request
 
-from backend.extensions import db
 from backend.libs.Resource.AuthResource import AuthResource
 from backend.api.UserManagement.Register.form import RegisterForm
 from backend.services.user.user import UserService
@@ -23,9 +22,7 @@ class RegisterUser(AuthResource):
 
             try:
                 hashed_password: str = self.hash_password(form.password.data)
-                new_user: user_service.model = user_service.create_user(email, hashed_password)
-                db.session.add(new_user)
-                db.session.commit()
+                user_service.create_user(email, hashed_password)
                 return jsonify({
                     'created': True
                 })
