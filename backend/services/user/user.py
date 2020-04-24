@@ -21,3 +21,16 @@ class UserService(BaseService):
 
     def get_fav_articles(self):
         return self.get_logged_user().favourite_articles
+
+    def add_fav_services(self, services_list):
+        user: UserModel = self.get_logged_user()
+        user.favourite_services.extend(services_list)
+        user.commit_db()
+
+    def set_fav_display_as_main(self, show_fav_as_default):
+        self.get_logged_user().show_fav_as_default = show_fav_as_default
+
+    def initialize_user(self, selected_services, show_fav_as_default):
+        self.add_fav_services(selected_services)
+        self.set_fav_display_as_main(show_fav_as_default)
+

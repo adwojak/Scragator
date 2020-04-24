@@ -47,6 +47,8 @@ class UserModel(db.Model):
     password = db.Column(db.String(512), nullable=False)
     favourite_articles = db.Column(db.ARRAY(db.Integer), default=[])
     favourite_services = db.Column(db.ARRAY(db.String), default=[])
+    has_been_initialized = db.Column(db.Boolean, default=False)
+    show_fav_as_default = db.Column(db.Boolean, default=False)
 
     def commit_db(self):
         db.session.commit()

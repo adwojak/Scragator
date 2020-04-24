@@ -16,6 +16,7 @@ from backend.api.UserManagement.Logout.resource import AccessTokenLogout
 from backend.api.UserManagement.Logout.resource import RefreshTokenLogout
 from backend.api.UserManagement.Profile.resource import Profile
 from backend.api.UserManagement.DeleteUser.resource import DeleteUser
+from backend.api.UserManagement.InitializeUser.resource import InitializeUser
 
 routing: dict = {
     ManagerResource: ['/execute_observers'],
@@ -35,5 +36,6 @@ routing: dict = {
     AccessTokenLogout: ['/user/logout_access'],
     RefreshTokenLogout: ['/user/logout_refresh'],
     DeleteUser: ['/user/delete_user'],
+    InitializeUser: ['/user/initialize'],
     Profile: ['/profile'],
 }

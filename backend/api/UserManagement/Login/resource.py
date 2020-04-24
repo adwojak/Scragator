@@ -29,6 +29,8 @@ class LoginUser(AuthResource):
                     'refresh_token': create_refresh_token(identity=email),
                     'favourite_articles': user.favourite_articles,
                     'favourite_services': user.favourite_services,
+                    'has_been_initialized': user.has_been_initialized,
+                    'show_fav_as_default': user.show_fav_as_default,
                 })
             else:
                 return jsonify({
