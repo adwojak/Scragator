@@ -1,6 +1,8 @@
-from wtforms import Form, FieldList, BooleanField, StringField
+from wtforms import Form, BooleanField, StringField
+
+from backend.libs.Forms.fields import ArrayFieldList
 
 
 class InitializeUserForm(Form):
-    selected_services: FieldList = FieldList(StringField('Service'))  # TODO Need to be tested with frontend
+    selected_services: ArrayFieldList = ArrayFieldList(StringField('Service'))
     show_fav_as_default: BooleanField = BooleanField()

@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from backend.models.models import UserModel
 from backend.services.base import BaseService
 from flask_jwt_extended import get_jwt_identity
@@ -22,9 +24,13 @@ class UserService(BaseService):
     def get_fav_articles(self):
         return self.get_logged_user().favourite_articles
 
-    def add_fav_services(self, services_list):
+    def add_fav_services(self, services):
+        if type(services) != list:
+            services = [services]
         user: UserModel = self.get_logged_user()
-        user.favourite_services.extend(services_list)
+        user_fav_services: list = deepcopy(user.favourite_services)
+        user_fav_services.extend(services)
+        user.favourite_services: list = sorted(set(user_fav_services))
         user.commit_db()
 
     def set_fav_display_as_main(self, show_fav_as_default):

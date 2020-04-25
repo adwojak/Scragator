@@ -1,4 +1,3 @@
-from copy import deepcopy
 from flask import Response, jsonify, request
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required
@@ -15,13 +14,10 @@ class AddFavouriteService(Resource):
         user: user_service.model = user_service.get_logged_user()
 
         if user and service_name and service_name not in user.favourite_services:
-            user_fav_services: list = deepcopy(user.favourite_services)
-            user_fav_services.append(service_name)
-            user.favourite_services: list = user_fav_services
-            user.commit_db()
+            user_service.add_fav_services(service_name)
             return jsonify({
                 'success': True,
-                'user_fav_services': user_fav_services
+                'user_fav_services': user.favourite_services
             })
         return jsonify({
             'error': True
