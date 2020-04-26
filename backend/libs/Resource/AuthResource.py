@@ -1,10 +1,11 @@
 from binascii import hexlify
-from flask_restful import Resource
 from hashlib import pbkdf2_hmac, sha256
 from os import urandom
 
+from backend.libs.Resource.FormResource import FormResource
 
-class AuthResource(Resource):
+
+class AuthResource(FormResource):
     ASCII_ENCODE = 'ascii'
     UTF_ENCODE = 'utf-8'
     HASH_NAME = 'sha512'

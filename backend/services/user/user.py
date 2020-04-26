@@ -24,12 +24,35 @@ class UserService(BaseService):
     def get_fav_articles(self):
         return self.get_logged_user().favourite_articles
 
+    def add_fav_articles(self, articles):
+        articles = self.provide_list(articles)
+        user: UserModel = self.get_logged_user()
+        user_fav_articles: list = deepcopy(user.favourite_articles)
+        user_fav_articles.extend(articles)
+        user.favourite_articles: list = sorted(set(user_fav_articles))
+        user.commit_db()
+
     def add_fav_services(self, services):
-        if type(services) != list:
-            services = [services]
+        services = self.provide_list(services)
         user: UserModel = self.get_logged_user()
         user_fav_services: list = deepcopy(user.favourite_services)
         user_fav_services.extend(services)
+        user.favourite_services: list = sorted(set(user_fav_services))
+        user.commit_db()
+
+    def remove_fav_articles(self, articles):
+        articles = self.provide_list(articles)
+        user: UserModel = self.get_logged_user()
+        user_fav_articles: list = deepcopy(user.favourite_articles)
+        [user_fav_articles.remove(article) for article in articles]
+        user.favourite_articles: list = sorted(set(user_fav_articles))
+        user.commit_db()
+
+    def remove_fav_services(self, services):
+        services = self.provide_list(services)
+        user: UserModel = self.get_logged_user()
+        user_fav_services: list = deepcopy(user.favourite_services)
+        [user_fav_services.remove(service) for service in services]
         user.favourite_services: list = sorted(set(user_fav_services))
         user.commit_db()
 

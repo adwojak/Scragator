@@ -21,3 +21,8 @@ class BaseService(object):
         except:
             is_success = False
         return is_success
+
+    def provide_list(self, elements):
+        if type(elements) != list:
+            return [elements]
+        return elements

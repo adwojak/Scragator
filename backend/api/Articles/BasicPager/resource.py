@@ -1,17 +1,18 @@
 from flask import Response, jsonify
-from flask_restful import Resource, request
 from werkzeug.exceptions import NotFound
 
+from backend.libs.Resource.FormResource import FormResource
 from backend.services.articles.article import ArticleService
+from backend.libs.Forms.forms import PagerForm
 
 
-class PaginateArticle(Resource):
+class PaginateArticle(FormResource):
+
+    FORM = PagerForm
 
     def post(self) -> Response:
-        page_int: int = request.form.get('page')
         try:
-            page: int = int(page_int)
-            article_models: list = ArticleService().get_items(page, ordered=True)
+            article_models: list = ArticleService().get_items(self.form_data['page'], ordered=True)
             return jsonify([article.get_article() for article in article_models])
         except NotFound:
             return jsonify([])

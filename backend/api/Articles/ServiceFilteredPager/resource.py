@@ -1,20 +1,22 @@
 from flask import Response, jsonify
-from flask_restful import Resource, request
 from werkzeug.exceptions import NotFound
 
 from backend.services.articles.article import ArticleService
+from backend.libs.Resource.FormResource import FormResource
+from backend.api.Articles.ServiceFilteredPager.form import ServiceFilteredPagerForm
 
 
-class FilteredPager(Resource):
+class FilteredPager(FormResource):
+    FORM = ServiceFilteredPagerForm
 
     def post(self) -> Response:
-        page_str: str = request.form.get('page')
-        service: str = request.form.get('service')
         article_service: ArticleService = ArticleService()
 
         try:
-            page: int = int(page_str)
-            filtered_models: list = article_service.get_items(page, article_service.filter_by_service(service), True)
+            filtered_models: list = article_service.get_items(self.form_data['page'],
+                                                              article_service.filter_by_service(
+                                                                  self.form_data['service']),
+                                                              True)
             return jsonify([article.get_article() for article in filtered_models])
         except NotFound:
             return jsonify([])

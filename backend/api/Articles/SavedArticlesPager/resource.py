@@ -1,23 +1,26 @@
-from flask import Response, jsonify, request
-from flask_restful import Resource
+from flask import Response, jsonify
 from flask_jwt_extended import jwt_required
 
 from backend.services.articles.article import ArticleService
 from backend.services.user.user import UserService
+from backend.libs.Resource.FormResource import FormResource
+from backend.libs.Forms.forms import PagerForm
 
 
-class SavedArticlesPager(Resource):
+class SavedArticlesPager(FormResource):
+
+    FORM = PagerForm
 
     @jwt_required
     def post(self) -> Response:
-        page: int = int(request.form.get('page'))
         article_service: ArticleService = ArticleService()
         user_service: UserService = UserService()
 
         try:
             user: user_service.model = user_service.get_logged_user()
             favourite_articles: list = user.favourite_articles
-            articles: list = article_service.get_items(page, article_service.get_articles_by_ids(favourite_articles))
+            articles: list = article_service.get_items(self.form_data['page'],
+                                                       article_service.get_articles_by_ids(favourite_articles))
             return jsonify([article.get_article() for article in articles])
         except:
             return jsonify({
