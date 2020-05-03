@@ -4,7 +4,7 @@ from pytest import fixture, yield_fixture
 from backend.app import create_app
 from backend.config import TestingConfig
 from backend.extensions import db
-from backend.models.models import ArticleModel, UserModel
+from backend.models.models import ArticleModel, UserModel, RevokedTokenModel
 from backend.scrappers.names import ScrapperNames
 
 
@@ -40,4 +40,11 @@ def article():
         url='articleurl.com/asd',
         author='Article author',
         upload_date=datetime(2020, 4, 22, 11, 31),
+    )
+
+
+@fixture
+def revoked_token():
+    return RevokedTokenModel(
+        jti='examplejti'
     )
