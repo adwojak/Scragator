@@ -3,7 +3,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_restful import Api
 
-from backend.config import Config
+from backend.config import DevelopmentConfig
 from backend.extensions import db, migrate, scheduler, jwt
 from backend.routing import routing
 from backend.models.models import RevokedTokenModel
@@ -14,10 +14,10 @@ def create_routing(api) -> None:
         api.add_resource(resource, *routes)
 
 
-def create_app() -> Flask:
+def create_app(config_class=DevelopmentConfig) -> Flask:
     app: Flask = Flask(__name__)
     CORS(app)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     api: Api = Api(app)
     create_routing(api)
