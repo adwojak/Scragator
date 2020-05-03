@@ -14,7 +14,7 @@ def create_routing(api) -> None:
         api.add_resource(resource, *routes)
 
 
-def create_app(config_class=DevelopmentConfig, init_scheduler=True) -> Flask:
+def create_app(config_class: type = DevelopmentConfig, init_scheduler: bool = True) -> Flask:
     app: Flask = Flask(__name__)
     CORS(app)
     app.config.from_object(config_class)

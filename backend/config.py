@@ -32,16 +32,16 @@ class Config(object):
 
 
 class ProductionConfig(Config):
-    DEBUG = False
-    TESTING = False
+    DEBUG: bool = False
+    TESTING: bool = False
 
 
 class DevelopmentConfig(Config):
-    DEBUG = True
-    TESTING = False
+    DEBUG: bool = True
+    TESTING: bool = False
 
 
 class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI: str = 'postgresql:///scragatorTest'  # TODO TMP
-    DEBUG = True
-    TESTING = True
+    DEBUG: bool = True
+    TESTING: bool = True
