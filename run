@@ -1,0 +1,15 @@
+#!/bin/bash
+
+directory="backend/"
+testCommand="test"
+testCovCommand="test-cov"
+
+if [ $1 == $testCommand ]
+then
+pytest $directory
+elif [ $1 == $testCovCommand ]
+then
+pytest --cov-report term-missing:skip-covered --cov=$directory $directory
+else
+echo "Wrong command"
+fi
