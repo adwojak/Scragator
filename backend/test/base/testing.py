@@ -7,6 +7,7 @@ from flask.wrappers import Response
 
 from backend.config import TestingConfig
 from backend.test.base.database import DatabaseBase
+from backend.test.base.validators import validate_http_status
 
 
 class TestingBase(DatabaseBase):
@@ -28,21 +29,26 @@ class ResourceTesting(TestingBase):
         "Content-Type": "application/x-www-form-urlencoded"
     }
 
+    def init_test(self, app) -> NoReturn:
+        super().init_test(app)
+        self.client: FlaskClient = self.app.test_client()
+
     @property
     def url(self) -> NoReturn:
         raise NotImplementedError
 
-    def client(self) -> FlaskClient:
-        return self.app.test_client()
-
     def get(self, headers: Optional[dict] = None) -> Response:
-        return self.client().get(self.url, headers=headers or self.default_headers)
+        return self.client.get(self.url, headers=headers or self.default_headers)
 
     def post(self, request: dict, headers: Optional[dict] = None) -> Response:
-        return self.client().post(self.url, headers=headers or self.default_headers, data=request)
+        return self.client.post(self.url, headers=headers or self.default_headers, data=request)
 
     def request_get(self, headers: Optional[dict] = None) -> list:
-        return self.get(headers).json
+        response: Response = self.get(headers)
+        validate_http_status(response.status_code)
+        return response.json
 
     def request_post(self, request: dict, headers: Optional[dict] = None) -> list:
-        return self.post(request, headers).json
+        response: Response = self.post(request, headers)
+        validate_http_status(response.status_code)
+        return response.json
