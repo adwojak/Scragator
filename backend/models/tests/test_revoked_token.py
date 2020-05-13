@@ -1,5 +1,5 @@
-from backend.test.base.testing import TestingBase
 from backend.models.models import RevokedTokenModel
+from backend.test.base.testing import TestingBase
 
 
 class TestRevokedTokenModel(TestingBase):

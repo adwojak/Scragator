@@ -1,8 +1,9 @@
+from json import dumps
+from typing import NoReturn, Optional
+
 from flask import Flask
 from flask.testing import FlaskClient
 from flask.wrappers import Response
-from json import dumps
-from typing import NoReturn, Optional
 
 from backend.config import TestingConfig
 from backend.test.base.database import DatabaseBase

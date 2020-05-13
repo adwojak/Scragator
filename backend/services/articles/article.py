@@ -1,6 +1,7 @@
-from flask_sqlalchemy import BaseQuery
-from sqlalchemy.sql.elements import BinaryExpression, UnaryExpression
 from typing import List, Optional
+
+from flask_sqlalchemy import BaseQuery
+from sqlalchemy.sql.elements import UnaryExpression, BinaryExpression
 
 from backend.models.models import ArticleModel
 from backend.services.base import BaseService

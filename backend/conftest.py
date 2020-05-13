@@ -1,11 +1,12 @@
 from datetime import datetime
+
 from flask import Flask
 from pytest import fixture, yield_fixture
 
 from backend.app import create_app
 from backend.config import TestingConfig
 from backend.extensions import db
-from backend.models.models import ArticleModel, UserModel, RevokedTokenModel
+from backend.models.models import UserModel, ArticleModel, RevokedTokenModel
 from backend.scrappers.names import ScrapperNames
 
 

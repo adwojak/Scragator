@@ -1,5 +1,5 @@
-from datetime import datetime
 from string import whitespace
+from datetime import datetime
 
 from bs4.element import Tag
 

@@ -1,4 +1,4 @@
-from wtforms import Form, BooleanField, StringField
+from wtforms import Form, StringField, BooleanField
 
 from backend.libs.Forms.fields import ArrayFieldList
 

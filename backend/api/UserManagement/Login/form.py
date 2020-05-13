@@ -1,5 +1,5 @@
 from wtforms import Form, PasswordField
-from wtforms.validators import DataRequired, Length, Email
+from wtforms.validators import Email, Length, DataRequired
 from wtforms.fields.html5 import EmailField
 
 

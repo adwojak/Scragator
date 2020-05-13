@@ -1,8 +1,9 @@
 from copy import deepcopy
 
+from flask_jwt_extended import get_jwt_identity
+
 from backend.models.models import UserModel
 from backend.services.base import BaseService
-from flask_jwt_extended import get_jwt_identity
 
 
 class UserService(BaseService):
@@ -62,4 +63,3 @@ class UserService(BaseService):
     def initialize_user(self, selected_services, show_fav_as_default):
         self.add_fav_services(selected_services)
         self.set_fav_display_as_main(show_fav_as_default)
-

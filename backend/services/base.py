@@ -1,5 +1,6 @@
-from flask_sqlalchemy import BaseQuery
 from typing import NoReturn
+
+from flask_sqlalchemy import BaseQuery
 
 from backend.extensions import db
 

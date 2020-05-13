@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from backend.test.base.testing import TestingBase
 from backend.models.models import ArticleModel
 from backend.scrappers.names import ScrapperNames
+from backend.test.base.testing import TestingBase
 
 
 class TestArticleModel(TestingBase):

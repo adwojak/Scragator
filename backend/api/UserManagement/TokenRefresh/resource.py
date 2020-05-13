@@ -1,6 +1,6 @@
 from flask import Response, jsonify
 from flask_restful import Resource
-from flask_jwt_extended import jwt_refresh_token_required, get_jwt_identity, create_access_token
+from flask_jwt_extended import get_jwt_identity, create_access_token, jwt_refresh_token_required
 
 
 class TokenRefresh(Resource):

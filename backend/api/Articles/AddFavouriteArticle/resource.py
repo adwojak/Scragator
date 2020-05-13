@@ -1,8 +1,8 @@
 from flask import Response, jsonify
 from flask_jwt_extended import jwt_required
 
-from backend.libs.Resource.FormResource import FormResource
 from backend.services.user.user import UserService
+from backend.libs.Resource.FormResource import FormResource
 from backend.api.Articles.AddFavouriteArticle.form import AddFavouriteArticleForm
 
 

@@ -4,8 +4,8 @@ from flask_cors import CORS
 from flask_restful import Api
 
 from backend.config import DevelopmentConfig
-from backend.extensions import db, migrate, scheduler, jwt
 from backend.routing import routing
+from backend.extensions import db, jwt, migrate, scheduler
 from backend.models.models import RevokedTokenModel
 
 

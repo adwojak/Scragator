@@ -1,8 +1,8 @@
 from flask import Response, jsonify
 
+from backend.services.user.user import UserService
 from backend.libs.Resource.AuthResource import AuthResource
 from backend.api.UserManagement.Register.form import RegisterForm
-from backend.services.user.user import UserService
 
 
 class RegisterUser(AuthResource):

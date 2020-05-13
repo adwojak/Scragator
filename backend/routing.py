@@ -1,22 +1,21 @@
-from backend.api.Articles.BasicPager.resource import PaginateArticle
-from backend.api.Articles.ServiceFilteredPager.resource import FilteredPager
-from backend.api.Articles.SavedArticlesPager.resource import SavedArticlesPager
-from backend.api.Articles.AddFavouriteArticle.resource import AddFavouriteArticle
-from backend.api.Articles.RemoveFavouriteArticle.resource import RemoveFavouriteArticle
-from backend.api.Services.AddFavouriteService.resource import AddFavouriteService
-from backend.api.Services.RemoveFavouriteService.resource import RemoveFavouriteService
-from backend.api.Articles.SearchArticlesPager.resource import SearchArticlesPager
 from backend.api.Manager.resource import ManagerResource
-from backend.api.Services.ListServices.resource import Services
-from backend.api.Services.SavedServicesPager.resource import SavedServices
-from backend.api.UserManagement.Register.resource import RegisterUser
+from backend.api.Articles.BasicPager.resource import PaginateArticle
 from backend.api.UserManagement.Login.resource import LoginUser
-from backend.api.UserManagement.TokenRefresh.resource import TokenRefresh
-from backend.api.UserManagement.Logout.resource import AccessTokenLogout
-from backend.api.UserManagement.Logout.resource import RefreshTokenLogout
+from backend.api.Services.ListServices.resource import Services
+from backend.api.UserManagement.Logout.resource import AccessTokenLogout, RefreshTokenLogout
 from backend.api.UserManagement.Profile.resource import Profile
+from backend.api.UserManagement.Register.resource import RegisterUser
 from backend.api.UserManagement.DeleteUser.resource import DeleteUser
+from backend.api.Articles.SavedArticlesPager.resource import SavedArticlesPager
+from backend.api.Services.SavedServicesPager.resource import SavedServices
+from backend.api.UserManagement.TokenRefresh.resource import TokenRefresh
+from backend.api.Articles.AddFavouriteArticle.resource import AddFavouriteArticle
+from backend.api.Articles.SearchArticlesPager.resource import SearchArticlesPager
+from backend.api.Services.AddFavouriteService.resource import AddFavouriteService
+from backend.api.Articles.ServiceFilteredPager.resource import FilteredPager
 from backend.api.UserManagement.InitializeUser.resource import InitializeUser
+from backend.api.Articles.RemoveFavouriteArticle.resource import RemoveFavouriteArticle
+from backend.api.Services.RemoveFavouriteService.resource import RemoveFavouriteService
 
 routing: dict = {
     ManagerResource: ['/execute_observers'],

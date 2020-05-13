@@ -1,6 +1,6 @@
-from binascii import hexlify
-from hashlib import pbkdf2_hmac, sha256
 from os import urandom
+from hashlib import sha256, pbkdf2_hmac
+from binascii import hexlify
 
 from backend.libs.Resource.FormResource import FormResource
 

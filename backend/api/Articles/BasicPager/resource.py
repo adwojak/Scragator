@@ -1,9 +1,9 @@
 from flask import Response, jsonify
 from werkzeug.exceptions import NotFound
 
-from backend.libs.Resource.FormResource import FormResource
-from backend.services.articles.article import ArticleService
 from backend.libs.Forms.forms import PagerForm
+from backend.services.articles.article import ArticleService
+from backend.libs.Resource.FormResource import FormResource
 
 
 class PaginateArticle(FormResource):

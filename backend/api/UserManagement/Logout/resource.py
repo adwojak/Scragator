@@ -1,6 +1,6 @@
 from flask import Response, jsonify
 from flask_restful import Resource
-from flask_jwt_extended import jwt_required, jwt_refresh_token_required, get_raw_jwt
+from flask_jwt_extended import get_raw_jwt, jwt_required, jwt_refresh_token_required
 
 from backend.models.models import RevokedTokenModel
 
