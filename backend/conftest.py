@@ -35,6 +35,20 @@ def user() -> UserModel:
 
 
 @fixture
+def register_form() -> dict:
+    return {
+        'email': 'example@email.com',
+        'password': 'examplePassword',
+        'password_confirm': 'examplePassword'
+    }
+
+
+@fixture
+def login_form() -> dict:
+    return {'email': 'example@email.com', 'password': 'examplePassword'}
+
+
+@fixture
 def article() -> ArticleModel:
     return ArticleModel(
         name=ScrapperNames.NIEBEZPIECZNIK.name,

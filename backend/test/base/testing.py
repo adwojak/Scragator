@@ -1,5 +1,5 @@
 from json import dumps
-from typing import NoReturn, Optional
+from typing import NoReturn, Optional, Union
 
 from flask import Flask
 from flask.testing import FlaskClient
@@ -16,6 +16,12 @@ class TestingBase(DatabaseBase):
 
     def assert_match(self, value, expected) -> NoReturn:
         assert value == expected
+
+    def assert_true(self, value) -> NoReturn:
+        self.assert_match(value, True)
+
+    def assert_false(self, value) -> NoReturn:
+        self.assert_match(value, False)
 
     def assert_dicts(self, dictionary: dict, expected: dict) -> NoReturn:
         dict_dumped: str = dumps(dictionary, sort_keys=True, default=str)
@@ -37,18 +43,18 @@ class ResourceTesting(TestingBase):
     def url(self) -> NoReturn:
         raise NotImplementedError
 
-    def get(self, headers: Optional[dict] = None) -> Response:
-        return self.client.get(self.url, headers=headers or self.default_headers)
+    def get(self, headers: dict, url: str) -> Response:
+        return self.client.get(url, headers=headers)
 
-    def post(self, request: dict, headers: Optional[dict] = None) -> Response:
-        return self.client.post(self.url, headers=headers or self.default_headers, data=request)
+    def post(self, request: dict, headers: dict, url: str) -> Response:
+        return self.client.post(url, headers=headers, data=request)
 
-    def request_get(self, headers: Optional[dict] = None) -> list:
-        response: Response = self.get(headers)
+    def request_get(self, headers: Optional[dict] = None, url: Optional[str] = None) -> list:
+        response: Response = self.get({**self.default_headers, **(headers or {})}, url or self.url)
         validate_http_status(response.status_code)
         return response.json
 
-    def request_post(self, request: dict, headers: Optional[dict] = None) -> list:
-        response: Response = self.post(request, headers)
+    def request_post(self, request: dict, headers: Optional[dict] = None, url: Optional[str] = None) -> Union[list, dict]:
+        response: Response = self.post(request, {**self.default_headers, **(headers or {})}, url or self.url)
         validate_http_status(response.status_code)
         return response.json

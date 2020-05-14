@@ -12,20 +12,13 @@ class RegisterUser(AuthResource):
     def post(self) -> Response:
 
         user_service: UserService = UserService()
-
         email: str = self.form_data['email']
         if user_service.get_user(email):
             return jsonify({
                 'user_exists': True
             })
 
-        try:
-            hashed_password: str = self.hash_password(self.form_data['password'])
-            user_service.create_user(email, hashed_password)
-            return jsonify({
-                'created': True
-            })
-        except:  # TODO Errors handling
-            return jsonify({
-                'error': True
-            })
+        hashed_password: str = self.hash_password(self.form_data['password'])
+        return jsonify({
+            'created': user_service.create_user(email, hashed_password)
+        })
