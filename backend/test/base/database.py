@@ -1,14 +1,16 @@
 from typing import Any, NoReturn
 
-from backend.extensions import db
+from backend.extensions import db as database
 
 
 class DatabaseBase(object):
+    db = database
+
     def db_add(self, element: Any) -> NoReturn:
-        db.session.add(element)
+        self.db.session.add(element)
 
     def db_commit(self) -> NoReturn:
-        db.session.commit()
+        self.db.session.commit()
 
     def db_add_with_commit(self, element: Any) -> NoReturn:
         self.db_add(element)

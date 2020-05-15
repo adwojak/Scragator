@@ -10,6 +10,15 @@ from backend.models.models import UserModel, ArticleModel, RevokedTokenModel
 from backend.scrappers.names import ScrapperNames
 
 
+register_form_dict: dict = {
+    'email': 'example@email.com',
+    'password': 'examplePassword',
+    'password_confirm': 'examplePassword'
+}
+
+login_form_dict: dict = {'email': 'example@email.com', 'password': 'examplePassword'}
+
+
 @yield_fixture
 def app() -> Flask:
     def _app(config_class, init_scheduler=False) -> Flask:
@@ -36,16 +45,12 @@ def user() -> UserModel:
 
 @fixture
 def register_form() -> dict:
-    return {
-        'email': 'example@email.com',
-        'password': 'examplePassword',
-        'password_confirm': 'examplePassword'
-    }
+    return register_form_dict
 
 
 @fixture
 def login_form() -> dict:
-    return {'email': 'example@email.com', 'password': 'examplePassword'}
+    return login_form_dict
 
 
 @fixture

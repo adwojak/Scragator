@@ -7,7 +7,7 @@ from backend.test.base.testing import TestingBase
 
 class TestArticleModel(TestingBase):
     def test_create_article(self, app, article):
-        super().init_test(app)
+        super().init(app)
         self.db_add_with_commit(article)
         db_article = ArticleModel.query.first()
         # 79%
@@ -21,7 +21,7 @@ class TestArticleModel(TestingBase):
                           'TklFQkVaUElFQ1pOSUstMjAyMC0wNC0yMiAxMTozMTowMC1BcnRpY2xlIGF1dGhvci1hcnRpY2xldXJsLmNvbS9hc2Q=')
 
     def test_get_article(self, app, article):
-        super().init_test(app)
+        super().init(app)
         self.db_add_with_commit(article)
         db_article = ArticleModel.query.first()
         article_structure = {
@@ -36,14 +36,14 @@ class TestArticleModel(TestingBase):
         self.assert_dicts(db_article.get_article(), article_structure)
 
     def test_save_article(self, app, article):
-        super().init_test(app)
+        super().init(app)
         article.save()
         self.db_commit()
         db_article = ArticleModel.query.first()
         self.assert_match(db_article.title, 'Article title')
 
     def test_exist(self, app, article):
-        super().init_test(app)
+        super().init(app)
         self.db_add_with_commit(article)
         db_article = ArticleModel.query.first()
         self.assert_match(db_article.exist(), True)
