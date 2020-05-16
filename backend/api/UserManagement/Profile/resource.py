@@ -11,12 +11,7 @@ class Profile(Resource):
     def get(self) -> Response:
         user_service: UserService = UserService()
 
-        try:
-            return jsonify({
-                'favourite_articles': user_service.get_fav_articles(),
-                'favourite_services': user_service.get_fav_services(),
-            })
-        except:
-            return jsonify({
-                'error': True
-            })
+        return jsonify({
+            'favourite_articles': user_service.get_fav_articles(),
+            'favourite_services': user_service.get_fav_services(),
+        })

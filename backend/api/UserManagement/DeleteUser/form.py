@@ -1,5 +1,7 @@
-from wtforms import Form, BooleanField
+from wtforms import Form
 from wtforms.validators import DataRequired
+
+from backend.libs.Forms.fields import BooleanField
 
 
 class DeleteUserForm(Form):

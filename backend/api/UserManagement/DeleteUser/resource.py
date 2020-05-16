@@ -15,7 +15,7 @@ class DeleteUser(FormResource):
         user_service: UserService = UserService()
         user: user_service.model = user_service.get_logged_user()
 
-        if user and self.form_data['is_confirmed']:
+        if user and self.form_data.get('is_confirmed'):
             user.delete_user()
             return jsonify(deleted=True)
         return jsonify(error=True)

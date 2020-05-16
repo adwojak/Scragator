@@ -11,11 +11,6 @@ class TestRefreshTokenLogout(ResourceTesting):
         response: dict = self.request_post({})
         self.assert_true(response['refresh_token_logout'])
 
-    # def test_token_refresh_logout_failure(self, app):
-    #     super().init(app, jwt_refresh=True)
-    #     response: dict = self.request_post({})
-    #     self.assert_true(response['refresh_token_logout'])
-
 
 class TestAccessTokenLogout(ResourceTesting):
     url: str = '/user/logout_access'

@@ -73,7 +73,7 @@ class ResourceTesting(TestingBase):
     def post(self, request: dict, headers: dict, url: str) -> Response:
         return self.client.post(url, headers=headers, data=request)
 
-    def request_get(self, headers: Optional[dict] = None, url: Optional[str] = None) -> list:
+    def request_get(self, headers: Optional[dict] = None, url: Optional[str] = None) -> Union[list, dict]:
         response: Response = self.get({**self.headers, **(headers or {})}, url or self.url)
         validate_http_status(response.status_code)
         return response.json

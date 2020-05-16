@@ -21,4 +21,4 @@ class FormResource(Resource):
     def form_data(self):
         if self.is_form_validated:
             return self.form.data
-        raise ValidationError()
+        return self.form.errors

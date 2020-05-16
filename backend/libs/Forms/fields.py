@@ -1,4 +1,4 @@
-from wtforms import FieldList
+from wtforms import FieldList, BooleanField as BoolField
 from wtforms.utils import unset_value
 
 
@@ -38,3 +38,7 @@ class ArrayFieldList(FieldList):
                 k = k[offset:offset+1].split('-', 1)[0]
                 if k.isdigit():
                     yield int(k)
+
+
+class BooleanField(BoolField):
+    false_values = (False, 'False', 'false', '')

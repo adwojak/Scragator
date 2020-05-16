@@ -9,31 +9,21 @@ class AccessTokenLogout(Resource):
 
     @jwt_required
     def post(self) -> Response:
-        try:
-            jti: str = get_raw_jwt()['jti']
-            revoked_token: RevokedTokenModel = RevokedTokenModel(jti=jti)
-            revoked_token.add()
-            return jsonify({
-                'access_token_logout': True
-            })
-        except:
-            return jsonify({
-                'access_token_logout': False
-            })
+        jti: str = get_raw_jwt()['jti']
+        revoked_token: RevokedTokenModel = RevokedTokenModel(jti=jti)
+        revoked_token.add()
+        return jsonify({
+            'access_token_logout': True
+        })
 
 
 class RefreshTokenLogout(Resource):
 
     @jwt_refresh_token_required
     def post(self) -> Response:
-        try:
-            jti: str = get_raw_jwt()['jti']
-            revoked_token: RevokedTokenModel = RevokedTokenModel(jti=jti)
-            revoked_token.add()
-            return jsonify({
-                'refresh_token_logout': True
-            })
-        except:
-            return jsonify({
-                'refresh_token_logout': False
-            })
+        jti: str = get_raw_jwt()['jti']
+        revoked_token: RevokedTokenModel = RevokedTokenModel(jti=jti)
+        revoked_token.add()
+        return jsonify({
+            'refresh_token_logout': True
+        })

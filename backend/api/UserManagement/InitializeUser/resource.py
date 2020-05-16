@@ -12,11 +12,8 @@ class InitializeUser(FormResource):
     @jwt_required
     def post(self) -> Response:
         user_service: UserService = UserService()
-        try:
-            user_service.initialize_user(self.form_data.get('selected_services'),
-                                         self.form_data.get('show_fav_as_default'))
-            return jsonify({
-                'success': True
-            })
-        except:
-            return jsonify(error=True)
+        user_service.initialize_user(self.form_data.get('selected_services'),
+                                     self.form_data.get('show_fav_as_default'))
+        return jsonify({
+            'success': True
+        })
