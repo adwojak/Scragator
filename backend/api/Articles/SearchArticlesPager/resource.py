@@ -18,6 +18,4 @@ class SearchArticlesPager(FormResource):
                                                        article_service.filter_by_title(self.form_data['search_string']))
             return jsonify([article.get_article() for article in articles])
         except NotFound:
-            return jsonify({
-                'error': True
-            })
+            return jsonify([])

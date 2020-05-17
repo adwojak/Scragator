@@ -13,7 +13,6 @@ from backend.conftest import register_form_dict, login_form_dict
 
 
 class TestingBase(DatabaseBase):
-
     app = None
 
     def init(self, app) -> NoReturn:
@@ -43,14 +42,14 @@ class TestingBase(DatabaseBase):
 
 
 class ResourceTesting(TestingBase):
-
     default_headers: dict = {
         "Content-Type": "application/x-www-form-urlencoded"
     }
     client = None
     headers = None
 
-    def init(self, app, jwt_access=True, jwt_refresh=False, init_service=None) -> NoReturn:
+    def init(self, app, jwt_access=True, jwt_refresh=False, db_commit=None, fav_service=None,
+             fav_article=None) -> NoReturn:
         super().init(app)
         self.client: FlaskClient = self.app.test_client()
         self.headers = deepcopy(self.default_headers)
@@ -62,8 +61,15 @@ class ResourceTesting(TestingBase):
                 self.headers['Authorization'] = 'Bearer {refresh}'.format(refresh=response['refresh_token'])
             elif jwt_access:
                 self.headers['Authorization'] = 'Bearer {access}'.format(access=response['access_token'])
-        if init_service:
-            self.request_post(init_service, url='/add_fav_service')
+        if db_commit:
+            if isinstance(db_commit, list):
+                [self.db_add_with_commit(el) for el in db_commit]
+            else:
+                self.db_add_with_commit(db_commit)
+        if fav_service:
+            self.request_post(fav_service, url='/add_fav_service')
+        if fav_article:
+            self.request_post(fav_article, url='/add_fav_article')
 
     @property
     def url(self) -> NoReturn:
@@ -80,7 +86,8 @@ class ResourceTesting(TestingBase):
         validate_http_status(response.status_code)
         return response.json
 
-    def request_post(self, request: dict, headers: Optional[dict] = None, url: Optional[str] = None) -> Union[list, dict]:
+    def request_post(self, request: dict, headers: Optional[dict] = None, url: Optional[str] = None) -> Union[
+        list, dict]:
         response: Response = self.post(request, {**self.headers, **(headers or {})}, url or self.url)
         validate_http_status(response.status_code)
         return response.json

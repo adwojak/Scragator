@@ -20,5 +20,3 @@ class FilteredPager(FormResource):
             return jsonify([article.get_article() for article in filtered_models])
         except NotFound:
             return jsonify([])
-        except TypeError:
-            return jsonify([])

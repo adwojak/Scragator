@@ -7,7 +7,7 @@ class TestRemoveFavouriteService(ResourceTesting):
     resource: RemoveFavouriteService = RemoveFavouriteService
 
     def test_remove_favourite_service_success(self, app, service):
-        super().init(app, init_service=service)
+        super().init(app, fav_service=service)
         response: dict = self.request_post(service)
         self.assert_dicts(response, {'success': True, 'user_fav_services': []})
 

@@ -20,6 +20,8 @@ login_form_dict: dict = {'email': 'example@email.com', 'password': 'examplePassw
 
 service_dict: dict = {'service_name': 'ExampleService'}
 
+_article_dict: dict = {'article_id': 1}
+
 
 @yield_fixture
 def app() -> Flask:
@@ -58,6 +60,11 @@ def login_form() -> dict:
 @fixture
 def service() -> dict:
     return service_dict
+
+
+@fixture
+def article_dict() -> dict:
+    return _article_dict
 
 
 @fixture
