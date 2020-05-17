@@ -1,5 +1,5 @@
 from backend.test.base.testing import ResourceTesting
-from backend.api.UserManagement.Logout.resource import RefreshTokenLogout, AccessTokenLogout
+from backend.api.UserManagement.Logout.resource import AccessTokenLogout, RefreshTokenLogout
 
 
 class TestRefreshTokenLogout(ResourceTesting):
@@ -20,4 +20,3 @@ class TestAccessTokenLogout(ResourceTesting):
         super().init(app)
         response: dict = self.request_post({})
         self.assert_true(response['access_token_logout'])
-

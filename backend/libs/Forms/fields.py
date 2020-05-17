@@ -1,4 +1,5 @@
-from wtforms import FieldList, BooleanField as BoolField
+from wtforms import FieldList
+from wtforms import BooleanField as BoolField
 from wtforms.utils import unset_value
 
 

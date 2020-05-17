@@ -10,4 +10,3 @@ class TestTokenRefresh(ResourceTesting):
         super().init(app, jwt_refresh=True)
         response: dict = self.request_post({})
         self.assert_has_keys(response, 'access_token')
-

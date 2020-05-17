@@ -1,5 +1,5 @@
-from backend.test.base.testing import ResourceTesting
 from backend.models.models import UserModel
+from backend.test.base.testing import ResourceTesting
 from backend.api.UserManagement.Register.resource import RegisterUser
 
 

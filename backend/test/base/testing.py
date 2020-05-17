@@ -1,15 +1,15 @@
-from json import dumps
-from typing import NoReturn, Optional, Union
 from copy import deepcopy
+from json import dumps
+from typing import Union, NoReturn, Optional
 
 from flask import Flask
 from flask.testing import FlaskClient
 from flask.wrappers import Response
 
 from backend.config import TestingConfig
+from backend.conftest import login_form_dict, register_form_dict
 from backend.test.base.database import DatabaseBase
 from backend.test.base.validators import validate_http_status
-from backend.conftest import register_form_dict, login_form_dict
 
 
 class TestingBase(DatabaseBase):

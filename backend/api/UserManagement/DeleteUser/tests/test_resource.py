@@ -1,6 +1,6 @@
+from backend.models.models import UserModel
 from backend.test.base.testing import ResourceTesting
 from backend.api.UserManagement.DeleteUser.resource import DeleteUser
-from backend.models.models import UserModel
 
 
 class TestDeleteUser(ResourceTesting):

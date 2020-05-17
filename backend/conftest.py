@@ -9,7 +9,6 @@ from backend.extensions import db
 from backend.models.models import UserModel, ArticleModel, RevokedTokenModel
 from backend.scrappers.names import ScrapperNames
 
-
 register_form_dict: dict = {
     'email': 'example@email.com',
     'password': 'examplePassword',
