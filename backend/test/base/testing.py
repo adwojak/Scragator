@@ -50,7 +50,7 @@ class ResourceTesting(TestingBase):
     client = None
     headers = None
 
-    def init(self, app, jwt_access=True, jwt_refresh=False) -> NoReturn:
+    def init(self, app, jwt_access=True, jwt_refresh=False, init_service=None) -> NoReturn:
         super().init(app)
         self.client: FlaskClient = self.app.test_client()
         self.headers = deepcopy(self.default_headers)
@@ -62,6 +62,8 @@ class ResourceTesting(TestingBase):
                 self.headers['Authorization'] = 'Bearer {refresh}'.format(refresh=response['refresh_token'])
             elif jwt_access:
                 self.headers['Authorization'] = 'Bearer {access}'.format(access=response['access_token'])
+        if init_service:
+            self.request_post(init_service, url='/add_fav_service')
 
     @property
     def url(self) -> NoReturn:

@@ -18,6 +18,8 @@ register_form_dict: dict = {
 
 login_form_dict: dict = {'email': 'example@email.com', 'password': 'examplePassword'}
 
+service_dict: dict = {'service_name': 'ExampleService'}
+
 
 @yield_fixture
 def app() -> Flask:
@@ -51,6 +53,11 @@ def register_form() -> dict:
 @fixture
 def login_form() -> dict:
     return login_form_dict
+
+
+@fixture
+def service() -> dict:
+    return service_dict
 
 
 @fixture
