@@ -8,7 +8,7 @@ class TestInitializeUser(ResourceTesting):
 
     def test_initialize_user_success(self, app):
         super().init(app)
-        response: dict = self.request_post({'selected_services': [1], 'show_fav_as_default': True})
+        response: dict = self.request_post({'selected_services': ['1'], 'show_fav_as_default': True})
         self.assert_true(response['success'])
 
     def test_initialize_user_services_not_selected(self, app):
