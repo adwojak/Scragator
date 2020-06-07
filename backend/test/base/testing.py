@@ -43,7 +43,7 @@ class TestingBase(DatabaseBase):
 
 class ResourceTesting(TestingBase):
     default_headers: dict = {
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/json"
     }
     client = None
     headers = None
@@ -88,6 +88,6 @@ class ResourceTesting(TestingBase):
 
     def request_post(self, request: dict, headers: Optional[dict] = None, url: Optional[str] = None) -> Union[
         list, dict]:
-        response: Response = self.post(request, {**self.headers, **(headers or {})}, url or self.url)
+        response: Response = self.post(dumps(request), {**self.headers, **(headers or {})}, url or self.url)
         validate_http_status(response.status_code)
         return response.json

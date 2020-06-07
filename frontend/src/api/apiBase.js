@@ -1,12 +1,11 @@
 // @flow
 import axios from "axios";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
-import qs from "qs";
 import Cookies from "universal-cookie";
 import { TOKEN_REFRESH } from "./urls";
 
 const headers = Object.freeze({
-  "Content-Type": "application/x-www-form-urlencoded"
+  "Content-Type": "application/json"
 });
 
 const getHeaders = (tokenType: string): Object => {
@@ -44,7 +43,7 @@ const axiosRequestWithTokenCheck = (axiosRequest: Promise): Promise => {
 
 export const axiosPost = (url: string, data: Object): Promise => {
   return axiosRequestWithTokenCheck((): Promise => {
-    return axios.post(url, qs.stringify(data), {
+    return axios.post(url, data, {
       headers: getHeaders("accessToken")
     });
   });

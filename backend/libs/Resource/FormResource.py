@@ -11,7 +11,7 @@ class FormResource(Resource):
 
     @property
     def form(self):
-        return self.FORM(self.correct_request_types(request.form))
+        return self.FORM(self.correct_request_types(request.json))
 
     @property
     def is_form_validated(self):
@@ -24,9 +24,4 @@ class FormResource(Resource):
         return self.form.errors
 
     def correct_request_types(self, req):
-        # aa = ImmutableMultiDict([('example_field', 1)])
-        # Do naprawy - request testowy nie jest w postaci ExampleForm(ImmutableMultiDict([('example_field[0]', 1)]))
-        # a ExampleForm(ImmutableMultiDict([('example_field', 1)]))
-        # Należy sprawdzić, czy są jakieś ArrayFieldList i dla tych stworzyć nowy ImmutableMultiDict
-        # Już poprawny
-        return req
+        return ImmutableMultiDict(req)
