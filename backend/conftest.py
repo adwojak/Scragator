@@ -41,7 +41,7 @@ def app() -> Flask:
 @fixture
 def user() -> UserModel:
     return UserModel(
-        email='example@email.com',
+        email=register_form_dict['email'],
         password='3515687c045a1fe0eee41f0b6c660568c73556eeddef7b4cf2748b165ff9955b6be46867c91a07b4c356947fc0831625472c0e2d2332c37995681496086d1b355b94aaae98f90cb21b64540ecf31e4d66e914f698c644054146cf5083150cb10'
     )
 

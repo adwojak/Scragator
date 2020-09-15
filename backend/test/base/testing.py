@@ -11,6 +11,10 @@ from backend.conftest import login_form_dict, register_form_dict
 from backend.test.base.database import DatabaseBase
 from backend.test.base.validators import validate_http_status
 
+DEFAULT_HEADERS: dict = {
+    "Content-Type": "application/json"
+}
+
 
 class TestingBase(DatabaseBase):
     app = None
@@ -41,10 +45,21 @@ class TestingBase(DatabaseBase):
                 self.assert_true(key in dict_keys)
 
 
+class ServiceTesting(TestingBase):
+    service = None
+
+    def init(self, app, user=None) -> NoReturn:
+        super().init(app)
+        self.service = self.SERVICE()
+        if user:
+            self.db_add_with_commit(user)
+
+    @property
+    def SERVICE(self):
+        raise NotImplementedError
+
+
 class ResourceTesting(TestingBase):
-    default_headers: dict = {
-        "Content-Type": "application/json"
-    }
     client = None
     headers = None
 
@@ -52,7 +67,7 @@ class ResourceTesting(TestingBase):
              fav_article=None) -> NoReturn:
         super().init(app)
         self.client: FlaskClient = self.app.test_client()
-        self.headers = deepcopy(self.default_headers)
+        self.headers = deepcopy(DEFAULT_HEADERS)
 
         if jwt_access or jwt_refresh:
             self.request_post(register_form_dict, url='/user/register')

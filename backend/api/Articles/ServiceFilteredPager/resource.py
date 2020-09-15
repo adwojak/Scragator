@@ -13,10 +13,11 @@ class FilteredPager(FormResource):
         article_service: ArticleService = ArticleService()
 
         try:
-            filtered_models: list = article_service.get_items(self.form_data['page'],
-                                                              article_service.filter_by_service(
-                                                                  self.form_data['service']),
-                                                              True)
+            filtered_models: list = article_service.get_items(
+                self.form_data['page'],
+                article_service.filter_by_service(self.form_data['service']),
+                True
+            )
             return jsonify([article.get_article() for article in filtered_models])
         except NotFound:
             return jsonify([])
