@@ -16,26 +16,31 @@ import Popup from "./components/Popup";
 import NotFound from "./components/NotFound";
 import "./App.scss";
 
+import Test from "./components2/test";
+
 const App = (): React.Node => {
   const showPopup = useSelector((state: Object): Object => state.showPopup);
   return (
     <React.Fragment>
-      {showPopup && <Popup />}
-      <Header />
+      {/*{showPopup && <Popup />}*/}
+      {/*<Header />*/}
       <Switch>
-        <Route exact path="/" component={ArticlesList} />
-        <Route path="/message" component={Message} />
-        <Route path="/services" component={ServicesList} />
-        <Route path="/search" component={ArticlesList} />
-        <Route path="/serviceArticles" component={ArticlesList} />
-        <AnonymousRoute path="/login" component={Login} />
-        <AnonymousRoute path="/register" component={Register} />
-        <AnonymousRoute path="/resetPassword" component={ResetPassword} />
-        <LoginRoute path="/profile" component={Profile} />
-        <LoginRoute path="/savedArticles" component={ArticlesList} />
-        <LoginRoute path="/savedServices" component={ServicesList} />
-        <Route path="/*" component={NotFound} />
+        <Route exact path="/" component={Test} />
       </Switch>
+      {/*<Switch>*/}
+        {/*<Route exact path="/" component={ArticlesList} />*/}
+        {/*<Route path="/message" component={Message} />*/}
+        {/*<Route path="/services" component={ServicesList} />*/}
+        {/*<Route path="/search" component={ArticlesList} />*/}
+        {/*<Route path="/serviceArticles" component={ArticlesList} />*/}
+        {/*<AnonymousRoute path="/login" component={Login} />*/}
+        {/*<AnonymousRoute path="/register" component={Register} />*/}
+        {/*<AnonymousRoute path="/resetPassword" component={ResetPassword} />*/}
+        {/*<LoginRoute path="/profile" component={Profile} />*/}
+        {/*<LoginRoute path="/savedArticles" component={ArticlesList} />*/}
+        {/*<LoginRoute path="/savedServices" component={ServicesList} />*/}
+        {/*<Route path="/*" component={NotFound} />*/}
+      {/*</Switch>*/}
     </React.Fragment>
   );
 };

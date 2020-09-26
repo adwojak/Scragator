@@ -8,7 +8,7 @@ import { logoutUser, showBurgerMenu, hideBurgerMenu } from "../states/actions";
 import type { InitialStateType } from "../states/types";
 import { axiosPost } from "../api/apiBase";
 import { LOGOUT_ACCESS } from "../api/urls";
-import "./Header.scss";
+// import "./Header.scss";
 import BurgerButton from "../libs/components/BurgerButton";
 import homeIcon from "../static/images/houseIcon.png";
 import { HOME, SEARCH } from "../api/urls";

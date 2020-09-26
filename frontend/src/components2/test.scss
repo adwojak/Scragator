@@ -1,0 +1,109 @@
+.Content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .Header {
+    width: 100%;
+    height: 50px;
+    background-color: blue;
+  }
+
+  .Body {
+    width: 100%;
+    flex: 1 0 auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .RegisterBody {
+      width: 40%;  // ponizej jakiejs sie zmienia na 60%
+      background-color: white;
+      border-radius: 20px;
+      padding-top: 25px;
+      padding-bottom: 25px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      box-shadow: 1px 1px 20px 0 rgba(0, 0, 0, 0.3), -1px -1px 20px 0 rgba(0, 0, 0, 0.3);
+
+      .Logo {
+        width: 80px;
+        height: 80px;
+        background-color: darkred;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 40px;
+        font-weight: bolder;
+        color: white;
+      }
+
+      .RegisterQuocca {
+        font-size: 40px;
+        font-weight: bolder;
+        color: darkred;
+        margin-top: 15px;
+        margin-bottom: 10px;
+      }
+
+      .RegisterInfo {
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+
+      .RegisterForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        input {
+          width: 50%;
+          height: 40px;
+          padding-left: 10px;
+          padding-right: 10px;
+          margin-top: 10px;
+          margin-bottom: 10px;
+
+          border: 1px solid rgba(0, 0, 0, 0.3);
+          border-radius: 20px;
+          outline: none;
+
+          &:hover, &:focus {
+            border: 1px solid rgba(0, 0, 0, 0.6);
+          }
+        }
+
+        button {
+          width: calc(50% + 20px);
+          height: 50px;
+          margin-top: 10px;
+          margin-bottom: 10px;
+
+          background-color: darkred;
+          border: 1px solid rgba(0, 0, 0, 0.3);
+          border-radius: 25px;
+          outline: none;
+
+          font-weight: bold;
+          font-size: 18px;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .Footer {
+    width: 100%;
+    height: 50px;
+    background-color: blue;
+    flex-shrink: 0;
+  }
+}

@@ -27,13 +27,13 @@ routing: dict = {
     RemoveFavouriteArticle: ['/remove_fav_article'],
     AddFavouriteService: ['/add_fav_service'],
     RemoveFavouriteService: ['/remove_fav_service'],
-    SearchArticlesPager: ['/search_articles'],
+    SearchArticlesPager: ['/search_articles'],  # nie dziala
     Services: ['/services'],
     RegisterUser: ['/user/register'],
-    InitializeUser: ['/user/initialize'],
+    InitializeUser: ['/user/initialize'],  # Dodać na froncie
     LoginUser: ['/user/login'],
     DeleteUser: ['/user/delete_user'],
-    Profile: ['/profile'],
+    Profile: ['/profile'],  # Dodać na froncie
     TokenRefresh: ['/user/token_refresh'],
     AccessTokenLogout: ['/user/logout_access'],
     RefreshTokenLogout: ['/user/logout_refresh'],
