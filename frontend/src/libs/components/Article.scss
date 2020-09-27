@@ -1,0 +1,52 @@
+@import 'constants';
+
+.ArticleContainer {
+  width: 400px;
+  height: 300px;
+  background-color: white;
+
+  position: relative;
+  margin: 10px;
+
+  .ArticleBookmark {
+    width: 30px;
+    height: 30px;
+    background-color: darkred;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .ArticleImage {
+    width: 100%;
+    height: 200px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    box-shadow: 1px 1px 20px 0 $border-color-1, -1px -1px 20px 0 $border-color-1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+  }
+
+  .ArticleInfo {
+    padding-left: 10px;
+    padding-right: 10px;
+    color: black;
+
+    .ArticleTitle {
+      font-weight: bold;
+    }
+
+    .ArticleMeta {
+      font-size: 13px;
+    }
+  }
+}
