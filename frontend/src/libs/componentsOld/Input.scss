@@ -1,0 +1,33 @@
+@import "../../componentsOld/constants.scss";
+
+.InputBig {
+  display: flex;
+  flex-direction: column;
+
+  background-color: $inputColor;
+  border: none;
+  width: $elementsMobileWidth;
+  height: $elementsMobileHeight;
+  margin-bottom: 15px;
+
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  &::placeholder {
+    color: white;
+    opacity: 1;
+  }
+
+  @media (min-width: $mobileMedia) {
+    width: $elementsDesktopWidth;
+    height: $elementsDesktopHeight;
+  }
+}
+
+.Error {
+  color: red;
+  white-space: pre-wrap;
+}

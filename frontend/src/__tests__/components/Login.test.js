@@ -4,7 +4,7 @@ import Enzyme, { ReactWrapper } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { wrapComponent } from "../../helpers/wrapper";
 import type { NewParamsType } from "../../helpers/wrapper";
-import Login from "../../components/Login";
+import Login from "../../componentsOld/Login";
 
 Enzyme.configure({ adapter: new Adapter() });
 

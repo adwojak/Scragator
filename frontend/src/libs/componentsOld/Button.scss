@@ -1,0 +1,18 @@
+@import "../../componentsOld/constants.scss";
+
+.ButtonBig {
+  width: calc(#{$elementsMobileWidth} + 20px);
+  height: $elementsMobileHeight;
+  outline: none;
+  border: none;
+  background-color: $buttonColor;
+  font-size: 20px;
+  font-weight: bold;
+  color: $inputColor;
+  cursor: pointer;
+
+  @media (min-width: $mobileMedia) {
+    width: calc(#{$elementsDesktopWidth} + 20px);
+    height: $elementsDesktopHeight;
+  }
+}

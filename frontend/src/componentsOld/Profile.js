@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { deleteUser } from "../states/actions";
-import Button from "../libs/components/Button";
+import Button from "../libs/componentsOld/Button";
 import { axiosPost } from "../api/apiBase";
 import { SAVED_ARTICLES, SAVED_SERVICES, DELETE_USER } from "../api/urls";
 import "./Profile.scss";

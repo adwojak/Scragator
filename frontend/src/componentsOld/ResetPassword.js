@@ -1,10 +1,10 @@
 // @flow
 import * as React from "react";
 import { withTranslation } from 'react-i18next';
-import Button from "../libs/components/Button";
-import Input from "../libs/components/Input";
-import Form from "../libs/components/Form";
-import Label from "../libs/components/Label";
+import Button from "../libs/componentsOld/Button";
+import Input from "../libs/componentsOld/Input";
+import Form from "../libs/componentsOld/Form";
+import Label from "../libs/componentsOld/Label";
 import EmailValidator from "../libs/validators/EmailValidator";
 
 type StateType = $ReadOnly<{|

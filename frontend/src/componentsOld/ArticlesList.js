@@ -3,8 +3,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { axiosPost, axiosGet } from "../api/apiBase";
 import { HOME } from "../api/urls";
-import ScrollingPage from "../libs/components/ScrollingPage";
-import ArticleWindow from "../libs/components/ArticleWindow";
+import ScrollingPage from "../libs/componentsOld/ScrollingPage";
+import ArticleWindow from "../libs/componentsOld/ArticleWindow";
 
 type StateType = $ReadOnly<{|
   isLogged: boolean,

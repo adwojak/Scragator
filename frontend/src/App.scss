@@ -20,3 +20,18 @@
 .App-link {
   color: #09d3ac;
 }
+
+.Content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .Body {
+    width: 100%;
+    flex: 1 0 auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

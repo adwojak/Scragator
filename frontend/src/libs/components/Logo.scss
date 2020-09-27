@@ -1,0 +1,15 @@
+@import "constants";
+
+.Logo {
+    width: 80px;
+    height: 80px;
+    background-color: $color-main-1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 40px;
+    font-weight: bolder;
+    color: $color-main-2;
+}

@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 import Enzyme, { ReactWrapper, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import configureStore from "redux-mock-store";
-import LoginRoute from "../../components/LoginRoute";
+import LoginRoute from "../../componentsOld/LoginRoute";
 import configureMockStore from "redux-mock-store";
 
 Enzyme.configure({ adapter: new Adapter() });

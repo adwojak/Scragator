@@ -1,18 +1,17 @@
-@import "../../components/constants.scss";
+@import "constants";
 
-.ButtonBig {
-  width: calc(#{$elementsMobileWidth} + 20px);
-  height: $elementsMobileHeight;
+.Button {
+  width: calc(50% + 20px);
+  height: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  background-color: $color-main-1;
+  border: 1px solid $border-color-1;
+  border-radius: 25px;
   outline: none;
-  border: none;
-  background-color: $buttonColor;
-  font-size: 20px;
-  font-weight: bold;
-  color: $inputColor;
-  cursor: pointer;
 
-  @media (min-width: $mobileMedia) {
-    width: calc(#{$elementsDesktopWidth} + 20px);
-    height: $elementsDesktopHeight;
-  }
+  font-weight: bold;
+  font-size: 18px;
+  color: $color-main-2;
 }

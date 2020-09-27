@@ -2,7 +2,7 @@
 import * as React from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import Button from "../libs/components/Button";
+import Button from "../libs/componentsOld/Button";
 import "./Message.scss";
 
 const Error = (props: Object): React.Node => {

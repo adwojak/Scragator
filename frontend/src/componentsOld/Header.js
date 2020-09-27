@@ -9,7 +9,7 @@ import type { InitialStateType } from "../states/types";
 import { axiosPost } from "../api/apiBase";
 import { LOGOUT_ACCESS } from "../api/urls";
 // import "./Header.scss";
-import BurgerButton from "../libs/components/BurgerButton";
+import BurgerButton from "../libs/componentsOld/BurgerButton";
 import homeIcon from "../static/images/houseIcon.png";
 import { HOME, SEARCH } from "../api/urls";
 

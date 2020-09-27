@@ -1,24 +1,8 @@
-// @flow
-import * as React from "react";
-import "./Button.scss";
+import React from 'react';
+import './Button.scss';
 
-type ButtonType = $ReadOnly<{|
-  children: string,
-  type?: string,
-  disabled?: boolean,
-  className?: string
-|}>;
+const Button = ({children}) => (
+    <button className="Button">{children}</button>
+);
 
-export default function Button(props: ButtonType): React.Node {
-  const { children, disabled, type, className, ...properties } = props;
-  return (
-    <button
-      disabled={disabled || false}
-      type={type || "submit"}
-      className={className || "ButtonBig"}
-      {...properties}
-    >
-      {children}
-    </button>
-  );
-}
+export default Button;

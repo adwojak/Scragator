@@ -1,0 +1,24 @@
+@import "constants";
+
+.SmallContent {
+  width: 40%;
+
+  @media (max-width: $tabletMedia) {
+    width: 60%;
+  }
+
+  @media (max-width: $mobileMedia) {
+    width: 80%;
+  }
+
+  background-color: $color-main-2;
+  border-radius: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-shadow: 1px 1px 20px 0 $border-color-1, -1px -1px 20px 0 $border-color-1;
+}

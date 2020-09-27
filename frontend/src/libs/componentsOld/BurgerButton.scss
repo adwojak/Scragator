@@ -1,0 +1,6 @@
+@import "../../componentsOld/constants.scss";
+@import "../../componentsOld/mixins.scss";
+
+@media (max-width: $mobileMedia) {
+  @include burger-button($size: 50px);
+}

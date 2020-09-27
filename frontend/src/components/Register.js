@@ -1,94 +1,24 @@
-// @flow
-import * as React from "react";
-import { withTranslation } from 'react-i18next';
+import React from 'react';
+import Input from '../libs/components/Input';
 import Button from "../libs/components/Button";
-import Input from "../libs/components/Input";
-import Form from "../libs/components/Form";
-import Label from "../libs/components/Label";
-import EmailValidator from "../libs/validators/EmailValidator";
-import PasswordValidator from "../libs/validators/PasswordValidator";
-import { axiosPost } from "../api/apiBase";
-import { REGISTER } from "../api/urls";
-import "./Register.scss";
+import Text from '../libs/components/Text';
+import Form from '../libs/components/Form';
+import Logo from '../libs/components/Logo';
+import SmallContent from '../libs/components/SmallContent';
 
-type StateType = $ReadOnly<{|
-  email: string,
-  password: string,
-  repeatPassword: string
-|}>;
+const Register = () => (
+    <SmallContent>
+        <Logo/>
+        <Text kind="big">QUOCCA</Text>
+        <Text>Create account</Text>
+        <Form>
+            <Input id="email" placeholder="E-mail" />
+            <Input id="password" placeholder="Password" />
+            <Input id="repeatPassword" placeholder="Repeat password" />
+            <Button>REGISTER</Button>
+        </Form>
+        <Text>Already have an account? Log in!</Text>
+    </SmallContent>
+);
 
-class Register extends Form<null, StateType> {
-  formInputs = ["email", "password", "repeatPassword"];
-  state = this.createLocalState(this.formInputs);
-
-  executeValidFormSubmit = () => {
-    const { email, password, repeatPassword } = this.state;
-    const { t } = this.props;
-    axiosPost(REGISTER, {
-      email: email.value,
-      password: password.value,
-      password_confirm: repeatPassword.value
-    })
-      .then((response: Object) => {
-        const data = response.data;
-        if (data.user_exists) {
-          this.setState({
-            formError: t("USER_EXISTS")
-          });
-        } else if (data.created) {
-          this.props.history.push("/message", {
-            isCreated: true
-          });
-        } else {
-          this.props.history.push("/message", {
-            serverError: true
-          });
-        }
-      })
-      .catch((error: Error) => {
-        this.props.history.push("/message", {
-          serverError: true
-        });
-      });
-  };
-
-  render(): React.Node {
-    const { t } = this.props;
-    return (
-      <form onSubmit={this.handleSubmit} className="Form" noValidate>
-        <div>
-          <Label htmlFor="register">{t("REGISTER")}</Label>
-          {this.state.formError && (
-            <p className="FormError">{this.state.formError}</p>
-          )}
-          <Input
-            id="email"
-            placeholder="Email..."
-            required
-            setInputData={this.setInputData}
-            validator={EmailValidator}
-          />
-          <Input
-            id="password"
-            placeholder={t("PASSWD_HOLDER")}
-            type="password"
-            required
-            setInputData={this.setInputData}
-            validator={PasswordValidator}
-          />
-          <Input
-            id="repeatPassword"
-            placeholder={t("REPEAT_PASSWD_HOLDER")}
-            type="password"
-            required
-            setInputData={this.setInputData}
-            validator={PasswordValidator}
-          />
-        </div>
-        <Button>{t("REGISTER")}</Button>
-      </form>
-    );
-  }
-}
-
-export default withTranslation()(Register);
+export default Register;

@@ -4,7 +4,7 @@ import Enzyme, { ReactWrapper, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { wrapComponent } from "../../../helpers/wrapper";
 import type { NewParamsType } from "../../helpers/wrapper";
-import Input from "../../../libs/components/Input";
+import Input from "../../../libs/componentsOld/Input";
 import EmailValidator from "../../../libs/validators/EmailValidator";
 
 Enzyme.configure({ adapter: new Adapter() });

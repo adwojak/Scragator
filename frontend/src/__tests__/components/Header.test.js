@@ -9,7 +9,7 @@ import Header, {
   HeaderTitle,
   HeaderSearchBar,
   HeaderNavbar
-} from "../../components/Header";
+} from "../../componentsOld/Header";
 
 Enzyme.configure({ adapter: new Adapter() });
 

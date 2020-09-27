@@ -1,0 +1,15 @@
+@import "constants";
+
+.TextDefault {
+  font-size: 20px;
+  margin: 10px 15px 20px 20px;
+  text-align: center;
+}
+
+.TextBig {
+  font-size: 40px;
+  font-weight: bolder;
+  color: $color-main-1;
+  margin: 10px 15px 20px 20px;
+  text-align: center;
+}

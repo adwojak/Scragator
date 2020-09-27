@@ -3,7 +3,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { axiosGet } from "../api/apiBase";
 import { SERVICES } from "../api/urls";
-import Service from "../libs/components/Service";
+import Service from "../libs/componentsOld/Service";
 import Placeholder from "../static/images/placeholder.png";
 import "./ServicesList.scss";
 
