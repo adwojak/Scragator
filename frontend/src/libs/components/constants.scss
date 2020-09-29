@@ -4,11 +4,16 @@ $tabletMedia: 1280px;
 
 // Colors
 
-$color-main-1: darkred;
-$color-main-2: white;
+$color-main-1: rgb(139, 0, 0);
+$color-main-2: rgb(202, 202, 202);
+$color-main-3: rgb(240, 240, 240);
+$color-main-4: rgb(255, 255, 255);
+$color-main-5: rgb(0, 0, 0);
+$color-main-6: rgb(130, 0, 0);
 
 
 // Border colors:
 
+//$border-color-1: rgba(255, 255, 255, 0);
 $border-color-1: rgba(0, 0, 0, 0.3);
 $border-color-2: rgba(0, 0, 0, 0.6);

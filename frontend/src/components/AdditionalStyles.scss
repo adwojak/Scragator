@@ -1,0 +1,8 @@
+.GridList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  justify-items: center;
+  column-width: 400px;
+  max-width: 1300px;
+}

@@ -14,4 +14,9 @@
   font-weight: bold;
   font-size: 18px;
   color: $color-main-2;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-main-6;
+  }
 }

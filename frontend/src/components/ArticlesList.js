@@ -1,10 +1,10 @@
 import React from 'react';
 import Article from '../libs/components/Article';
-import './ArticlesList.scss';
+import './AdditionalStyles.scss';
 
 const ArticlesList = () => {
     return (
-        <div className="ArticlesList">
+        <div className="GridList">
             <Article/>
             <Article/>
             <Article/>

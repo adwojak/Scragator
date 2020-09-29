@@ -6,17 +6,21 @@ import Footer from './libs/components/Footer';
 import Register from "./components/Register";
 import Login from "./components/Login";
 import ArticlesList from './components/ArticlesList';
+import ServicesList from './components/ServicesList';
+import DeleteUser from './components/DeleteUser';
 import "./App.scss";
 
 
-const App = (): React.Node => (
+const App = () => (
     <div className="Content">
         <Header/>
         <div className="Body">
             <Switch>
-                <Route exact path="/" component={ArticlesList} />
+                <Route exact path="/services" component={ServicesList} />
+                <Route exact path="/articles" component={ArticlesList} />
+                <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
-                <Route exact path="/Login" component={Login} />
+                <Route exact path="/delete" component={DeleteUser} />
             </Switch>
         </div>
         <Footer/>
