@@ -44,7 +44,7 @@ pluggy==0.13.1
 port-for==0.4
 pre-commit==1.20.0
 psycopg2-binary==2.8.4
-py==1.8.0
+py==1.10.0
 pycodestyle==2.5.0
 pyflakes==2.1.1
 PyJWT==1.7.1
